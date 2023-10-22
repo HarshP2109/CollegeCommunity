@@ -17,13 +17,14 @@ var Accounts = [{"Email":"fameerpatil@gmail.com","Password":"abc"}];
 
 
 var randomOTP = "";
+
 require('dotenv').config()
 app.use(session({
   secret: 'your-secret-key',
   resave: false,
   saveUninitialized: true
 }));
-
+app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -49,11 +50,13 @@ var transporter = nodemailer.createTransport({
 // });
 
 app.get('/',(req,res)=>{
-    res.sendFile(__dirname+'/html/index.html');
+    // res.sendFile(__dirname+'/html/index.html');
+    res.render('pages/index');
 })
 
 app.get('/login',(req,res)=>{
-  res.sendFile(__dirname+'/html/login.html');
+  // res.sendFile(__dirname+'/html/login.html');
+  res.render('pages/login');
 })
 
 app.post('/validate',(req,res) => {
@@ -71,19 +74,22 @@ app.post('/validate',(req,res) => {
       "Password": l_pass
     }
     console.log("Login");
-    email = l_email;
+    // email = l_email;
     console.log(LoginUser);
 
     let valid = Accounts.find((acc)=> acc.Email == l_email)
     if(valid){
       let validpass = valid.Password;
+      req.session.Email = l_email;
+      console.log(valid);
       if(validpass==l_pass)
       res.redirect('/dash');
       else
       res.redirect('/otp');
     }
-    else
-    res.redirect('/login')
+    else{
+    res.redirect('/login');
+    }
   }
   else{
     let RegisterUser = {
@@ -109,12 +115,14 @@ app.post('/validate',(req,res) => {
 })
 
 app.get('/otp',(req,res)=>{
+  console.log("Hello");
   let email = req.session.Email;
   if((email=="")||(email==undefined)){
+    console.log("Error");
     res.redirect('/login');
   }
 else{
-  randomOTP = generateOTP()
+  randomOTP = generateOTP();
   let mailOptions = {
     from: process.env.SEND_EMAIL,
     to: email,
@@ -122,16 +130,17 @@ else{
     text: 'Your One-Time Password (OTP) is '+ randomOTP +' Please use this OTP to proceed with [action or verification process]. Do not share this OTP with anyone for security reasons.'
   };
 
-      // transporter.sendMail(mailOptions, function(error, info){
-      //   if (error) {
-      //     console.log(error);
-      //   } else {
-      //     console.log('Email sent: ' + info.response);
-      //   }
-      // });
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
 
     console.log(randomOTP);
-    res.sendFile(__dirname+'/html/otp.html');
+    // res.sendFile(__dirname+'/html/otp.html');
+    res.render('pages/otp');
 }
 })
 
@@ -162,7 +171,8 @@ app.post('/otpverify', (req,res) => {
 })
 
 app.get('/register',(req,res)=>{
-  res.sendFile(__dirname+'/html/register.html');
+  // res.sendFile(__dirname+'/html/register.html');
+  res.render('pages/register');
 })
 
 app.post('/getdata',(req,res)=>{
@@ -185,29 +195,34 @@ app.post('/getdata',(req,res)=>{
 })
 
 app.get('/dash',(req,res)=>{
-  res.sendFile(__dirname+'/html/dashboard.html');
+  // res.sendFile(__dirname+'/html/dashboard.html');
+  res.render('pages/dashboard');
 })
 
 app.get('/event',(req,res)=>{
-  res.sendFile(__dirname+'/html/events.html');
+  // res.sendFile(__dirname+'/html/events.html');
+  res.render('pages/events');
 })
 
 app.get('/community',(req,res)=>{
-  res.sendFile(__dirname+'/html/communities.html');
+  // res.sendFile(__dirname+'/html/communities.html');
+  res.render('pages/communities');
 })
 
 app.get('/message',(req,res)=>{
-  res.sendFile(__dirname+'/html/messages.html');
+  // res.sendFile(__dirname+'/html/messages.html');
+  res.render('pages/messages');
 })
 
 app.get('/setting',(req,res)=>{
-  res.sendFile(__dirname+'/html/settings.html');
+  // res.sendFile(__dirname+'/html/settings.html');
+  res.render('pages/settings');
 })
 
 
 //Mongoose
 const mongoose = require('mongoose');
-const CCH = mongoose.createConnection(process.env.MongoURL);
+const CCH = mongoose.createConnection(process.env.MongoDBURL);
 
 
 const temp_create = CCH.model('Temp', { 
