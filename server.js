@@ -59,7 +59,7 @@ app.get('/login',(req,res)=>{
   res.render('pages/login');
 })
 
-app.post('/validate',(req,res) => {
+app.post('/validate',async(req,res) => {
   let l_email = req.body.loginemail;
   let l_pass = req.body.loginpass;
 
@@ -68,7 +68,7 @@ app.post('/validate',(req,res) => {
   let r_name = req.body.registername;
   let r_num = req.body.registernumber;
 
-  if((l_email!=undefined)&&(l_pass!=undefined)){
+  if((l_email!=undefined)&&(l_pass!=undefined)){        //login
     let LoginUser = {
       "Email": l_email,
       "Password": l_pass
@@ -77,21 +77,26 @@ app.post('/validate',(req,res) => {
     // email = l_email;
     console.log(LoginUser);
 
-    let valid = Accounts.find((acc)=> acc.Email == l_email)
-    if(valid){
-      let validpass = valid.Password;
-      req.session.Email = l_email;
-      console.log(valid);
-      if(validpass==l_pass)
-      res.redirect('/dash');
-      else
-      res.redirect('/otp');
+   let valid = await findacc(l_email,l_pass);
+   console.log(valid);
+
+    if(valid > 0){
+      if(valid == 1){
+        console.log("User Logged in");
+        res.redirect('/dash');
+      }
+      else if(valid == 2){
+        console.log("Password failed");
+        req.session.Email = l_email;
+        res.redirect('/otp');
+      }
     }
     else{
     res.redirect('/login');
     }
   }
-  else{
+
+  else{                                             //register
     let RegisterUser = {
       "Name" : r_name,
       "Number" : r_num,
@@ -102,10 +107,6 @@ app.post('/validate',(req,res) => {
     req.session.Email = r_email;
     // console.log(RegisterUser);
 
-
-
-    // TEMPAccounts.push(RegisterUser);
-    // console.log(TEMPAccounts);
     res.redirect('/otp');
   }
   // let login_email = req.body.login-email;
@@ -171,7 +172,12 @@ app.post('/otpverify', (req,res) => {
 })
 
 app.get('/register',(req,res)=>{
-  // res.sendFile(__dirname+'/html/register.html');
+  let email = req.session.Email;
+  if((email=="")||(email==undefined)){
+    console.log("Error");
+    res.redirect('/login');
+  }
+  else
   res.render('pages/register');
 })
 
@@ -185,17 +191,19 @@ app.post('/getdata',(req,res)=>{
   let gen = req.body.gender;
   console.log(fname,lname,username,dob,pass,gen);
 
-  let newAccount = {
-    'Email':mail,
-    'Password':pass
-  }
-  Accounts.push(newAccount);
+  // Accounts.push(newAccount);
+  accInsert(fname,lname,username,dob,gen,mail,pass);
 
   res.redirect('/dash');
 })
 
 app.get('/dash',(req,res)=>{
-  // res.sendFile(__dirname+'/html/dashboard.html');
+  let email = req.session.Email;
+  if((email=="")||(email==undefined)){
+    console.log("Error");
+    res.redirect('/login');
+  }
+  else
   res.render('pages/dashboard');
 })
 
@@ -220,16 +228,12 @@ app.get('/setting',(req,res)=>{
 })
 
 
+
+
 //Mongoose
 const mongoose = require('mongoose');
 const CCH = mongoose.createConnection(process.env.MongoDBURL);
 
-
-const temp_create = CCH.model('Temp', { 
-  Name: String , 
-  Email: String, 
-  Number: Number 
-});
 
 
 const acc_create = CCH.model('Account', { 
@@ -239,30 +243,43 @@ const acc_create = CCH.model('Account', {
   Dateofbirth: Date ,
   Gender: String ,
   Email: String,
-  Password: String 
+  Password: String,
+  Gender: String
 });
 
-function tempInsert(naam,email,number){
-  let data = new ID_create({ Name: naam, Email: email, Number: number});
-  data.save().then(() => console.log("Temp account created!!!"));
-}
-
-function accInsert(firstname,lastname,username,dob,gender,email,pass){
+function accInsert(firstname,lastname,username,dob,gen,email,pass){
   let data = new acc_create({
     Firstname : firstname,
     Lastname : lastname,
     Username : username,
     Dateofbirth :dob,
     Email:email,
-    Password:pass
+    Password:pass,
+    Gender: gen
   })
   data.save().then(() => console.log("Permanents account created!!!"));
 }
 
 
 
+async function findacc(email,pass){
+  let User = await acc_create.findOne({ Email:email }).exec();
 
+  let ans = 0;
+  // console.log(User.Password);
+  if(User){
+    if(User.Password == pass){
+      return ans=1;
+    }
+    else{
+      return ans=2;
+    }
+  }
+  else{
+    return ans;
+  }
 
+}
 
 
 
