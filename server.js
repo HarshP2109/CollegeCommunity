@@ -83,6 +83,7 @@ app.post('/validate',async(req,res) => {
     if(valid > 0){
       if(valid == 1){
         console.log("User Logged in");
+        req.session.Email = l_email;
         res.redirect('/dash');
       }
       else if(valid == 2){
