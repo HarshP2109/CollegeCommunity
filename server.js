@@ -292,6 +292,6 @@ function generateOTP() {
   return otp;
 }
 
-server.listen(ServerKey,()=>{
-    console.log("Server at port ",ServerKey," !!!");
+server.listen(process.env.Port,()=>{
+    console.log("Server at port ",process.env.Port," !!!");
   }); 
