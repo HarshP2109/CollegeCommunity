@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Events</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-off-white">
+    <section class="grid lg:grid-cols-3 grid-cols-1 px-6 ">
+        <section></section>
+  
+        <section class="text-center mt-12 h-full overflow-y-scroll">
+            <div>
+                <span class="text-4xl font-bold "> Create Event</span>
+            </div>
+            <form action="/events">
+                <div class="flex flex-col justify-start items-start mt-10">
+                    <label for="title" class="text-md ml-2">Event Title</label >
+                    <input type="text" name="title" id="title" placeholder="Enter Event Title" class="w-full h-12 text-md bg-white focus:outline-none p-2 mt-2 rounded-md">
+                </div>
+    
+                <div class="flex flex-col justify-start items-start mt-6">
+                    <label for="title" class="text-md ml-2">Event Venue</label >
+                    <input type="text" name="title" id="title" placeholder="Enter Event Venue" class="w-full h-12 text-md bg-white focus:outline-none p-2 mt-2 rounded-md">
+                </div>
+    
+                <div class=" grid md:gap-4   grid-cols-1 md:grid-cols-2">
+                    <div>
+                        <div class="flex flex-col justify-start items-start mt-6">
+                            <label for="title" class="text-md ml-2">Start Time</label >
+                            <input type="text" name="title" id="title" placeholder="Enter Start Time" class="w-full h-12 text-md bg-white focus:outline-none p-2 mt-2 rounded-md">
+                        </div>
+    
+                    </div>
+                    <div>
+                        <div class="flex flex-col justify-start items-start mt-6">
+                            <label for="title" class="text-md ml-2"> End Time</label >
+                            <input type="text" name="title" id="title" placeholder="Enter End Time" class="w-full h-12 text-md bg-white focus:outline-none p-2 mt-2 rounded-md">
+                        </div>
+                    </div>
+    
+                </div>
+    
+    
+                <div class=" grid md:gap-4 grid-cols-1 md:grid-cols-2">
+                    <div>
+                        <div class="flex flex-col justify-start items-start mt-6">
+                            <label for="title" class="text-md ml-2">Start Date</label >
+                            <input type="text" name="title" id="title" placeholder="Enter Starting Date" class="w-full h-12 text-md bg-white focus:outline-none p-2 mt-2 rounded-md">
+                        </div>
+    
+                    </div>
+                    <div>
+                        <div class="flex flex-col justify-start items-start mt-6">
+                            <label for="title" class="text-md ml-2"> End Date</label >
+                            <input type="text" name="title" id="title" placeholder="Enter Ending Date" class="w-full h-12 text-md bg-white focus:outline-none p-2 mt-2 rounded-md">
+                        </div>
+                    </div>
+    
+                </div>
+    
+    
+                <!-- Event Discription -->
+                <div class="mt-16">
+                    <span class="text-4xl font-bold ">Event Discription</span>
+                </div>
+    
+    
+                <!-- Event Images -->
+                <div class="text-start mt-8">
+                    <span class="ml-2">
+                        Event Image
+                    </span>
+                </div>
+                <div class="upload-container relative flex items-center justify-between w-full mt-1">
+                    <div class="drop-area w-full rounded-md border-2 border-dashed text-white border-gray-200 transition-all hover:border-blue-600/30 text-center">
+                      <label 
+                          for="file-input" 
+                          class="block w-full h-full text-black p-4 text-sm cursor-pointer">
+                          Drop your image here or click to browse
+                      </label>
+                      <input 
+                          name="file" 
+                          type="file" 
+                          id="file-input" 
+                          accept="image/*" 
+                          class="hidden" 
+                      />
+                      <!-- Image upload input -->
+                      <div class="preview-container hidden items-center justify-center flex-col">
+                          <div class="preview-image w-36 h-36 bg-cover bg-center rounded-md"></div>
+                          <span class="file-name my-4 text-sm font-medium text-black" ></span>
+                          <p class="close-button cursor-pointer transition-all mb-4 rounded-md px-3 py-1 border text-xs text-red border-red hover:bg-red hover:text-white hover:border-white">Delete</p>
+                      </div>
+                    </div>
+                  </div>
+                <!-- Event Discription -->
+                <div class="flex flex-col  mt-8 justify-start items-start">
+                    
+                    <label for="message" class="text-md ml-2">Event Discription</label>
+                    <textarea id="message" rows="4" class="block p-2.5 w-full text-sm   rounded-lg  focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  mt-2 focus:outline-none" placeholder="Event discription goes here..."></textarea>
+
+                </div>
+                
+
+                <button class="bg-violet text-white  w-1/2 lg:w-full mt-8 py-3 rounded-md">
+                    <input type="submit" name="" id="" placeholder="Create Events">
+                </button>
+
+            </form>
+            
+          
+
+            
+        </section>
+        <section></section>
+
+    </section>
+</body>
+
+<script>
+   
+    const dropArea = document.querySelector('.drop-area');
+    const fileInput = document.querySelector('#file-input');
+    const previewContainer = document.querySelector('.preview-container');
+    const previewImage = document.querySelector('.preview-image');
+    const closeButton = document.querySelector('.close-button');
+    const fileName = document.querySelector('.file-name');
+
+    // Add event listener to the drop area to handle when a file is being dragged over it
+    dropArea.addEventListener('dragover', (event) => {
+        event.preventDefault(); 
+        dropArea.classList.add('active'); 
+    });
+
+    // Add event listener to the drop area to handle when a file is no longer being dragged over it
+    dropArea.addEventListener('dragleave', () => {
+        dropArea.classList.remove('active');
+    });
+
+    // Add event listener to the drop area to handle when a file is dropped onto it
+    dropArea.addEventListener('drop', (event) => {
+        event.preventDefault();
+        const file = event.dataTransfer.files[0];
+        showPreview(file);
+        showFileName(file); 
+    });
+
+    // Add event listener to the file input element to handle when a file is selected
+    fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0]; 
+        showPreview(file); 
+        showFileName(file); 
+    });
+
+    // Add event listener to the close button to handle when it is clicked
+    closeButton.addEventListener('click', (event) => {
+        event.preventDefault(); 
+        fileInput.value = ''; 
+        previewImage.style.backgroundImage = ''; 
+        fileName.textContent = ''; 
+        previewImage.classList.add('hidden'); 
+        previewContainer.classList.add('hidden'); 
+        previewImage.classList.remove('flex'); 
+    });
+
+    // Function to show a preview of the file
+    function showPreview(file) {
+        if (file.type.startsWith('image/')) { 
+            const reader = new FileReader(); 
+            reader.readAsDataURL(file);
+            reader.onload = () => { 
+                previewImage.style.backgroundImage = `url(${reader.result})`;
+                previewImage.classList.remove('hidden'); 
+                dropArea.classList.remove('active'); 
+                previewContainer.classList.remove('hidden'); 
+                previewContainer.classList.add('flex'); 
+            };
+        }
+    }
+
+    // Function to show the name of the file
+    function showFileName(file) {
+        fileName.textContent = file.name; 
+        fileName.style.display = 'block'; 
+    }
+</script>
+</html>

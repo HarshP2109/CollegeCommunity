@@ -1,0 +1,72 @@
+.leftLoad{
+    animation-name: leftLoad;
+    animation-duration: 0.5s;
+    animation-timing-function: all;
+}
+
+
+@keyframes leftLoad{
+    0% {
+        transform: translateX(-200px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+
+}
+
+.rightLoad{
+    animation-name: rightLoad;
+    animation-duration: 0.5s;
+    animation-timing-function: all;
+}
+
+
+@keyframes rightLoad{
+    0% {
+        transform: translateX(2000px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+
+}
+
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgba(16, 16, 123, 1); 
+    border-radius: 10px;
+
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(27, 89, 248, 1); 
+    border-radius: 10px;
+  }
+
+
+
+
+
+
+  /* Styling for messages */
+  
