@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon/cclogo.png">
+</head>
+
+<link rel="stylesheet" href="/css/login.css">
+<script>
+    window.onload = function() {
+    if (localStorage) {
+    
+        document.getElementById('signformms').addEventListener('submit', function() {
+        
+            var mail = document.getElementById('signemail').value.trim();
+            localStorage.setItem('Email', mail);
+
+        });
+    
+        document.getElementById('loginformms').addEventListener('submit', function() {
+        
+            var mail = document.getElementById('loginemail').value.trim();
+            var pass = document.getElementById('loginpass').value.trim();
+            localStorage.setItem('Email', mail);
+            localStorage.setItem('PASSWORD', pass);
+        });
+
+    }
+}
+</script>
+<body>
+
+    <!-- container div -->
+    <div class="container">
+
+        <!-- upper button section to select
+			the login or signup form -->
+        <div class="slider"></div>
+        <div class="btn">
+            <button class="login">Login</button>
+            <button class="signup">Signup</button>
+        </div>
+
+        <!-- Form section that contains the
+			login and the signup form -->
+        <div class="form-section">
+
+        <form action="/validate" method="post" id="loginformms">
+            <!-- login form -->
+            <div class="login-box">
+                
+                <input type="email" class="email ele" name="loginemail" id="loginemail" placeholder="youremail@email.com" required>
+                <input type="password" class="password ele" name="loginpass" id="loginpass" placeholder="password" required>
+                <button class="clkbtn">Login</button>
+                <a href="#" style="text-decoration: none; color: white;">
+                    <h3>
+                        Forgot your password?
+                    </h3>
+                </a>
+            
+            </div>
+        </form>
+
+            <!-- signup form -->
+            <form action="/validate" method="post" id="signformms">
+                <div class="signup-box" >
+                    <input type="text" class="name ele" name="registername" placeholder="Enter your name" required>
+                    <input type="email" class="email ele" id="signemail" name="registeremail" placeholder="youremail@email.com" required>
+                    <!-- <input type="password" class="password ele" placeholder="password"> -->
+                    <!-- <input type="password" class="password ele" placeholder="Confirm password"> -->
+                    <input type="number" class="password ele" name="registernumber" placeholder="Enter your number" minlength="10" maxlength="10" required>
+                    <button class="clkbtn">Signup</button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+    <script>
+        let signup = document.querySelector(".signup");
+        let login = document.querySelector(".login");
+        let slider = document.querySelector(".slider");
+        let formSection = document.querySelector(".form-section");
+
+        signup.addEventListener("click", () => {
+            slider.classList.add("moveslider");
+            formSection.classList.add("form-section-move");
+        });
+
+        login.addEventListener("click", () => {
+            slider.classList.remove("moveslider");
+            formSection.classList.remove("form-section-move");
+        });
+
+    </script>
+
+</body>
+
+</html>

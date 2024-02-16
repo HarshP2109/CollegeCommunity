@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Communities</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Fonts -->
+    <script src="https://kit.fontawesome.com/e4a2ea9e4b.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon/cclogo.png">
+</head>
+
+
+<body class="font-Inter lg:overflow-hidden ">
+    <div class="grid grid-cols-1 lg:grid-cols-6 ">
+        <!-- SideBar -->
+        <aside class="col-span-1 bg-blue py-4 lg:h-full hidden lg:block leftLoad">
+            <!-- logo -->
+            <div class="text-white lg:text-center lg:ml-0 ml-4 lg:py-2 ">
+                <span class="title text-4xl mt-4">Student'sHub</span>
+
+            </div>
+
+
+            <!-- Navigation -->
+            <div class=" navigation">
+                <ul class="text-white text-2xl text-center flex flex-col gap-y-8 mt-16">
+                    <li class="customHover">
+                        <a href="/dash">Dashboard</a>
+                    </li>
+                    <li class="customHover ">
+                        <a href="/events">Events</a>
+                    </li>
+                    <li class="customHover  bg-white text-black ml-4 rounded-l-2xl">
+                        <a href="/communities">Communities</a>
+                    </li>
+                    <li class="customHover">
+                        <a href="/messages">Messages</a>
+                    </li>
+                    <li class="customHover">
+                        <a href="/mycollege">My College</a>
+                    </li>
+                    <li class=" flex justify-center items-center gap-x-2 cursor-pointer" id="LogOut">
+                        LogOut <i class="fa-solid fa-right-from-bracket fa-xs text-violet" ></i>
+                    </li>
+                </ul>
+            </div>
+
+        </aside>
+
+        <!-- Main -->
+        <main class="col-span-5 ">
+
+            <!-- Mobile Header -->
+            <div
+                class="top-0 left-0 bg-blue lg:hidden py-5 pl-3 flex flex-row justify-between items-center sticky z-20">
+                <span class="text-4xl text-white  ">
+                    Student'sHub
+                </span>
+
+                <div class="mr-4">
+                    <button class="bg-white p-2 rounded-sm" id="MenuShowBtn">
+                        <i class="fa-solid fa-bars" style="color: #10107b;"> </i>
+                    </button>
+                </div>
+
+
+                <!-- Mobile Navbar -->
+                <div class="absolute top-0 right-0 text-white bg-blue px-6 text-3xl pb-4  pt-2 rounded-l-sm hidden mblNavbar "
+                    id="MobileMenu">
+                    <div>
+                        <div class="flex flex-row justify-between items-center mt-2">
+                            <div class="flex flex-row">
+                                <a href="/profile" class="flex flex-row"><img src="img1/profle-picture.png" alt="" class="h-12 w-12 rounded-full">
+                                    <div class="ml-1 flex flex-col">
+                                        <h3 class="text-lg"><%= Name %></h3>
+                                        <span class="text-xs opacity-[0.8]"><%= Role %></span>
+                                    </div></a>
+                           
+                                
+                            </div>
+                            <div>
+                                <button class="bg-white px-1  rounded-sm " id="MenuCloseBtn">
+                                    <i class="fa-solid fa-xmark fa-xs " style="color: #072964;"></i>
+    
+                                </button>
+                            </div>
+                         
+                        </div>
+                        <ul class="px-4 text-xl">
+
+                            <a href="/dash">
+                                <li class="mt-6"> <i class="fa-solid fa-user fa-sm mr-2"
+                                        style="color: #ffffff;"></i>Dashboard</li>
+                            </a>
+                            <a href="/events">
+                                <li class="mt-6"><i class="fa-regular fa-calendar fa-sm mr-2"
+                                        style="color: #ffffff;"></i>Events</li>
+                            </a>
+                            <a href="/communities">
+                                <li class="mt-6"><i class="fa-solid fa-user-group fa-sm mr-2"
+                                        style="color: #ffffff;"></i>Communities</li>
+                            </a>
+                            <a href="/messages">
+                                <li class="mt-6"><i class="fa-solid fa-message fa-sm mr-2"
+                                        style="color: #ffffff;"></i>Messages</li>
+                            </a>
+
+                            <a href="/mycollege">
+                                <li class="mt-6"><i class="fa-solid fa-building-columns fa-sm mr-2"
+                                        style="color: #ffffff;"></i>My College</li>
+                            </a>
+                            <a href="/logout">
+                                <li class="mt-6" ><i class="fa-solid fa-right-from-bracket fa-xs mr-2" ></i>LogOut</li>
+                            </a>
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Header -->
+            <header class="shadow-md hidden lg:grid grid-cols-3 px-4 py-4">
+                <div>
+                    <span class="text-3xl font-thin opacity-80">Communities</span>
+                </div>
+
+                <!-- Search Bar -->
+                <div>
+                    <div class="relative  flex w-full flex-wrap items-stretch ">
+                        <input type="search"
+                            class="relative m-0 block min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                            placeholder="Search" aria-label="Search" aria-describedby="button-addon2" />
+
+                        <!--Search icon-->
+                        <span
+                            class="input-group-text flex items-center whitespace-nowrap rounded px-3 py-1.5 text-center text-base font-normal text-neutral-700 dark:text-neutral-200"
+                            id="basic-addon2">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                class="h-5 w-5 cursor-pointer">
+                                <path fill-rule="evenodd"
+                                    d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+                <!-- Profile Info -->
+                <div class="flex justify-end items-center">
+                    <!-- Bell Icon -->
+                    <!-- <i class="fa-solid fa-xl fa-bell mr-12"></i> -->
+                    <!-- Profile Info -->
+                    <div class="flex flex-col mr-6 ">
+                        <h3 class="text-xl"><%= Name %></h3>
+                        <h6 class="text-sm text-end"><%= Role %></h6>
+                    </div>
+                    <!-- Proifle Picture -->
+                    <a href="/profile"><img src="img1/profle-picture.png" alt="Profile Picture"
+                        class="h-12 w-12  rounded-full cursor-pointer"></a>
+                    
+
+                </div>
+
+            </header>
+            <div class="mt-4 lg:p-4 ml-1">
+                <div>
+                    <span class="text-2xl text-violet">Community</span><span class="text-2xl"> posts near you...</span>
+                </div>
+            </div>
+
+            <section class="grid grid-cols-1 lg:grid-cols-3 lg:px-4 gap-6">
+                <div class="col-span-2 lg:h-screen lg:overflow-y-scroll lg:pb-44 ">
+
+                    <!-- Card-1 -->
+                    <div class="mt-4">
+                        <div class="flex flex-row items-center ml-1">
+                            <img src="img1/gdsc.jpg" alt=""><span class="mx-1">•</span><span class="">Posted
+                                by</span><span class="mx-1">harsh69</span><span class="opacity-50">
+                                22m
+                            </span>
+                        </div>
+                        <div class="mt-2">
+                            <img src="img1/event3.jpeg" alt="" class="h-[350px] w-full ">
+                        </div>
+                        <div class=" p-2 flex flex-row gap-x-4">
+                            <div>
+                                <i class="fa-regular fa-thumbs-up fa-md"></i> <span>120</span>
+                            </div>
+                            <div>
+                                <i class="fa-regular fa-comment fa-md"></i> <span>96</span>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-share-nodes fa-md"></i>
+                            </div>
+
+                        </div>
+                        <hr class="text-neutral opacity-50">
+
+                    </div>
+
+                    <!-- Card-2 -->
+                    <div class="mt-4">
+                        <div class="flex flex-row items-center ml-1">
+                            <img src="img1/gdsc.jpg" alt=""><span class="mx-1">•</span><span class="">Posted
+                                by</span><span class="mx-1">harsh69</span><span class="opacity-50">
+                                22m
+                            </span>
+                        </div>
+                        <div class="mt-2">
+                            <img src="img1/event3.jpeg" alt="" class="h-[350px] w-full ">
+                        </div>
+                        <div class=" p-2 flex flex-row gap-x-4">
+                            <div>
+                                <i class="fa-regular fa-thumbs-up fa-md"></i> <span>120</span>
+                            </div>
+                            <div>
+                                <i class="fa-regular fa-comment fa-md"></i> <span>96</span>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-share-nodes fa-md"></i>
+                            </div>
+
+                        </div>
+                        <hr class="text-neutral opacity-50">
+                    </div>
+
+                    <!-- Card-3 -->
+                    <div class="mt-4">
+                        <div class="flex flex-row items-center ml-1">
+                            <img src="img1/gdsc.jpg" alt=""><span class="mx-1">•</span><span class="">Posted
+                                by</span><span class="mx-1">harsh69</span><span class="opacity-50">
+                                22m
+                            </span>
+                        </div>
+                        <div class="mt-2">
+                            <img src="img1/event3.jpeg" alt="" class="h-[350px] w-full ">
+                        </div>
+                        <div class=" p-2 flex flex-row gap-x-4">
+                            <div>
+                                <i class="fa-regular fa-thumbs-up fa-md"></i> <span>120</span>
+                            </div>
+                            <div>
+                                <i class="fa-regular fa-comment fa-md"></i> <span>96</span>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-share-nodes fa-md"></i>
+                            </div>
+
+                        </div>
+                        <hr class="text-neutral opacity-50">
+
+                    </div>
+                </div>
+                <section class="col-span-1">
+                    <div class="p-4  lg:shadow-[0_8px_14px_rgb(0,0,0,0.2)] lg:h-[150px] text-center  ">
+                        <button
+                            class=" mt-1 bg-violet text-white py-2 rounded-full w-3/4 lg:w-full hover:bg-white hover:border hover:text-black duration-500 hover:scale-[1.02]">
+                            Create Post
+                        </button>
+
+                        <button class="mt-6 rounded-full border w-3/4 lg:w-full py-2  ">
+                            Create Community
+                        </button>
+                    </div>
+
+
+                    <div class="p-4 lg:shadow-[0_8px_14px_rgb(0,0,0,0.2)] ml-3 lg:ml-0">
+                        <div>
+                            <span class="text-lg">Trending Communities</span>
+                        </div>
+
+                        <div class="mt-4 cursor-pointer lg:overflow-scroll lg:h-[350px]">
+                            <div class="flex flex-row gap-4 items-center">
+                                <div class="">
+                                    <img src="img1/event2.jpeg" alt="" class="rounded-full h-12 w-12">
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-lg font-thin"> SPCA Community</span>
+                                    <span class="text-sm text-neutral opacity-80">
+                                        1.2K Members
+                                    </span>
+                                </div>
+
+
+                            </div>
+
+                            <div class="flex flex-row gap-4 items-center mt-4">
+                                <div class="">
+                                    <img src="img1/event1.jpeg" alt="" class="rounded-full h-12 w-12">
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-lg font-thin">Google Developer Community</span>
+                                    <span class="text-sm text-neutral opacity-80">
+                                        1.2K Members
+                                    </span>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="flex flex-row gap-4 items-center mt-4">
+                                <div class="">
+                                    <img src="img1/event1.jpeg" alt="" class="rounded-full h-12 w-12">
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-lg font-thin">Google Developer Community</span>
+                                    <span class="text-sm text-neutral opacity-80">
+                                        1.2K Members
+                                    </span>
+                                </div>
+
+
+                            </div>
+
+                            <div class="flex flex-row gap-4 items-center mt-4">
+                                <div class="">
+                                    <img src="img1/event1.jpeg" alt="" class="rounded-full h-12 w-12">
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-lg font-thin">Google Developer Community</span>
+                                    <span class="text-sm text-neutral opacity-80">
+                                        1.2K Members
+                                    </span>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="flex flex-row gap-4 items-center mt-4">
+                                <div class="">
+                                    <img src="img1/event1.jpeg" alt="" class="rounded-full h-12 w-12">
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-lg font-thin">Google Developer Community</span>
+                                    <span class="text-sm text-neutral opacity-80">
+                                        1.2K Members
+                                    </span>
+                                </div>
+
+
+                            </div>
+
+
+
+                            <div class="flex flex-row gap-4 items-center mt-4">
+                                <div class="">
+                                    <img src="img1/event1.jpeg" alt="" class="rounded-full h-12 w-12">
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-lg font-thin">Google Developer Community</span>
+                                    <span class="text-sm text-neutral opacity-80">
+                                        1.2K Members
+                                    </span>
+                                </div>
+
+
+                            </div>
+
+                            <div class="flex flex-row gap-4 items-center mt-4">
+                                <div class="">
+                                    <img src="img1/event1.jpeg" alt="" class="rounded-full h-12 w-12">
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-lg font-thin">Google Developer Community</span>
+                                    <span class="text-sm text-neutral opacity-80">
+                                        1.2K Members
+                                    </span>
+                                </div>
+
+
+                            </div>
+
+
+
+
+
+
+                            
+
+
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+
+
+
+
+
+        </main>
+    </div>
+
+</body>
+
+
+<script>
+    //mobile
+    const MenuShowBtn = document.querySelector('#MenuShowBtn');
+    const MobileMenu = document.querySelector('#MobileMenu');
+    const MenuCloseBtn = document.querySelector('#MenuCloseBtn');
+
+
+    MenuShowBtn.addEventListener('click', disMenu);
+    MenuCloseBtn.addEventListener('click', hideMenu)
+
+    function disMenu() {
+        MobileMenu.classList.toggle('hidden');
+    }
+
+    function hideMenu() {
+        MobileMenu.classList.toggle('hidden');
+    }
+
+
+    //like
+    document.addEventListener('DOMContentLoaded', function () {
+        // Your code here
+        const like = document.getElementsByClassName('like');
+        like.addEventListener('click', reaction);
+
+        function reaction() {
+            if (like.classList.contains('fa-regular')) {
+                like.classList.add('fa-solid');
+                like.classList.remove('fa-regular');
+
+            }
+
+            else if (like.classList.contains('fa-solid')) {
+                like.classList.add('fa-regular');
+                like.classList.remove('fa-solid');
+            }
+        }
+
+    });
+
+
+    
+
+        //LogOut
+        const LogOut = document.getElementById('LogOut') 
+       
+        
+       LogOut.addEventListener('click',function(){
+           confirm('Are you sure to LogOut?');
+           window.location.href = '/logout';
+       })
+
+
+
+
+</script>
+<script src="js/count-time.js"></script>
+
+</html>

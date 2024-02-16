@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon/cclogo.png">
+</head>
+<link rel="stylesheet" href="/css/register.css">
+<script>
+    window.onload = function() {
+    let loginer_mail = window.localStorage.getItem('Email');
+    if(!loginer_mail)
+    window.location.href = "/login";
+    
+    // document.getElementById('specialID').addEventListener('submit', function() {
+// Get the value of the name field.
+//   var name = document.getElementById('name').value.trim();
+// Save the name in localStorage.
+    // console.log(name);
+  let secretkey = '<%= specialID %>';
+  localStorage.setItem('USER', secretkey);
+//   const form = document.getElementById('specialID');
+//   form.action = 'getdata'+;
+// });
+
+    }
+</script>
+<body>
+        <div class="wrapper">
+            <div class="title">
+                <span id="typewriter"></span><span id="cursor">|</span>
+            </div>
+            <form action="/getdata" id="specialID" method="post" onsubmit="return validateForm()">
+                <div class="user-details">
+                    <div class="input-box">
+                        <span class="details">First Name</span>
+                        <input type="text" name="fname" placeholder="Enter your firstname" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Last Name</span>
+                        <input type="text" name="lname" placeholder="Enter your lastname" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Username</span>
+                        <input type="text" name="username" placeholder="Enter your username" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">E-Mail</span>
+                        <input type="email" name="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Date of Birth</span>
+                        <input type="date" name="dob" placeholder="Enter your DoB" required>
+                    </div>
+                    <!-- <div class="input-box">
+                        <span class="details">Phone Number</span>
+                        <input type="number" name="num" placeholder="Enter your number" required>
+                    </div> -->
+                    <div class="input-box">
+                        <span class="details">Password</span>
+                        <input type="password" name="pass" id="password" placeholder="Enter your Password" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Confirm Password</span>
+                        <input type="password" id="confirmPassword" placeholder="Confirm your Password" required>
+                    </div>
+                </div>
+                <div class="gender-details">
+                    <input type="radio" name="gender" value="Male" id="dot-1">
+                    <input type="radio" name="gender" value="Female" id="dot-2">
+                    <input type="radio" name="gender" value="Prefer not to answer" id="dot-3">
+                    <span class="gender-title">Gender</span>
+                    <div class="category">
+                        <label for="dot-1">
+                            <span class="dot one"></span>
+                            <span class="gender">Male</span>
+                        </label>
+                        <label for="dot-2">
+                            <span class="dot two"></span>
+                            <span class="gender">Female</span>
+                        </label>
+                        <label for="dot-3">
+                            <span class="dot three"></span>
+                            <span class="gender">Prefer Not to say</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="button">
+                    <input type="submit" value="Register" id="reg-btn">
+                    
+                </div>
+            </form>
+
+        </div>
+
+        
+
+
+</body>
+<script>
+ // to display otp block
+
+
+ function validateForm() {
+        let password = document.getElementById("password").value;
+        let confirmPassword = document.getElementById("confirmPassword").value;
+        let email = document.getElementById("email").value;
+        let localemail = window.localStorage.getItem('Email');
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match. Please try again.");
+            return false;
+        }
+
+        if (localemail !== email) {
+            alert("Emails do not match. Please try again.");
+            return false;
+        }
+
+        localStorage.setItem('PASSWORD', password)
+        return true;
+    }
+
+    
+    
+
+
+    function sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
+
+    const words = ["Register yourself with us!"];
+    const el = document.getElementById("typewriter");
+
+    let sleepTime = 150;
+
+    let curInd = 0;
+
+    const writeLoop = async () => {
+        while (true) {
+            let curWord = words[curInd];
+
+            for (let i = 0; i < curWord.length; i++) {
+                el.innerText = curWord.substring(0, i + 1);
+                await sleep(sleepTime);
+            }
+            await sleep(sleepTime);
+
+
+            for (let i = curWord.length; i > 0; i--) {
+                el.innerText = curWord.substring(0, i - 1);
+                await sleep(sleepTime);
+            }
+            await sleep(sleepTime);
+
+            if (curInd === words.length - 1) {
+                curInd = 0;
+            }
+            else {
+                curInd++;
+            }
+        }
+    };
+
+    writeLoop();
+
+</script>
+
+</html>

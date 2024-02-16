@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Graphs Script -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+
+    <!-- Fonts -->
+    <script src="https://kit.fontawesome.com/e4a2ea9e4b.js" crossorigin="anonymous"></script>
+    <!-- <script src="change_redirect"></script> -->
+    <script>
+        window.onload = function() {
+const linkData = localStorage.getItem('USER');
+const anchor = document.getElementsByClassName("redire");
+if (anchor) {
+    let newUrl = anchor.href + "/" + linkData;
+    anchor.href = newUrl;
+} else {
+    console.error(`Anchor tag with id not found.`);
+}
+}
+    </script>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon/cclogo.png">
+</head>
+
+<body class="font-Inter lg:overflow-y-hidden">
+    <div class="grid grid-cols-1 lg:grid-cols-6 ">
+        <!-- Sidebar -->
+        <aside class=" leftLoad  col-span-1 bg-blue md:h-screen py-4 hidden lg:block ">
+            <!-- logo -->
+            <div class="text-white lg:text-center lg:ml-0 ml-4 lg:py-2">
+                <span class="title text-4xl mt-4">Student'sHub</span>
+            </div>
+
+
+            <!-- Navigation -->
+            <div class="hidden lg:block navigation">
+                <ul class="text-white text-2xl text-center flex flex-col gap-y-8 mt-16">
+                    <li class="customHover bg-white text-black ml-4 rounded-l-2xl">
+                        <a class="redire" href="/dash">Dashboard</a>
+                    </li>
+                    <li class="customHover">
+                        <a class="redire" href="/events">Events</a>
+                    </li>
+                    <li class="customHover">
+                        <a class="redire" href="/communities">Communities</a>
+                    </li>
+                    <li class="customHover">
+                        <a class="redire" href="/messages">Messages</a>
+                    </li>
+                    <li class="customHover">
+                        <a class="redire" href="/mycollege">My College</a>
+                    </li>
+                    <li class=" flex justify-center items-center gap-x-2 cursor-pointer" id="LogOut">
+                        LogOut <i class="fa-solid fa-right-from-bracket fa-xs text-violet" ></i>
+                    </li>
+                </ul>
+            </div>
+
+
+        </aside>
+
+
+
+        <!-- Main -->
+
+        <main class="col-span-5 mainDiv">
+            <!-- Mobile Header -->
+            <div class="top-0 left-0 bg-blue lg:hidden py-5 pl-3 flex flex-row justify-between items-center sticky z-20">
+                <span class="text-4xl text-white  ">
+                    Student'sHub
+                </span>
+
+                <div class="mr-4">
+                    <button class="bg-white p-2 rounded-sm" id="MenuShowBtn">
+                        <i class="fa-solid fa-bars fa-sm" style="color: #10107b;"> </i>
+                    </button>
+                </div>
+
+
+                  <!-- Mobile Navbar -->
+                  <div class="absolute top-0 right-0 text-white bg-blue px-6 text-3xl pb-4  pt-2 rounded-l-sm hidden mblNavbar" id="MobileMenu">   
+                    <div>
+                        <div class="flex flex-row items-center justify-between mt-2">
+                            <div class="flex flex-row">
+                                <a class="redire" href="/profile" class="flex flex-row"><img src="img1/profle-picture.png" alt="" class="h-12 w-12 rounded-full">
+                                    <div class="ml-1 flex flex-col">
+                                        <h3 class="text-lg"><%= Name %></h3>
+                                        <span class="text-xs opacity-[0.8]"><%= Role %></span>
+                                    </div></a>
+                           
+                                
+                            </div>
+                            <div>
+                                <button class="bg-white px-1  rounded-sm " id="MenuCloseBtn">
+                                    <i class="fa-solid fa-xmark fa-xs " style="color: #072964;"></i>
+    
+                                </button>
+                            </div>
+                          
+                        </div>
+                        <ul class="px-4 py-1  text-xl">
+                            
+                           
+                            <a class="redire" href="/dash">
+                                <li class="mt-6"> <i class="fa-solid fa-user fa-sm mr-2" style="color: #ffffff;" ></i>Dashboard</li>
+                            </a>
+                            <a class="redire" href="/events">
+                                <li class="mt-6"><i class="fa-regular fa-calendar fa-sm mr-2" style="color: #ffffff;"></i>Events</li>
+                            </a>
+                            <a class="redire" href="/communities">
+                                <li class="mt-6"><i class="fa-solid fa-user-group fa-sm mr-2" style="color: #ffffff;"></i>Communities</li>
+                            </a>
+                            <a class="redire" href="/messages">
+                                <li class="mt-6"><i class="fa-solid fa-message fa-sm mr-2" style="color: #ffffff;"></i>Messages</li>
+                            </a>
+                            
+                            <a class="redire" href="/mycollege">
+                                <li class="mt-6" ><i class="fa-solid fa-building-columns fa-sm mr-2"  style="color: #ffffff;"></i>My College</li>
+                            </a>
+                            <a href="/logout">
+                                <li class="mt-6" ><i class="fa-solid fa-right-from-bracket fa-xs mr-2" ></i>LogOut</li>
+                            </a>
+                            
+                            
+                        </ul>
+                    </div>
+                  </div>
+ 
+
+            </div>
+          
+            <div class=" ">
+                <!-- Header -->
+                <header class="shadow-md  grid-cols-3 px-4 py-4 hidden lg:grid">
+                    <div>
+                        <span class="text-3xl font-thin opacity-80">Events</span>
+                    </div>
+
+                    <!-- Search Bar -->
+                    <div>
+                        <div class="relative  flex w-full flex-wrap items-stretch ">
+                            <input type="search"
+                                class="relative m-0 block min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                                placeholder="Search" aria-label="Search" aria-describedby="button-addon2" />
+
+                            <!--Search icon-->
+                            <span
+                                class="input-group-text flex items-center whitespace-nowrap rounded px-3 py-1.5 text-center text-base font-normal text-neutral-700 dark:text-neutral-200"
+                                id="basic-addon2">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                    class="h-5 w-5 cursor-pointer">
+                                    <path fill-rule="evenodd"
+                                        d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- Profile Info -->
+                    <div class="flex justify-end">
+                        <!-- Bell Icon -->
+                        <!-- <i class="fa-solid fa-xl fa-bell mr-12"></i> -->
+                        <!-- Profile Info -->
+                        <div class="flex flex-col mr-6 ">
+                            <h3 class="text-xl"><%= Name %></h3>
+                            <h6 class="text-sm text-end"><%= Role %></h6>
+                        </div>
+                        <!-- Proifle Picture -->
+                        <a class="redire" href="/profile"><img src="img1/profle-picture.png" alt="Profile Picture"
+                            class="h-12 w-12 mr-6 rounded-full cursor-pointer"></a>
+                        
+
+                    </div>
+
+                </header>
+                <!-- Cards-Section -->
+                <section class=" mt-4 px-4 rightLoad">
+                    <!-- Cards -->
+                    <div class="grid lg:grid-cols-4  grid-cols-2 text-start gap-8">
+                        <!-- Card-1 -->
+                        <div
+                            class=" rounded-xl  p-4 h-36 shadow-[0_8px_14px_rgb(0,0,0,0.2)] hover:scale-105 transform duration-75 cursor-pointer ">
+                            <h6 class="opacity-65">Ongoing Events</h6>
+                            <p class="flex items-end justify-start mt-4">
+                                <span class="text-2xl font-semibold">2</span>
+                                <span class="opacity-65 mb-1 ml-1">/50*</span>
+                            </p>
+                        </div>
+                        <!-- Card-2 -->
+                        <div
+                            class=" rounded-xl  p-4 h-36 shadow-[0_8px_14px_rgb(0,0,0,0.2)] hover:scale-105 transform duration-75 cursor-pointe">
+                            <h6 class="opacity-65">Questions Answered</h6>
+                            <p class="flex items-end justify-start mt-4">
+                                <span class="text-2xl font-semibold">3,298</span>
+                                <!-- <span class="opacity-65 mb-1 ml-1">/50*</span> -->
+                            </p>
+                        </div>
+                        <!-- Card-3 -->
+                        <div
+                            class=" rounded-xl  p-4 h-36 shadow-[0_8px_14px_rgb(0,0,0,0.2)] hover:scale-105 transform duration-75 cursor-pointe">
+                            <h6 class="opacity-65">Today's Usage </h6>
+                            <p class="flex items-end justify-start mt-4">
+                                <span class="text-2xl font-semibold" id="timeSpent">0m0s</span>
+                                <!-- <span class="opacity-65 mb-1 ml-1">/50*</span> -->
+                            </p>
+                        </div>
+                        <!-- Card-4 -->
+                        <div
+                            class=" rounded-xl  p-4 h-36 shadow-[0_8px_14px_rgb(0,0,0,0.2)] hover:scale-105 transform duration-75 cursor-pointe ">
+                            <h6 class="opacity-65">Project Impression</h6>
+                            <p class="flex items-end justify-start mt-4">
+                                <span class="text-2xl font-semibold">64%</span>
+                                <!-- <span class="opacity-65 mb-1 ml-1">/50*</span> -->
+                            </p>
+                        </div>
+
+                        <!-- Card-5 -->
+                        <!-- <div
+                            class=" rounded-xl  p-4 h-36 shadow-[0_8px_14px_rgb(0,0,0,0.2)] hover:scale-105 transform duration-75 cursor-pointe ">
+                            <h6 class="opacity-65">Current Knowledge</h6>
+                            <p class="flex flex-col items-start justify-start mt-4">
+                                <span class="text-2xl font-semibold">86%</span>
+                                <img src="img1/Graph.png" alt="">
+                           
+                            </p>
+                        </div> -->
+
+                        <!-- Card-6 -->
+                        <!-- <div
+                            class=" rounded-xl  p-4 h-36 shadow-[0_8px_14px_rgb(0,0,0,0.2)] hover:scale-105 transform duration-75 cursor-pointe">
+                            <h6 class="opacity-65">Knowledge Gain</h6>
+                            <p class="flex flex-col items-start justify-start mt-4">
+                                <span class="text-2xl font-semibold">34%</span>
+                                <img src="img1/Graph.png" alt="">
+                               
+                            </p>
+                        </div> -->
+
+
+
+                    </div>
+                </section>
+
+
+                <!-- Section Below Cards -->
+                <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-4 p-4">
+                    <!-- Graph Left SIde -->
+                    <div class=" text-center order-2 lg:order-1 leftLoad">
+
+                        <!-- Graph -->
+                        <!-- <div class="shadow-[0_8px_14px_rgb(0,0,0,0.2)] rounded-xl p-4">
+                                <canvas id="bar-chart"  class=""></canvas>
+                           </div> -->
+                        <div class="chart-container p-2 shadow-[0_8px_14px_rgb(0,0,0,0.4)] rounded-xl"
+                            style="position: relative; height: 200px;; width:auto">
+                            <canvas id="bar-chart"></canvas>
+                        </div>
+                        <!-- Area below graph -->
+                        <div class="grid grid-cols-2 mt-4 gap-8 h-[245px]">
+                            <div
+                                class=" cursor-pointer p-2 shadow-[0_8px_14px_rgb(0,0,0,0.4)] rounded-xl text-xltracking-wide bg-blue text-white justify-center items-center flex overflow-y-scroll">
+                                <div>
+                                    You have <span class="bg-purple rounded-full p-1">12</span> insights from SPCA and
+                                    <span class="bg-purple  rounded-full p-1 ">22</span> pending submissions of
+                                    Hacktober.
+                                </div>
+
+                            </div>
+                            <div
+                                class=" cursor-pointer p-2 shadow-[0_8px_18px_rgb(0,0,0,0.4)] rounded-xl overflow-y-scroll ">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quibusdam accusamus
+                                aliquid, debitis sed enim. Nihil, amet consequuntur repellendus deserunt a eius
+                                quibusdam ea eum error dolores fugiat non consectetur expedita. Eum neque itaque, vitae
+                                harum sapiente praesentium rerum placeat fugiat esse ea quibusdam expedita soluta
+                                architecto pariatur accusamus omnis atque reprehenderit voluptas optio debitis rem
+                                reiciendis. Eius, animi architecto quod, molestiae tempore magnam sequi unde in
+                                recusandae minima nostrum autem aliquid soluta necessitatibus. Ipsam accusamus quibusdam
+                                est autem necessitatibus quo voluptatibus, culpa doloremque alias blanditiis ab in
+                                temporibus asperiores magnam explicabo, fugiat, rerum nihil suscipit porro. Explicabo,
+                                accusamus esse!
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Right side -->
+                    <div
+                        class=" order-1 lg:order-2 h-[460px] shadow-[0_8px_14px_rgb(0,0,0,0.4)] rounded-xl overflow-y-scroll rightLoad">
+                        <div class="p-4">
+                            <span class="font-normal text-lg  opacity-80">
+                                Task Assigned
+                            </span>
+                        </div>
+
+
+                        <!-- Task-Card -->
+                        <div class="px-4 ">
+                            <!-- Card-1 -->
+                            <div
+                                class="p-2  bg-stone rounded-md hover:scale-[1.02] cursor-pointer transition transform duration-100">
+                                <!-- Title -->
+                                <div class="grid grid-cols-2">
+
+                                    <!-- Research -->
+                                    <div class="opacity-45">
+                                        <span
+                                            class="text-white bg-l-grey text-[10px] rounded-full p-1  font-thin">Research</span>
+                                    </div>
+
+                                    <!-- Done -->
+                                    <div class="justify-end flex">
+                                        <span
+                                            class="text-green bg-l-green p-1 text-[10px] font-semibold rounded-full">Done</span>
+                                    </div>
+
+                                </div>
+                                <!-- Discription -->
+                                <div class="mt-2">
+                                    <span class="font-thin text[12px]  text-neutral">Sint ex excepteur proident
+                                        adipisicing adipisicing occaecat pariatur.
+                                        Sint ex excepteur proident adipisicing adipisicing </span>
+                                </div>
+
+                                <!-- Bottom Task Div -->
+                                <div class="grid grid-cols-2 mt-2">
+                                    <div class="flex flex-row gap-4">
+                                        <div>
+                                            <i class="fa-regular fa-calendar fa-sm" style="color: #828282;"></i>
+                                            <span class="text-sm font-thin text-grey">Mar 14</span>
+                                        </div>
+                                        <div>
+                                            <i class="fa-solid fa-sm fa-paperclip" style="color: #828282;"></i>
+                                            <span class="text-sm  font-thin text-grey">4</span>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="flex justify-end">
+                                        <img src="img1/profle-picture.png" alt="" class="h-8 w-8 rounded-full">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Card-2 -->
+                            <div
+                                class="p-2  bg-stone rounded-md mt-4 hover:scale-[1.02] cursor-pointer transition transform duration-100">
+                                <!-- Title -->
+                                <div class="grid grid-cols-2">
+
+                                    <!-- Web Design -->
+                                    <div class="opacity-45">
+                                        <span
+                                            class="bg-l-sky-blue text-sky-blue text-[10px] rounded-full p-1  font-semibold">Web
+                                            Design</span>
+                                    </div>
+
+                                    <!-- Pending -->
+                                    <div class="justify-end flex">
+                                        <span
+                                            class="text-red bg-l-red p-1 text-[10px] font-semibold rounded-full">Pending</span>
+                                    </div>
+
+                                </div>
+                                <!-- Discription -->
+                                <div class="mt-2">
+                                    <span class="font-thin text[12px]  text-neutral">Sint ex excepteur proident
+                                        adipisicing adipisicing occaecat pariatur.
+                                        Sint ex excepteur proident adipisicing adipisicing </span>
+                                </div>
+
+                                <!-- Bottom Task Div -->
+                                <div class="grid grid-cols-2 mt-2">
+                                    <div class="flex flex-row gap-4">
+                                        <div>
+                                            <i class="fa-regular fa-calendar fa-sm" style="color: #828282;"></i>
+                                            <span class="text-sm font-thin text-grey">Mar 14</span>
+                                        </div>
+                                        <div>
+                                            <i class="fa-solid fa-sm fa-paperclip" style="color: #828282;"></i>
+                                            <span class="text-sm  font-thin text-grey">4</span>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="flex justify-end">
+                                        <img src="img1/profle-picture.png" alt="" class="h-8 w-8 rounded-full">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Card-3 -->
+                            <div
+                                class="p-2  bg-stone rounded-md mt-4 hover:scale-[1.02] cursor-pointer transition transform duration-100">
+                                <!-- Title -->
+                                <div class="grid grid-cols-2">
+
+                                    <!-- Research -->
+                                    <div class="opacity-45">
+                                        <span
+                                            class="text-white bg-l-grey text-[10px] rounded-full p-1  font-thin">Research</span>
+                                    </div>
+
+                                    <!-- Done -->
+                                    <div class="justify-end flex">
+                                        <span
+                                            class="text-green bg-l-green p-1 text-[10px] font-semibold rounded-full">Done</span>
+                                    </div>
+
+                                </div>
+                                <!-- Discription -->
+                                <div class="mt-2">
+                                    <span class="font-thin text[12px]  text-neutral">Sint ex excepteur proident
+                                        adipisicing adipisicing occaecat pariatur.
+                                        Sint ex excepteur proident adipisicing adipisicing </span>
+                                </div>
+
+                                <!-- Bottom Task Div -->
+                                <div class="grid grid-cols-2 mt-2">
+                                    <div class="flex flex-row gap-4">
+                                        <div>
+                                            <i class="fa-regular fa-calendar fa-sm" style="color: #828282;"></i>
+                                            <span class="text-sm font-thin text-grey">Mar 14</span>
+                                        </div>
+                                        <div>
+                                            <i class="fa-solid fa-sm fa-paperclip" style="color: #828282;"></i>
+                                            <span class="text-sm  font-thin text-grey">4</span>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="flex justify-end">
+                                        <img src="img1/profle-picture.png" alt="" class="h-8 w-8 rounded-full">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- card-4 -->
+                            <div
+                                class="p-2  bg-stone rounded-md mt-4 mb-4 hover:scale-[1.02] cursor-pointer transition transform duration-100">
+                                <!-- Title -->
+                                <div class="grid grid-cols-2">
+
+                                    <!-- Research -->
+                                    <div class="opacity-45">
+                                        <span
+                                            class="text-white bg-l-grey text-[10px] rounded-full p-1  font-thin">Research</span>
+                                    </div>
+
+                                    <!-- Done -->
+                                    <div class="justify-end flex">
+                                        <span
+                                            class="text-green bg-l-green p-1 text-[10px] font-semibold rounded-full">Done</span>
+                                    </div>
+
+                                </div>
+                                <!-- Discription -->
+                                <div class="mt-2">
+                                    <span class="font-thin text[12px]  text-neutral">Sint ex excepteur proident
+                                        adipisicing adipisicing occaecat pariatur.
+                                        Sint ex excepteur proident adipisicing adipisicing </span>
+                                </div>
+
+                                <!-- Bottom Task Div -->
+                                <div class="grid grid-cols-2 mt-2">
+                                    <div class="flex flex-row gap-4">
+                                        <div>
+                                            <i class="fa-regular fa-calendar fa-sm" style="color: #828282;"></i>
+                                            <span class="text-sm font-thin text-grey">Mar 14</span>
+                                        </div>
+                                        <div>
+                                            <i class="fa-solid fa-sm fa-paperclip" style="color: #828282;"></i>
+                                            <span class="text-sm  font-thin text-grey">4</span>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="flex justify-end">
+                                        <img src="img1/profle-picture.png" alt="" class="h-8 w-8 rounded-full">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <script type="text/javascript">
+
+
+        //Graph
+        var bar_ctx = document.getElementById('bar-chart').getContext('2d');
+
+        var purple_orange_gradient = bar_ctx.createLinearGradient(0, 0, 0, 600);
+        purple_orange_gradient.addColorStop(0, 'rgba(16, 16, 123, 0.8)');
+        purple_orange_gradient.addColorStop(1, 'rgba(0, 37, 65, 0.4)');
+
+        var bar_chart = new Chart(bar_ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Annual Activity',
+                    data: [12, 19, 3, 8, 14, 5, 6, 7, 8, 9, 11, 12],
+                    backgroundColor: purple_orange_gradient,
+                    borderRadius: 50,
+                    barThickness: 10,
+                    circular: true,
+                    barPercentage: 0.5,
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+
+        //mobile navbar
+
+        const MenuShowBtn = document.querySelector('#MenuShowBtn');
+        const MobileMenu = document.querySelector('#MobileMenu');
+        const MenuCloseBtn = document.querySelector('#MenuCloseBtn');
+
+
+        MenuShowBtn.addEventListener('click',disMenu);
+        MenuCloseBtn.addEventListener('click',hideMenu)
+        
+        function disMenu(){
+            MobileMenu.classList.toggle('hidden');
+        }
+
+        function hideMenu(){
+            MobileMenu.classList.toggle('hidden');
+        }
+        
+
+        //LogOut
+        const LogOut = document.getElementById('LogOut') 
+       
+        
+       LogOut.addEventListener('click',function(){
+           confirm('Are you sure to LogOut?');
+           window.location.href = '/logout';
+       })
+
+
+
+
+    </script>
+    <script src="js/count-time.js"></script>
+</body>
+
+</html>

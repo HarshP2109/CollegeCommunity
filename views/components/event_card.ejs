@@ -1,0 +1,109 @@
+<!-- Events Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 mt-2 gap-4">
+
+    <!-- Card-1 -->
+    <% let n = Events.length; %>
+    <% if(n > 4){ %>
+    <% for(let i=0;i <4;i++){ %>
+    <% let link = "/eventhomie/" + Events[i].EventID%>
+    <a href="<%- link %>" class="cursor-pointer cardHover <%= (i % 2) ? 'bottomLoad' : 'topLoad' %> ">
+        <div class=" bg-white grid grid-cols-1 lg:grid-cols-2 p-3 rounded-md">
+            <!-- Events Img -->
+            <div>
+                <img src=<%= Events[i].img %> alt="" class="rounded-md">
+            </div>
+            <!-- Events Discription -->
+            <div class="p-2">
+                <div>
+                    <span class="text-lg font-normal">
+                        <% let naam = Events[i].Title + " - " + Events[i].Organsiation %>
+                        <%- naam %>
+                    </span>
+                </div>
+                <div class="mt-8">
+                    <% let date = new Date(Events[i].St_d) %>
+                    <% let dates = date.getDate() + ' , ' + Events[i].St_t %>
+                    <span class="text-md font-thin text-violet"><%- dates %></span><br/>
+                </div>
+                <div>
+                    <span class="text-sm text-neutral font-semibold opacity-80"><%= Events[i].Venue %></span>
+                </div>
+
+            </div>
+
+        </div>
+    </a>
+    <% } %>
+    <% } else { %>
+    <% for(let i=0;i < n;i++){ %>
+    <% let link = "/eventhomie/" + Events[i].EventID%>
+    <a href="<%- link %>" class="cursor-pointer cardHover bottomLoad">
+        <div class=" bg-white grid grid-cols-1 lg:grid-cols-2 p-3 rounded-md">
+            <!-- Events Img -->
+            <div>
+                <img src=<%= Events[i].img %> alt="" class="rounded-md">
+            </div>
+            <!-- Events Discription -->
+            <div class="p-2">
+                <div>
+                    <span class="text-lg font-normal">
+                        <% let naam = Events[i].Title + " - " + Events[i].Organsiation %>
+                        <%- naam %>
+                    </span>
+                </div>
+                <div class="mt-8">
+                    <% let date = new Date(Events[i].St_d) %>
+                    <% let dates = date.getDate() + ' , ' + Events[i].St_t %>
+                    <span class="text-md font-thin text-violet"><%- dates %></span><br/>
+                </div>
+                <div>
+                    <span class="text-sm text-neutral font-semibold opacity-80"><%= Events[i].Venue %></span>
+                </div>
+
+            </div>
+
+        </div>
+    </a>
+    <% } %>
+    <% } %>
+
+
+</div>
+
+<!-- Cards to be made visible after load more -->
+<div id="myDiv" class=" grid  hidden grid-cols-1 sm:grid-cols-2 mt-4 gap-4">
+    <% if(n>4){ %>
+
+        <% for(let i=4; i < Events.length;i++){ %>
+            <% let link = "/eventhomie/" + Events[i].EventID%>
+            <a href="<%- link %>" class="cursor-pointer cardHover bottomLoad">
+                <div class=" bg-white grid grid-cols-1 lg:grid-cols-2 p-3 rounded-md">
+                    <!-- Events Img -->
+                    <div>
+                        <img src=<%= Events[i].img %> alt="" class="rounded-md">
+                    </div>
+                    <!-- Events Discription -->
+                    <div class="p-2">
+                        <div>
+                            <span class="text-lg font-normal">
+                                <% let naam = Events[i].Title + " - " + Events[i].Organsiation %>
+                                <%- naam %>
+                            </span>
+                        </div>
+                        <div class="mt-8">
+                            <% const date = new Date(dateString) %>
+                            <% let dates = date.getDate() + ' , ' + Events[i].St_t %>
+                            <span class="text-md font-thin text-violet"><%- dates %></span><br/>
+                        </div>
+                        <div>
+                            <span class="text-sm text-neutral font-semibold opacity-80"><%= Events[i].Venue %></span>
+                        </div>
+        
+                    </div>
+        
+                </div>
+            </a>
+            <% } %>
+
+    <% } %>
+</div>

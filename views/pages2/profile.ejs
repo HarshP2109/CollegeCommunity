@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- FontsAwesome -->
+    <script src="https://kit.fontawesome.com/e4a2ea9e4b.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon/cclogo.png">
+
+</head>
+
+<body class="flex justify-center items-center rightLoad ">
+
+    <section class="">
+
+        <div class="bg-blue h-52 -z-10 w-screen  ">
+            <div class="bg-blue h-52 -z-10 w-screen flex flex-row  justify-between">
+                <div class="m-2">
+                    <span class=" text-xl font-semibold text-white">My Profile</span>
+                </div>
+                <div class="m-2 text-xl font-semibold text-white cursor-pointer " >
+                    <button id="LogOut">
+                        LogOut <i class="fa-solid fa-right-from-bracket fa-xs ml-2 "></i>
+                    </button>
+                      
+                 
+                    
+                </div>
+               
+             
+            </div>
+            
+
+
+            <section class="flex lg:flex-row flex-col justify-center md:items-center lg:items-start -mt-28 gap-8 px-4
+         lg:px-0">
+                <!-- Left Section -->
+                <section class="bg-white  rounded-md shadow-md p-4  md:w-[593px] lg:w-[393px] w-full topLoad">
+                    <!-- Profle Picture -->
+                    <div class="flex flex-row items-center justify-between">
+                        <div>
+                            <img src="img1/profle-picture.png " class="h-20 w-20 rounded-full" alt="">
+                        </div>
+                        <div>
+                            <button class="bg-stone px-2 py-1 rounded-full prflBtn">Upload Picture</button>
+                        </div>
+                    </div>
+
+                    <!--Profile Details-->
+
+                    <!-- Profile Name -->
+                    <div class="border border-stone mt-4 p-4 rounded-md">
+
+                        <!-- Displayed Profile Details -->
+                        <div class="  transform transition-all duration-150 " id="myDiv">
+                            <div class="flex flex-col">
+                                <span class="text-xs opacity-[0.8]">Your Name</span>
+                                <span class="text-lg mt-1"><%= Name %></span>
+
+                            </div>
+                            <div class="flex flex-col mt-4">
+                                <span class="text-xs opacity-[0.8]">Email</span>
+                                <span class="text-lg mt-1"><%=  Email %></span>
+
+                            </div>
+                            <div class="flex flex-col mt-4">
+                                <span class="text-xs opacity-[0.8]">Phone Number</span>
+                                <span class="text-lg mt-1">+91 49652845732</span>
+
+                            </div>
+                        </div>
+
+
+                        <!-- Edit Profile Details -->
+
+                        <div class="hidden  navLoad" id="myDiv-1">
+                            <form action="/profile">
+                                <div class="flex flex-col gap-y-2 px-2">
+                                    <label for="pname" class="text-sm opacity-[0.8] ml-1">Your Name</label>
+                                    <input type="text" name="pname" id="pname"
+                                        class="bg-stone h-8 rounded-md pl-2 focus:outline-none"
+                                        placeholder="make unique username">
+                                </div>
+
+                                <div class="flex flex-col gap-y-2 px-2 mt-4">
+                                    <label for="mail" class="text-sm opacity-[0.8] ml-1">Your Email</label>
+                                    <input type="email" name="mail" id="mail"
+                                        class="bg-stone h-8 rounded-md pl-2 focus:outline-none"
+                                        placeholder="enter your email here">
+                                </div>
+
+
+                                <div class="flex flex-col gap-y-2 px-2 mt-4">
+                                    <label for="number" class="text-sm opacity-[0.8] ml-1">Your Phone Number</label>
+                                    <input type="email" name="Number" id="number"
+                                        class="bg-stone h-8 rounded-md pl-2 focus:outline-none"
+                                        placeholder="enter your phone number here">
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="text-center mt-6" ">
+                            <button class="bg-stone py-1 px-2  rounded-full prflBtn" onclick="toggleDiv(),toggleTxt(this)">Edit Profile Details</button>
+                        </div>
+
+                    </div>
+
+
+                    <!-- about -->
+                    <div class="border border-stone mt-4 py-2 px-4 rounded-md">
+
+                        <!-- About header -->
+                        <div class="flex flex-row items-center justify-between">
+                            <div>
+                                <span class="text-xl font-semibold">About</span><span
+                                    class="text-xl ml-1 font-semibold "><%= Firstname %> </span>
+                            </div>
+                            <div>
+                                <button onclick="toggleAbout(),toggleText(this)"
+                                    class="bg-stone text-blue  px-4 rounded-full prflBtn" >Edit</button>
+                            </div>
+                        </div>
+
+                        <!-- about content -->
+                        <div class="mt-4  ">
+                            <p class="opacity-[0.8] " id="abtDiv">
+                                Lorem ipsum dolor sit amet consectetur. Erat auctor a aliquam vel congue luctus. Leo
+                                diam
+                                cras neque mauris ac arcu elit ipsum dolor sit amet consectetur.
+                            </p>
+                            <textarea name="" id="abtDiv-1" cols="30" rows="" placeholder="Write a creative about..."
+                                class="bg-stone w-full p-1 focus:outline-none hidden navLoad rounded-sm "></textarea>
+                        </div>
+                    </div>
+                </section>
+                <!-- Right Section -->
+                <section class="bg-white  rounded-md shadow-md p-4 lg:w-[313px] md:w-[593px] w-full bottomLoad">
+                    <!-- <div class="border border-stone p-4 rounded-md">
+                        <div>
+                            <span class="font-semibold">Professional Details</span>
+                            <p class="text-sm opacity-[0.8]">This are the professional details shown to users in the
+                                app.
+                            </p>
+                        </div>
+                    </div> -->
+
+
+                    <!-- Skills -->
+                    <div class="mt-4 ">
+                        <span class="text-lg font-semibold">Skills </span>
+                        <div class="grid grid-cols-4 gap-1 mt-1">
+                            <span class="text-sm bg-neutral text-white px-1 rounded-full py-1 text-center">HTML</span>
+                            <span
+                                class="text-sm bg-neutral text-white px-1 rounded-full py-1 text-center">JavaScript</span>
+                            <span class="text-sm bg-neutral text-white px-1 rounded-full py-1 text-center">CSS</span>
+                            <span class="text-sm bg-neutral text-white px-1 rounded-full py-1 text-center">Java</span>
+                            <span class="text-sm bg-neutral text-white px-1 rounded-full py-1 text-center">Python</span>
+                        </div>
+                    </div>
+
+                    <!-- Experience -->
+                    <div class="mt-4">
+                        <span class="text-lg font-semibold ">
+                            Total Experience
+                        </span>
+                        <div
+                            class="border border-stone pl-4  rounded-md mt-2 flex flex-row justify-between items-center">
+                            <div class="gap-y-2">
+                                <span class="text-md font-semibold">
+                                    7 years
+                                </span>
+                                <p>
+                                    of total experience
+                                </p>
+                            </div>
+
+                            <div class="bg-skin py-4 rounded-r-md w-16 text-center">
+                                <i class="fa-solid fa-medal fa-xl" style="color: #ffffff;"></i>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Ratings -->
+                    <div class="mt-4">
+                        <span class="text-lg font-semibold ">
+                            Ratings
+                        </span>
+                        <div
+                            class="border border-stone pl-4  rounded-md mt-2 flex flex-row justify-between items-center">
+                            <div class="gap-y-2">
+                                <span class="text-md font-semibold">
+                                    4 stars
+                                </span>
+                                <p>
+                                    from 34 members
+                                </p>
+                            </div>
+
+                            <div class="bg-l-yellow py-4 rounded-r-md w-16 text-center">
+                                <i class="fa-solid fa-star fa-xl" style="color: #ffffff;"></i>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Reviews -->
+                    <div class="mt-4 ">
+                        <span class="text-lg font-semibold">Members Reviews</span>
+                        <div class="border border-stone rounded-md py-1 px-4">
+                            <span class="text-lg font-semibold">
+                                Ankit Srivastava
+                            </span>
+                            <div class="mt-1">
+                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                <i class="fa-solid fa-star" style="color: #222220;"></i>
+                            </div>
+
+                            <div class="">
+                                <p>excelent conversation with him.. very knowledgeble personhappy to talk towith him</p>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </section>
+            </section>
+
+
+    </section>
+
+
+
+
+    <script>
+        //logOut
+
+        const LogOut = document.getElementById('LogOut') 
+       
+        
+        LogOut.addEventListener('click',function(){
+            confirm('Are you sure to LogOut?');
+            window.location.href = '/logout';
+        })
+        
+    
+        //edit profile
+        function toggleDiv() {
+            var myDiv = document.getElementById("myDiv");
+            var myDiv_1 = document.getElementById("myDiv-1");
+
+
+            // Toggle the 'hidden' class using classList.toggle
+            myDiv.classList.toggle("hidden");
+            myDiv_1.classList.toggle("hidden");
+
+        }
+
+        //edit about
+        function toggleAbout() {
+            var myDiv = document.getElementById("abtDiv");
+            var myDiv_1 = document.getElementById("abtDiv-1");
+
+
+            // Toggle the 'hidden' class using classList.toggle
+            myDiv.classList.toggle("hidden");
+            myDiv_1.classList.toggle("hidden");
+
+        }
+
+        //text
+        function toggleText(button) {
+            // Toggle the text of the button
+            if (button.innerText === "Edit") {
+                button.innerText = "Save";
+            } else {
+                button.innerText = "Edit";
+            }
+            
+        }
+
+        function toggleTxt(button) {
+            // Toggle the text of the button
+            if (button.innerText === "Edit Profile Details") {
+                button.innerText = "Save";
+            } else {
+                button.innerText = "Edit Profile Details";
+            }
+            
+        }
+
+
+    </script>
+    <script src="js/count-time.js"></script>
+</body>
+
+</html>
