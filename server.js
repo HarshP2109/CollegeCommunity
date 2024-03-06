@@ -216,11 +216,13 @@ app.get('/dash',requireAuth,async(req,res)=>{
     // else
     let ide = req.session.User;
     let data = await find_data(ide);
+    let task = await find_task(ide);
     req.session.MAIN_DATA = data;
     let name = data.Username;
     let role = data.Role;
+    console.log(task);
 
-    res.render('pages2/dashboard', { "Name": name, "Role": role });
+    res.render('pages2/dashboard', { "Name": name, "Role": role, "Tasks": task });
 }, 2000);
 })
 
@@ -459,11 +461,25 @@ function Participation_Inserter(title,ven,std,descrip,tagi,organi,Ev_id,Us_id,Us
   data.save().then(() => console.log("Participation created!!!"));
 }
 
+//Task Assign Bot 
+const Tasks = CCH.model('Tasks', { 
+  FromID: String,   //UniqueId
+  FromName: String,   //Username
+  ToID: String,      //UniqueID
+  ToName: String,    //Username
+  Message: String,     
+  Deadline: String,
+  Status: String
+});
 
+// class="text-white bg-l-grey text-[15px] rounded-full p-2  font-thin"
 
+async function find_task(meriID){
+  let Task = await Tasks.find({ ToID:meriID }).exec();
 
-
-
+  
+  return Task;
+}
 
 
 
