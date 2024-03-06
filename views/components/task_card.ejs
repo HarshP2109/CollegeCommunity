@@ -1,0 +1,96 @@
+<div class="px-4 ">
+    <!-- Card-1 -->
+    <!-- <div
+        class="p-2  bg-stone rounded-md hover:scale-[1.02] cursor-pointer transition transform duration-100">
+        
+        <div class="grid grid-cols-2">
+
+            <div class="opacity-45">
+                <span
+                    class="text-white bg-l-grey text-[10px] rounded-full p-1  font-thin">Research</span>
+            </div>
+
+            <div class="justify-end flex">
+                <span
+                    class="text-green bg-l-green p-1 text-[10px] font-semibold rounded-full">Done</span>
+            </div>
+
+        </div>
+        <div class="mt-2">
+            <span class="font-thin text[12px]  text-neutral">Sint ex excepteur proident
+                adipisicing adipisicing occaecat pariatur.
+                Sint ex excepteur proident adipisicing adipisicing </span>
+        </div>
+
+        <div class="grid grid-cols-2 mt-2">
+            <div class="flex flex-row gap-4">
+                <div>
+                    <i class="fa-regular fa-calendar fa-sm" style="color: #828282;"></i>
+                    <span class="text-sm font-thin text-grey">Mar 14</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-sm fa-paperclip" style="color: #828282;"></i>
+                    <span class="text-sm  font-thin text-grey">4</span>
+
+                </div>
+
+
+            </div>
+
+            <div class="flex justify-end">
+                <img src="img1/profle-picture.png" alt="" class="h-8 w-8 rounded-full">
+            </div>
+        </div>
+
+    </div> -->
+
+    <% let n = Tasks.length; %>
+    <% for(let i=0;i<n;i++){ %>
+            <div
+            class="p-2  bg-stone rounded-md hover:scale-[1.02] cursor-pointer transition transform duration-100">
+            <!-- Title -->
+            <div class="grid grid-cols-2">
+
+                <!-- Research -->
+                <div class="opacity-45">
+                    <span
+                        class="text-white bg-l-grey text-[15px] rounded-full p-2  font-thin"><%= Tasks[i].FromName %></span>
+                </div>
+
+                <!-- Done -->
+                <div class="justify-end flex">
+                    <span
+                        class="text-green bg-l-green p-1 text-[10px] font-semibold rounded-full"><%= Tasks[i].Status %></span>
+                </div>
+
+            </div>
+            <!-- Discription -->
+            <div class="mt-2">
+                <span class="font-thin text[12px]  text-neutral"><%= Tasks[i].Message %></span>
+            </div>
+
+            <!-- Bottom Task Div -->
+            <div class="grid grid-cols-2 mt-2">
+                <div class="flex flex-row gap-4">
+                    <div>
+                        <i class="fa-regular fa-calendar fa-sm" style="color: #828282;"></i>
+                        <span class="text-sm font-thin text-grey"><%= Tasks[i].Deadline %></span>
+                    </div>
+                    <!-- <div>
+                        <i class="fa-solid fa-sm fa-paperclip" style="color: #828282;"></i>
+                        <span class="text-sm  font-thin text-grey">4</span>
+
+                    </div> -->
+
+
+                </div>
+
+                <div class="flex justify-end">
+                    <img src="img1/profle-picture.png" alt="" class="h-8 w-8 rounded-full">
+                </div>
+            </div>
+
+        </div>
+    <% } %>
+
+</div>
