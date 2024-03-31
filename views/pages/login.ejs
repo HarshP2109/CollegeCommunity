@@ -4,98 +4,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login/SignUp</title>
+    <link rel="stylesheet" href="css/pageindex.css">
+    <script src="https://kit.fontawesome.com/e4a2ea9e4b.js" crossorigin="anonymous"></script>
     <link rel="icon" type="image/x-icon" href="/assets/favicon/cclogo.png">
 </head>
-
-<link rel="stylesheet" href="/css/login.css">
 <script>
-    window.onload = function() {
-    if (localStorage) {
+//     window.onload = function() {
+//     if (localStorage) {
     
-        document.getElementById('signformms').addEventListener('submit', function() {
+        // document.getElementById('signformms').addEventListener('submit', function() {
         
-            var mail = document.getElementById('signemail').value.trim();
-            localStorage.setItem('Email', mail);
+        //     var mail = document.getElementById('signemail').value.trim();
+        //     localStorage.setItem('Email', mail);
 
-        });
+        // });
     
-        document.getElementById('loginformms').addEventListener('submit', function() {
-        
-            var mail = document.getElementById('loginemail').value.trim();
-            var pass = document.getElementById('loginpass').value.trim();
-            localStorage.setItem('Email', mail);
-            localStorage.setItem('PASSWORD', pass);
-        });
+ 
 
-    }
-}
+//     }
+// }
 </script>
-<body>
 
-    <!-- container div -->
-    <div class="container">
-
-        <!-- upper button section to select
-			the login or signup form -->
-        <div class="slider"></div>
-        <div class="btn">
-            <button class="login">Login</button>
-            <button class="signup">Signup</button>
+<body class="flex justify-center items-center h-screen lg:pt-0 pt-16 ">
+    <section class="grid grid-cols-1 lg:grid-cols-2 mt-16 lg:justify-items-center  items-center">
+        <div class="order-2 lg:order-1 lg:flex justify-center items-center hidden " style="height: 100px;">
+            <img src="img1/signup.jpg" alt="" id="img">
         </div>
 
-        <!-- Form section that contains the
-			login and the signup form -->
-        <div class="form-section">
+        <form action="/validate" method="post" id="loginformms" class="order-1 lg:order-2 " onsubmit="return validateForm()" >
+            <!-- Login Form -->
+            <div class="flex flex-col w-full px-5 justify-start hidden transition-all duration-500 ease-in-out " id="loginF">
+                <h2 class="text-4xl font-semibold self-center">Welcome Back!</h2>
+                <span class="text-neutral-400 mt-1 self-center">Lets get you signed in and straight to the
+                    community.</span>
 
-        <form action="/validate" method="post" id="loginformms">
-            <!-- login form -->
-            <div class="login-box">
-                
-                <input type="email" class="email ele" name="loginemail" id="loginemail" placeholder="youremail@email.com" required>
-                <input type="password" class="password ele" name="loginpass" id="loginpass" placeholder="password" required>
-                <button class="clkbtn">Login</button>
-                <a href="#" style="text-decoration: none; color: white;">
-                    <h3>
-                        Forgot your password?
-                    </h3>
-                </a>
-            
-            </div>
-        </form>
-
-            <!-- signup form -->
-            <form action="/validate" method="post" id="signformms">
-                <div class="signup-box" >
-                    <input type="text" class="name ele" name="registername" placeholder="Enter your name" required>
-                    <input type="email" class="email ele" id="signemail" name="registeremail" placeholder="youremail@email.com" required>
-                    <!-- <input type="password" class="password ele" placeholder="password"> -->
-                    <!-- <input type="password" class="password ele" placeholder="Confirm password"> -->
-                    <input type="number" class="password ele" name="registernumber" placeholder="Enter your number" minlength="10" maxlength="10" required>
-                    <button class="clkbtn">Signup</button>
+                <!-- Error msg -->
+                <div id="Err">
+                <!-- <div class="self-center text-center bg-red-200 border border-red-500 p-4 w-full rounded-md mt-12"
+                    id="errorMsg">
+                    <span class="text-red-900">
+                        That was an invalid email or password. Try again!
+                    </span>
+                </div> -->
                 </div>
-            </form>
-            
-        </div>
-    </div>
-    <script>
-        let signup = document.querySelector(".signup");
-        let login = document.querySelector(".login");
-        let slider = document.querySelector(".slider");
-        let formSection = document.querySelector(".form-section");
+                <label for="email" class="font-semibold mt-8">Email</label>
+                <div class="border-[0.2px]  rounded-md  flex flex-row items-center px-1">
+                    <img src="img1/mail.png" alt="" class="h-6 w-6 ">
+                    <input type="email" name="loginemail" id="loginemail" placeholder="youremail@mail.com"
+                        class="p-1  focus:outline-none flex items-center w-full">
 
-        signup.addEventListener("click", () => {
-            slider.classList.add("moveslider");
-            formSection.classList.add("form-section-move");
-        });
+                </div>
+                <div class="flex justify-between">
+                    <label for="password" class="font-semibold mt-6">Password</label>
+                    <label for="password" class="font-semibold mt-6 cursor-pointer text-blue-500">Forgot
+                        Password?</label>
+                </div>
+                <div class="border-[0.2px]  rounded-md  flex flex-row items-center px-1">
+                    <img src="img1/lock.png" alt="" class="h-6 w-6 ">
+                    <input type="password" name="loginpass" id="loginpass" placeholder="Enter your password"
+                        class="p-1  focus:outline-none flex items-center w-full">
+                </div>
 
-        login.addEventListener("click", () => {
-            slider.classList.remove("moveslider");
-            formSection.classList.remove("form-section-move");
-        });
+                <button class="bg-blue-500 text-white p-2 mt-12 rounded-md LoginBtn">
+                    Login
+                </button>
 
-    </script>
+                <div class="lg:mt-12 mt-6 font-semibold self-center">
+                    <span>Not a member of the community?
+                        <!-- Button to SignUp Form  -->
+                        <span class="cursor-pointer text-blue-500 " onclick="disSignUp()">Sign Up</span></span>
+                </div>
+            </div>
+
+            <!-- SignUp Form -->
+            <div class="flex flex-col w-full px-5 justify-start  transition-opacity duration-500 ease-in-out " id="signupF">
+                <h2 class="text-4xl font-semibold self-center">Welcome to </h2>
+                <h2 class="text-4xl font-semibold self-center">College Community Hub </h2>
+                <span class="text-neutral-400 mt-1 self-center">Lets get you signed in and straight to the
+                    community.</span>
+
+                <!-- Error msg -->
+                <!-- <div class="self-center text-center bg-red-200 border border-red-500 p-4 w-full rounded-md mt-12"
+                    id="errorMsg">
+                    <span class="text-red-900">
+                        That was an invalid email or password. Try again!
+                    </span>
+                </div> -->
+                <label for="email" class="font-semibold mt-8">Email</label>
+                <div class="border-[0.2px]  rounded-md  flex flex-row items-center px-1">
+                    <img src="img1/mail.png" alt="" class="h-6 w-6 ">
+                    <input type="email" name="registeremail" id="registeremail" placeholder="youremail@mail.com"
+                        class="p-1  focus:outline-none flex items-center w-full">
+
+                </div>
+
+                <label for="password" class="font-semibold mt-6">Password</label>
+                <div class="border-[0.2px]  rounded-md  flex flex-row items-center px-1">
+                    <img src="img1/lock.png" alt="" class="h-6 w-6 ">
+                    <input type="password" name="registerpass" id="registerpass" placeholder="Enter your password"
+                        class="p-1  focus:outline-none flex items-center w-full">
+                </div>
+
+                <label for="password" class="font-semibold mt-6"> Confirm Password</label>
+                <div class="border-[0.2px]  rounded-md  flex flex-row items-center px-1">
+                    <img src="img1/lock.png" alt="" class="h-6 w-6 ">
+                    <input type="password" name="password" id="confirmpass" placeholder="Enter your password"
+                        class="p-1  focus:outline-none flex items-center w-full">
+                </div>
+
+                <button class="bg-blue-500 text-white p-2 mt-12 rounded-md LoginBtn">
+                    Sign Up
+                </button>
+
+                <div class="lg:mt-12 mt-6 font-semibold self-center">
+                    <span>Already a member of the community?
+                        <!-- Button to SignUp Form  -->
+                        <span class="cursor-pointer text-blue-500 " onclick="disSignUp()">Sign In</span></span>
+                </div>
+            </div>
+
+        </form>
+    </section>
+
 
 </body>
+
+<script>
+    const loginF = document.getElementById('loginF');
+    const signupF = document.getElementById('signupF');
+    var image = document.getElementById('img')
+
+    function disSignUp() {
+        loginF.classList.toggle("hidden");
+        signupF.classList.toggle("hidden");
+        if(image.src.match("img1/login.jpg")){
+            image.src = "img1/signup.jpg";
+        }else{
+            image.src = "img1/login.jpg";
+        }
+
+        console.log(image.src)
+
+
+    }
+
+
+    function validateForm(){
+        let mail = document.getElementById('loginemail').value.trim();
+            let pass = document.getElementById('loginpass').value.trim();
+            if(mail == "" && pass == ""){
+                let r_mail = document.getElementById('registeremail').value.trim();
+                let r_pass = document.getElementById('registerpass').value.trim();
+                let con_pass = document.getElementById('confirmpass').value.trim();
+                if(r_pass === con_pass){
+                    if(r_mail == ""){
+                        alert("Enter the Email");
+                        return false;
+                    }
+                    else if(r_pass==""){
+                        alert("Enter the pass");
+                        return false;
+                    }
+                    else{
+                        localStorage.setItem('Email', r_mail);
+                        localStorage.setItem('PASSWORD', r_pass);
+                        return true;
+                    }
+                } else {
+                    alert( "Passwords do not match." );
+                    return false;
+                }
+
+            }
+            else if(mail=="" || pass==""){
+                alert("Enter the fields")
+                return false;
+                // alert();
+            }
+            else if(mail != "" || pass!=""){
+                localStorage.setItem('Email', mail);
+                localStorage.setItem('PASSWORD', pass);
+                return true;
+            }
+    }
+
+    function ErrorMessage(msg){
+
+            let errorDiv = document.createElement('div'); 
+            
+            while (errDiv.firstChild) {
+                errDiv.removeChild(errDiv.firstChild);
+            }
+        // Create the div element
+            const divElement = document.createElement('div');
+            divElement.classList.add('self-center', 'text-center', 'bg-red-200', 'border', 'border-red-500', 'p-4', 'w-full', 'rounded-md', 'mt-12');
+            divElement.id = 'errorMsg';
+
+            // Create the span element
+            const spanElement = document.createElement('span');
+            spanElement.classList.add('text-red-900');
+            spanElement.textContent = msg;
+
+            // Append the span element to the div element
+            divElement.appendChild(spanElement);
+
+            // Append the div element to the div with id "Err"
+            errDiv.appendChild(divElement);
+    }  
+    
+ 
+</script>
 
 </html>

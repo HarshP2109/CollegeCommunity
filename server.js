@@ -16,7 +16,7 @@ var Accounts = [{"Email":"fameerpatil@gmail.com","Password":"abc"}];
 
 
 
-var randomOTP = "";
+// var randomOTP = "";
 
 require('dotenv').config()
 app.use(session({
@@ -70,11 +70,10 @@ app.post('/validate',async(req,res) => {
 
   
   let r_email = req.body.registeremail;
-  let r_name = req.body.registername;
-  let r_num = req.body.registernumber;
+  let r_pass = req.body.registerpass;
 
-  if((l_email!=undefined)&&(l_pass!=undefined)){        //login
-    let LoginUser = {
+  if((l_email!="")&&(l_pass!="")){        //login
+     let LoginUser = {
       "Email": l_email,
       "Password": l_pass
     }
@@ -102,15 +101,15 @@ app.post('/validate',async(req,res) => {
     }
   }
 
-  else{                                             //register
+  else if(r_email != "" && r_pass != ""){                                             //register
     let RegisterUser = {
-      "Name" : r_name,
-      "Number" : r_num,
-      "Email" : r_email
+      "Email" : r_email,
+      "Pass" : r_pass
     }
     console.log("Register");
     // email = r_email;
     req.session.Email = r_email;
+    req.session.Password = r_pass;
     // console.log(RegisterUser);
 
     res.redirect('/otp');
@@ -129,7 +128,8 @@ app.get('/otp',(req,res)=>{
     res.redirect('/login');
   }
 else{
-  randomOTP = generateOTP();
+  let randomOTP = generateOTP();
+  req.session.otp = randomOTP;
   let mailOptions = {
     from: process.env.SEND_EMAIL,
     to: email,
@@ -152,8 +152,8 @@ else{
 })
 
 app.post('/otpverify', (req,res) => {
-  console.log(randomOTP);
-  let otp = randomOTP;
+  console.log(req.session.otp);
+  let otp = req.session.otp;
   // let enteredotp = req.body.otp;
   let a = req.body.ek.trim();
   let b = req.body.do.trim();
@@ -194,10 +194,10 @@ app.post('/getdata',(req,res)=>{
   let fname = req.body.fname;
   let lname = req.body.lname;
   let username = req.body.username;
-  let mail = req.body.email;
   let dob = req.body.dob;
-  let pass = req.body.pass;
-  let gen = req.body.gender;
+  let mail = req.session.Email;
+  let pass = req.session.Password;
+ let gen = req.body.gender;
   let id = req.session.spID;
   req.session.User = id;
   console.log(fname,lname,username,dob,pass,gen,id);

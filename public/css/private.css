@@ -69,4 +69,7 @@
 
 
   /* Styling for messages */
+  .actv{
+    @apply bg-blue text-white
+  }
   
