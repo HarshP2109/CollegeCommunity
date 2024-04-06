@@ -37,13 +37,13 @@
                         <a href="/communities">Communities</a>
                     </li>
                     <li class="customHover  bg-white text-black ml-4 rounded-l-2xl">
-                        <a href="/message">Messages</a>
+                        <a href="/messages">Messages</a>
                     </li>
                     <!-- <li class="customHover">
                         <a href="myCollege.html">My College</a>
                     </li> -->
                     <li class=" flex justify-center items-center gap-x-2 cursor-pointer mt-2" id="LogOut">
-                         <i class="fa-solid fa-right-from-bracket fa-xs text-violet"><a href="/logout">LogOut</a></i>
+                       <a href="/logout">LogOut</a> <i class="fa-solid fa-right-from-bracket fa-xs text-violet"></i>
                     </li>
                 </ul>
             </div>
@@ -173,7 +173,7 @@
 
                     <div class="mt-4 flex flex-col gap-y-2 ">
                         <!-- chat 1 -->
-                        <div class="p-1 actChat cursor-pointer bg-blue text-white act">
+                        <div class="p-1 actChat cursor-pointer bg-blue text-white act" id="bot">
                             <div class="px-1  flex flex-row items-center">
                                 <img src="img1/bot.jpg" alt="" class="h-12 w-12 rounded-full">
                                 <div class="px-2">
@@ -182,7 +182,7 @@
                             </div>
                         </div>
                         <!-- chat 2 -->
-                        <div class="p-1 actChat cursor-pointer">
+                        <div class="p-1 actChat cursor-pointer" id="group">
                             <div class="px-1 flex flex-row items-center">
                                 <img src="img1/group.jpg" alt="" class="h-12 w-12 rounded-full">
                                 <div class="px-2">
@@ -264,13 +264,27 @@
                     </div>
 
                 </section>
-                <section class="col-span-3 bg-stone h-screen gap-2">
-                    <div class="bg-blue text-white p-2">
+
+                <!-- message field with the chat bot -->
+                <section class="col-span-3 bg-stone h-screen gap-2 hidden" id="botChats">
+                    <div class="bg-blue text-white p-2 flex flex-row justify-between">
                         <div class="flex items-center gap-2">
                             <img src="img1/bot.jpg" alt="" class="h-16 w-16 rounded-full">
                             <div>
                                 <span class="text-2xl">Let me help you with your tasks!</span>
                             </div>
+                        </div>
+                        <!-- chats toggle to normal and assign tasks -->
+                        <div class="flex justify-center items-center">
+                            <label class="inline-flex items-center cursor-pointer">
+
+                                <input type="checkbox" value="" class="sr-only peer">
+                                <span class="ms-3 text-md font-normal text-white dark:text-gray-300 mr-2">Chat</span>
+                                <div
+                                    class="relative w-11 h-6 bg-violet rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                                </div>
+                                <span class="ms-3 text-md font-normal text-white dark:text-gray-300">Assign Tasks</span>
+                            </label>
                         </div>
                     </div>
 
@@ -349,21 +363,159 @@
                         <div class="w-full flex items-center justify-center px-4">
                             <input type="text" class=" w-3/4 p-2 rounded-lg focus:outline-none text-lg font-thin">
                             <div class="">
-                                <button class="ml-4 bg-blue text-white py-2 px-4 rounded-lg"><span class="font-thin text-lg">Send</span>
+                                <button class="ml-4 bg-blue text-white py-2 px-4 rounded-lg"><span
+                                        class="font-thin text-lg">Send</span>
                                     <i class="fa-solid fa-paper-plane"></i>
                                 </button>
                             </div>
-                       
+
                         </div>
 
                     </div>
 
-    </div>
+    
 
 
-    </section>
+                </section>
 
-    </section>
+                 <!-- community group chat field -->
+                 <section class="col-span-3 bg-stone h-screen gap-2 " id="grpChats">
+                    <div class="bg-blue text-white p-2 flex flex-row justify-between">
+                        <div class="flex items-center gap-2">
+                            <img src="img1/group.jpg" alt="" class="h-16 w-16 rounded-full">
+                            <div>
+                                <span class="text-2xl">Community Group</span>
+                            </div>
+                        </div>
+                        <!-- chats toggle to normal and assign tasks -->
+                        <!-- <div class="flex justify-center items-center">
+                            <label class="inline-flex items-center cursor-pointer">
+
+                                <input type="checkbox" value="" class="sr-only peer">
+                                <span class="ms-3 text-md font-normal text-white dark:text-gray-300 mr-2">Chat</span>
+                                <div
+                                    class="relative w-11 h-6 bg-violet rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                                </div>
+                                <span class="ms-3 text-md font-normal text-white dark:text-gray-300">Assign Tasks</span>
+                            </label>
+                        </div> -->
+                    </div>
+
+                    <!-- chats -->
+                    <div class="overflow-y-scroll cursor-pointer" style="height: 500px;">
+                        <div class="p-1 flex items-center justify-center font-semibold">
+
+                            Today
+
+                        </div>
+                        <!-- user 1 msg -->
+                        <div class="mt-4 px-2 w-3/4">
+                            <div>
+                                <span class="text-black font-semibold">Alice</span>
+                            </div>
+
+                            <div class="">
+                                <span class="bg-white p-2 rounded-md text-xl flex ">Good morning, team! Just a reminder that our project deadline is approaching. How's everyone doing with their tasks?</span>
+                                <h5 class="mt-2 text-sm">11.30</h5>
+                            </div>
+
+                        </div>
+
+                         <!-- user 2 msg -->
+                         <div class="mt-4 px-2 w-3/4">
+                            <div>
+                                <span class="text-black font-semibold">Bob</span>
+                            </div>
+
+                            <div class="">
+                                <span class="bg-white p-2 rounded-md text-xl flex ">Morning, Alice! I've finished my part on the market analysis. I'll send it over for review shortly.</span>
+                                <h5 class="mt-2 text-sm">11.30</h5>
+                            </div>
+
+                        </div>
+
+                        <!-- user reply -->
+                        <div class="mt-4 px-2 flex justify-end items-end ">
+
+                            <div class="w-3/4">
+                                <span class="bg-white p-2 rounded-md text-xl flex">Hey, everyone! I've been working on the presentation slides. I'm almost done with the first draft.</span>
+                                <h5 class="mt-2 text-sm text-end">11.30</h5>
+                            </div>
+
+                        </div>
+
+
+                        <!-- user 1  msg -->
+                        <div class="mt-4 px-2">
+                            <div>
+                                <span class="text-black font-semibold">Alice</span>
+                            </div>
+                            <div class="w-3/4">
+                                <span class="bg-white p-2 rounded-md text-xl flex"> Great progress, Bob and Charlie! Thanks for the updates. David, how's the financial projections going?</span>
+                                <h5 class="mt-2 text-sm">11.30</h5>
+                            </div>
+
+                        </div>
+
+                         <!-- user 3  msg -->
+                         <div class="mt-4 px-2">
+                            <div>
+                                <span class="text-black font-semibold">David</span>
+                            </div>
+                            <div class="w-3/4">
+                                <span class="bg-white p-2 rounded-md text-xl flex"> Hey, sorry for the delay. I've been caught up with some personal stuff, but I'll dedicate more time to it today. Should have it ready by the end of the day.</span>
+                                <h5 class="mt-2 text-sm">11.30</h5>
+                            </div>
+
+                        </div>
+
+                        <!-- user reply -->
+                        <div class="mt-4 px-2 flex justify-end items-end ">
+
+                            <div class="w-3/4">
+                                <span class="bg-white p-2 rounded-md text-xl flex"> In the meantime, I can help with any formatting or data organization for the financial projections if needed.</span>
+                                <h5 class="mt-2 text-sm text-end">11.30</h5>
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- user 3  msg -->
+                        <div class="mt-4 px-2">
+                            <div>
+                                <span class="text-black font-semibold">David</span>
+                            </div>
+                            <div class="w-3/4">
+                                <span class="bg-white p-2 rounded-md text-xl flex"> Thanks, guys. I really appreciate it. I'll make sure to reach out if I need any help.</span>
+                                <h5 class="mt-2 text-sm">11.30</h5>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- send -->
+                    <div class="bg-l-sky-blue px-2   flex justify-center items-center" style="height: 80px;">
+
+                        <div class="w-full flex items-center justify-center px-4">
+                            <input type="text" class=" w-3/4 p-2 rounded-lg focus:outline-none text-lg font-thin">
+                            <div class="">
+                                <button class="ml-4 bg-blue text-white py-2 px-4 rounded-lg"><span
+                                        class="font-thin text-lg">Send</span>
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+    
+
+
+                </section>
+
+            </section>
 
 
 
@@ -423,6 +575,35 @@
         })
     })
     console.log(chatList)
+
+
+    const bot = document.getElementById('bot');
+    const group = document.getElementById('group');
+    const grpChats = document.getElementById('grpChats');    
+    const botChats = document.getElementById('botChats');    
+
+
+    console.log(bot,group);
+
+    bot.addEventListener('click',()=>{
+        if(botChats.classList.contains('hidden')){
+            botChats.classList.remove('hidden');
+            grpChats.classList.add('hidden');
+        }else{
+            botChats.classList.add('hidden');
+            grpChats.classList.remove('hidden');
+        }
+    })
+
+    group.addEventListener('click',()=>{
+        if(grpChats.classList.contains('hidden')){
+            grpChats.classList.remove('hidden');
+            botChats.classList.add('hidden');
+        }else{
+            grpChats.classList.add('hidden');
+            botChats.classList.remove('hidden');
+        }
+    })
 
 
 

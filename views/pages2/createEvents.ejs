@@ -15,10 +15,10 @@
             <div>
                 <span class="text-4xl font-bold "> Create Event</span>
             </div>
-            <form action="/eventcreate" method="post">
+            <form action="/eventcreate" method="post" enctype="multipart/form-data">
                 <div class="flex flex-col justify-start items-start mt-10">
                     <label for="title" class="text-md ml-2">Event Title</label >
-                    <input type="text" name="title" id="title" placeholder="Enter Event Title" class="w-full h-12 text-md bg-white focus:outline-none p-2 mt-2 rounded-md">
+                    <input type="text" name="title" id="title" placeholder="Enter Event Title" class="w-full h-12 text-md bg-white focus:outline-none p-2 mt-2 rounded-md" >
                 </div>
     
                 <div class="flex flex-col justify-start items-start mt-6">
@@ -101,7 +101,7 @@
                           Drop your image here or click to browse
                       </label>
                       <input 
-                          name="file" 
+                          name="eventpic" 
                           type="file" 
                           id="file-input" 
                           accept="image/*" 

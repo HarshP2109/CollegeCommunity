@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Events</title>
+    <title>My College</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/slider.css">
+    <link rel="stylesheet" href="css/private.css">
     <!-- Fonts -->
     <script src="https://kit.fontawesome.com/e4a2ea9e4b.js" crossorigin="anonymous"></script>
-
-    <link rel="icon" type="image/x-icon" href="/assets/favicon/cclogo.png">
 </head>
+
 
 <body class="font-Inter">
     <div class="grid grid-cols-1 lg:grid-cols-6 ">
@@ -18,31 +19,31 @@
         <aside class="col-span-1 bg-blue py-4 lg:h-screen hidden lg:block leftLoad">
             <!-- logo -->
             <div class="text-white lg:text-center lg:ml-0 ml-4 lg:py-2 ">
-                <span class="title text-4xl mt-4">Student'sHub</span>
+                <span class="title text-4xl mt-4">CCHub</span>
 
             </div>
 
 
             <!-- Navigation -->
             <div class=" navigation">
-                <ul class="text-white text-2xl text-center flex flex-col gap-y-8 mt-16">
+                <ul class="text-white text-2xl text-center flex flex-col  mt-8">
                     <li class="customHover">
                         <a href="/dash">Dashboard</a>
                     </li>
-                    <li class="customHover  bg-white text-black ml-4 rounded-l-2xl">
+                    <li class="customHover  bg-white text-black ml-4 rounded-l-2xl ">
                         <a href="/events">Events</a>
                     </li>
-                    <li class="customHover">
+                    <li class="customHover ">
                         <a href="/communities">Communities</a>
                     </li>
-                    <li class="customHover">
+                    <li class="customHover ">
                         <a href="/messages">Messages</a>
                     </li>
-                    <li class="customHover">
-                        <a href="/mycollege">My College</a>
-                    </li>
-                    <li class=" flex justify-center items-center gap-x-2 cursor-pointer" id="LogOut">
-                        LogOut <i class="fa-solid fa-right-from-bracket fa-xs text-violet" ></i>
+                    <!-- <li class="customHover  bg-white text-black ml-4 rounded-l-2xl">
+                        <a href="/logout">My College</a>
+                    </li> -->
+                    <li class=" flex justify-center items-center gap-x-2 cursor-pointer mt-2" id="LogOut">
+                        <a href="/logout">LogOut</a> <i class="fa-solid fa-right-from-bracket fa-xs text-violet" ></i>
                     </li>
                 </ul>
             </div>
@@ -50,7 +51,7 @@
         </aside>
 
         <!-- Main -->
-        <main class="col-span-5 overflow-y-scroll h-screen">
+        <main class="col-span-5 overflow-y-scroll h-screen bg-stone" >
 
             <!-- Mobile Header -->
             <div
@@ -67,15 +68,15 @@
 
 
                 <!-- Mobile Navbar -->
-                <div class="absolute top-0 right-0 text-white bg-blue px-6 text-3xl pb-4  pt-2 rounded-l-sm hidden mblNavbar"
+                <div class="absolute top-0 right-0 text-white bg-blue px-6 text-3xl pb-4  pt-2 rounded-l-sm hidden  mblNavbar"
                     id="MobileMenu">
                     <div>
                         <div class="flex flex-row justify-between items-center mt-2">
                             <div class="flex flex-row">
                                 <a href="/profile" class="flex flex-row"><img src="img1/profle-picture.png" alt="" class="h-12 w-12 rounded-full">
                                     <div class="ml-1 flex flex-col">
-                                        <h3 class="text-lg"><%= Name %></h3>
-                                        <span class="text-xs opacity-[0.8]"><%= Role %></span>
+                                        <h3 class="text-lg">Prajwal</h3>
+                                        <span class="text-xs opacity-[0.8]">Admin</span>
                                     </div></a>
                            
                                 
@@ -83,10 +84,10 @@
                             <div>
                                 <button class="bg-white px-1  rounded-sm " id="MenuCloseBtn">
                                     <i class="fa-solid fa-xmark fa-xs " style="color: #072964;"></i>
-
+    
                                 </button>
                             </div>
-
+                         
                         </div>
                         <ul class="px-4 text-xl">
 
@@ -103,14 +104,14 @@
                                         style="color: #ffffff;"></i>Communities</li>
                             </a>
                             <a href="/messages">
-                                <li class="mt-6"><i class="fa-solid fa-message fa-sm mr-2"
-                                        style="color: #ffffff;"></i>Messages</li>
-                            </a>
+                            <li class="mt-6"><i class="fa-solid fa-message fa-sm mr-2"
+                                    style="color: #ffffff;"></i>Messages</li>
+                        </a>
 
-                            <a href="/mycollege">
+                            <!-- <a href="/logout">
                                 <li class="mt-6"><i class="fa-solid fa-building-columns fa-sm mr-2"
                                         style="color: #ffffff;"></i>My College</li>
-                            </a>
+                            </a> -->
                             <a href="/logout">
                                 <li class="mt-6" ><i class="fa-solid fa-right-from-bracket fa-xs mr-2" ></i>LogOut</li>
                             </a>
@@ -154,32 +155,64 @@
                     <!-- <i class="fa-solid fa-xl fa-bell mr-12"></i> -->
                     <!-- Profile Info -->
                     <div class="flex flex-col mr-6 ">
-                        <h3 class="text-xl"><%= Name %></h3>
-                        <h6 class="text-sm text-end"><%= Role %></h6>
+                        <h3 class="text-xl">Prajwal</h3>
+                        <h6 class="text-sm text-end">Admin</h6>
                     </div>
                     <!-- Proifle Picture -->
-                    <a href="/profile">
-                        <img src="img1/profle-picture.png" alt="Profile Picture"
-                            class="h-12 w-12  rounded-full cursor-pointer">
-                    </a>
-
+                    <a href="/profile"><img src="img1/profle-picture.png" alt="Profile Picture"
+                        class="h-12 w-12  rounded-full cursor-pointer"></a>
+                    
 
                 </div>
 
             </header>
 
-            <!-- Banner -->
-            <section class=" grid-cols-1 lg:grid hidden rightLoad">
-                <div class="bg-banner h-[250px] flex justify-center items-end ">
-                    <a href="#">
-                        <button
-                            class="p-2 bg-black rounded-full text-white mb-6 hover:scale-[1.05] hover:bg-white hover:text-black">
-                            Register Now
+            <!-- Image Slider -->
+            <section class="hidden lg:block px-4  mt-4">
+                <div class="container rounded-md">
+                    <div class="slides">
+                        <div class="slide">
+                            <img src="img1/event1.jpeg" alt="" class="brightness-50"/>
+                            <div class="slide-content p-12">
+                                <h1 class="text-white text-5xl">Event Heading</h1>
+                                <span class="text-white mt-8 text-xl ml-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, recusandae! Aut consequuntur a voluptatibus quo temporibus saepe nemo officia, alias ea excepturi recusandae vero iusto commodi, molestiae sapiente esse incidunt sunt illum beatae corporis veritatis? Suscipit laborum, veritatis similique sapiente sint magnam velit dolore, harum dignissimos dolor eos, repellat quos!</span>
+                                <a href="eventHome.html" class=""><br><button class="text-white clgBtnHover mt-4 rounded-sm px-4 py-2 bg-violet">
+                                    View Event
+                                </button></a>
+                            </div>
+                          
+                        </div>
+                        <div class="slide">
+                            <img src="img1/event2.jpeg" alt="" class="brightness-50"/>
+                            <div class="slide-content p-12">
+                                <h1 class="text-white text-5xl">Event Heading</h1>
+                                <span class="text-white mt-8 text-xl ml-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, recusandae! Aut consequuntur a voluptatibus quo temporibus saepe nemo officia, alias ea excepturi recusandae vero iusto commodi, molestiae sapiente esse incidunt sunt illum beatae corporis veritatis? Suscipit laborum, veritatis similique sapiente sint magnam velit dolore, harum dignissimos dolor eos, repellat quos!</span>
+                                <a href="eventHome.html" class=""><br><button class="text-white clgBtnHover mt-4 rounded-sm px-4 py-2 bg-violet">
+                                    View Event
+                                </button></a>
+                            </div>
+                        </div>
+           
+                        <div class="slide">
+                            <img src="img1/event3.jpeg" alt="" class="brightness-50"/>
+                            <div class="slide-content p-12">
+                                <h1 class="text-white text-5xl">Event Heading</h1>
+                                <span class="text-white mt-8 text-xl ml-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, recusandae! Aut consequuntur a voluptatibus quo temporibus saepe nemo officia, alias ea excepturi recusandae vero iusto commodi, molestiae sapiente esse incidunt sunt illum beatae corporis veritatis? Suscipit laborum, veritatis similique sapiente sint magnam velit dolore, harum dignissimos dolor eos, repellat quos!</span>
+                                <a href="eventHome.html" class=""><br><button class="text-white clgBtnHover mt-4 rounded-sm px-4 py-2 bg-violet">
+                                    View Event
+                                </button></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide-controls">
+                        <button id="prev-btn">
+                            <i class="fas fa-chevron-left"></i>
                         </button>
-                    </a>
-
+                        <button id="next-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
                 </div>
-
             </section>
 
 
@@ -281,6 +314,79 @@
            confirm('Are you sure to LogOut?');
            window.location.href = '/logout';
        })
+
+       const slideContainer = document.querySelector('.container');
+        const slide = document.querySelector('.slides');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const interval = 1200;
+
+        let slides = document.querySelectorAll('.slide');
+        let index = 1;
+        let slideId;
+
+        const firstClone = slides[0].cloneNode(true);
+        const lastClone = slides[slides.length - 1].cloneNode(true);
+
+        firstClone.id = 'first-clone';
+        lastClone.id = 'last-clone';
+
+        slide.append(firstClone);
+        slide.prepend(lastClone);
+
+        const slideWidth = slides[index].clientWidth;
+
+        slide.style.transform = `translateX(${-slideWidth * index}px)`;
+
+        console.log(slides);
+
+        const startSlide = () => {
+            slideId = setInterval(() => {
+                moveToNextSlide();
+            }, interval);
+        };
+
+        const getSlides = () => document.querySelectorAll('.slide');
+
+        slide.addEventListener('transitionend', () => {
+            slides = getSlides();
+            if (slides[index].id === firstClone.id) {
+                slide.style.transition = 'none';
+                index = 1;
+                slide.style.transform = `translateX(${-slideWidth * index}px)`;
+            }
+
+            if (slides[index].id === lastClone.id) {
+                slide.style.transition = 'none';
+                index = slides.length - 2;
+                slide.style.transform = `translateX(${-slideWidth * index}px)`;
+            }
+        });
+
+        const moveToNextSlide = () => {
+            slides = getSlides();
+            if (index >= slides.length - 1) return;
+            index++;
+            slide.style.transition = '.7s ease-out';
+            slide.style.transform = `translateX(${-slideWidth * index}px)`;
+        };
+
+        const moveToPreviousSlide = () => {
+            if (index <= 0) return;
+            index--;
+            slide.style.transition = '.7s ease-out';
+            slide.style.transform = `translateX(${-slideWidth * index}px)`;
+        };
+
+        slideContainer.addEventListener('mouseenter', () => {
+            clearInterval(slideId);
+        });
+
+        slideContainer.addEventListener('mouseleave', startSlide);
+        nextBtn.addEventListener('click', moveToNextSlide);
+        prevBtn.addEventListener('click', moveToPreviousSlide);
+
+        startSlide();
 
 
 

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- Fonts -->
     <script src="https://kit.fontawesome.com/e4a2ea9e4b.js" crossorigin="anonymous"></script>
-    <link rel="icon" type="image/x-icon" href="/assets/favicon/cclogo.png">
+    <link rel="icon" type="image/x-icon" href="assets/favicon/cclogo.png">
 </head>
 
 
@@ -18,14 +18,14 @@
         <aside class="col-span-1 bg-blue py-4 lg:h-full hidden lg:block leftLoad">
             <!-- logo -->
             <div class="text-white lg:text-center lg:ml-0 ml-4 lg:py-2 ">
-                <span class="title text-4xl mt-4">Student'sHub</span>
+                <span class="title text-4xl mt-4">CCHub</span>
 
             </div>
 
 
             <!-- Navigation -->
             <div class=" navigation">
-                <ul class="text-white text-2xl text-center flex flex-col gap-y-8 mt-16">
+                <ul class="text-white text-2xl text-center flex flex-col  mt-10">
                     <li class="customHover">
                         <a href="/dash">Dashboard</a>
                     </li>
@@ -38,11 +38,11 @@
                     <li class="customHover">
                         <a href="/messages">Messages</a>
                     </li>
-                    <li class="customHover">
-                        <a href="/mycollege">My College</a>
-                    </li>
-                    <li class=" flex justify-center items-center gap-x-2 cursor-pointer" id="LogOut">
-                        LogOut <i class="fa-solid fa-right-from-bracket fa-xs text-violet" ></i>
+                    <!-- <li class="customHover">
+                        <a href="myCollege.html">My College</a>
+                    </li> -->
+                    <li class=" flex justify-center items-center gap-x-2 cursor-pointer mt-2" id="LogOut">
+                       <a href="/logout">LogOut</a>  <i class="fa-solid fa-right-from-bracket fa-xs text-violet" ></i>
                     </li>
                 </ul>
             </div>
@@ -74,15 +74,15 @@
                             <div class="flex flex-row">
                                 <a href="/profile" class="flex flex-row"><img src="img1/profle-picture.png" alt="" class="h-12 w-12 rounded-full">
                                     <div class="ml-1 flex flex-col">
-                                        <h3 class="text-lg"><%= Name %></h3>
-                                        <span class="text-xs opacity-[0.8]"><%= Role %></span>
+                                        <h3 class="text-lg">Prajwal</h3>
+                                        <span class="text-xs opacity-[0.8]">Admin</span>
                                     </div></a>
                            
                                 
                             </div>
                             <div>
                                 <button class="bg-white px-1  rounded-sm " id="MenuCloseBtn">
-                                    <i class="fa-solid fa-xmark fa-xs " style="color: #072964;"></i>
+                                    <i class="fa-solid fa-xmark fa-xs self-center mt-1" style="color: #072964;"></i>
     
                                 </button>
                             </div>
@@ -107,10 +107,10 @@
                                         style="color: #ffffff;"></i>Messages</li>
                             </a>
 
-                            <a href="/mycollege">
+                            <!-- <a href="myCollege.html">
                                 <li class="mt-6"><i class="fa-solid fa-building-columns fa-sm mr-2"
                                         style="color: #ffffff;"></i>My College</li>
-                            </a>
+                            </a> -->
                             <a href="/logout">
                                 <li class="mt-6" ><i class="fa-solid fa-right-from-bracket fa-xs mr-2" ></i>LogOut</li>
                             </a>
@@ -154,8 +154,8 @@
                     <!-- <i class="fa-solid fa-xl fa-bell mr-12"></i> -->
                     <!-- Profile Info -->
                     <div class="flex flex-col mr-6 ">
-                        <h3 class="text-xl"><%= Name %></h3>
-                        <h6 class="text-sm text-end"><%= Role %></h6>
+                        <h3 class="text-xl">Prajwal</h3>
+                        <h6 class="text-sm text-end">Admin</h6>
                     </div>
                     <!-- Proifle Picture -->
                     <a href="/profile"><img src="img1/profle-picture.png" alt="Profile Picture"
@@ -165,6 +165,9 @@
                 </div>
 
             </header>
+
+
+            
             <div class="mt-4 lg:p-4 ml-1">
                 <div>
                     <span class="text-2xl text-violet">Community</span><span class="text-2xl"> posts near you...</span>
@@ -182,12 +185,17 @@
                                 22m
                             </span>
                         </div>
+                        <div class="my-2 px-2">
+                            <span class="text-lg ">
+                                Teamwork makes the dream work! 💡 Excited to tackle innovative challenges and build solutions at this weekend's hackathon. Let's code, collaborate, and create something amazing together! 💻
+                            </span>
+                        </div>
                         <div class="mt-2">
                             <img src="img1/event3.jpeg" alt="" class="h-[350px] w-full ">
                         </div>
                         <div class=" p-2 flex flex-row gap-x-4">
                             <div>
-                                <i class="fa-regular fa-thumbs-up fa-md"></i> <span>120</span>
+                                <i class="fa-regular fa-thumbs-up fa-md text-black cursor-pointer like"></i> <span>120</span>
                             </div>
                             <div>
                                 <i class="fa-regular fa-comment fa-md"></i> <span>96</span>
@@ -209,12 +217,17 @@
                                 22m
                             </span>
                         </div>
+                        <div class="my-2 px-2">
+                            <span class="text-lg ">
+                                Teamwork makes the dream work! 💡 Excited to tackle innovative challenges and build solutions at this weekend's hackathon. Let's code, collaborate, and create something amazing together! 💻
+                            </span>
+                        </div>
                         <div class="mt-2">
                             <img src="img1/event3.jpeg" alt="" class="h-[350px] w-full ">
                         </div>
                         <div class=" p-2 flex flex-row gap-x-4">
                             <div>
-                                <i class="fa-regular fa-thumbs-up fa-md"></i> <span>120</span>
+                                <i class="fa-regular fa-thumbs-up fa-md text-black cursor-pointer like" ></i> <span>120</span>
                             </div>
                             <div>
                                 <i class="fa-regular fa-comment fa-md"></i> <span>96</span>
@@ -235,12 +248,17 @@
                                 22m
                             </span>
                         </div>
+                        <div class="my-2 px-2">
+                            <span class="text-lg ">
+                                Teamwork makes the dream work! 💡 Excited to tackle innovative challenges and build solutions at this weekend's hackathon. Let's code, collaborate, and create something amazing together! 💻
+                            </span>
+                        </div>
                         <div class="mt-2">
                             <img src="img1/event3.jpeg" alt="" class="h-[350px] w-full ">
                         </div>
                         <div class=" p-2 flex flex-row gap-x-4">
                             <div>
-                                <i class="fa-regular fa-thumbs-up fa-md"></i> <span>120</span>
+                                <i class="fa-regular fa-thumbs-up fa-md text-black cursor-pointer like"></i> <span>120</span>
                             </div>
                             <div>
                                 <i class="fa-regular fa-comment fa-md"></i> <span>96</span>
@@ -256,10 +274,13 @@
                 </div>
                 <section class="col-span-1">
                     <div class="p-4  lg:shadow-[0_8px_14px_rgb(0,0,0,0.2)] lg:h-[150px] text-center  ">
-                        <button
+                        <a href="/postCreate">
+                            <button
                             class=" mt-1 bg-violet text-white py-2 rounded-full w-3/4 lg:w-full hover:bg-white hover:border hover:text-black duration-500 hover:scale-[1.02]">
                             Create Post
                         </button>
+                        </a>
+                        
 
                         <button class="mt-6 rounded-full border w-3/4 lg:w-full py-2  ">
                             Create Community
@@ -267,22 +288,40 @@
                     </div>
 
 
-                    <div class="p-4 lg:shadow-[0_8px_14px_rgb(0,0,0,0.2)] ml-3 lg:ml-0">
+                    <div class="p-4 lg:shadow-[0_8px_14px_rgb(0,0,0,0.2)] ml-3 lg:ml-0 flex flex-col items-center mt-8">
                         <div>
-                            <span class="text-lg">Trending Communities</span>
+                            <span class="text-xl text-violet">Trending Communities</span>
                         </div>
 
-                        <div class="mt-4 cursor-pointer lg:overflow-scroll lg:h-[350px]">
-                            <div class="flex flex-row gap-4 items-center">
-                                <div class="">
-                                    <img src="img1/event2.jpeg" alt="" class="rounded-full h-12 w-12">
+                        <div class="mt-4 cursor-pointer lg:overflow-scroll  flex flex-col gap-4 " style="height: 300px;">
+                           
+                            <div class="flex  gap-2">
+                                <div class="flex gap-2 flex-col items-center justify-center border border-stone p-2 rounded-lg">
+                                    <div>
+                                        <img src="img1/event1.jpeg" alt="" class="h-12 w-12 rounded-full">
+                                    </div>
+                                    <div class="flex flex-col items-center justify-center">
+                                        <span class="text-lg font-thin text-center"> Google Developer Community</span>
+                                        <h6>1.25 Member</h6>
+
+                                </div>
                                 </div>
                                 <div class="flex flex-col">
-                                    <span class="text-lg font-thin"> SPCA Community</span>
+                                    <span class="text-lg font-thin">Google Developer Community</span>
                                     <span class="text-sm text-neutral opacity-80">
                                         1.2K Members
                                     </span>
                                 </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="flex flex-row gap-4 items-center mt-4">
+                                <div class="">
+                                    <img src="img1/event1.jpeg" alt="" class="rounded-full h-12 w-12">
+                                </div>
+                                    </div>
 
 
                             </div>
@@ -298,13 +337,28 @@
                                     </span>
                                 </div>
 
+                                <div class="flex gap-2 flex-col items-center justify-center border border-stone p-2 rounded-lg">
+                                    <div>
+                                        <img src="img1/event1.jpeg" alt="" class="h-12 w-12 rounded-full">
+                                    </div>
+                                    <div class="flex flex-col items-center justify-center">
+                                        <span class="text-lg font-thin text-center"> Google Developer Community</span>
+                                        <h6>1.25 Member</h6>
 
+                                    </div>
+                                </div>
                             </div>
 
+                            <div class="flex  gap-2">
+                                <div class="flex gap-2 flex-col items-center justify-center border border-stone p-2 rounded-lg">
+                                    <div>
+                                        <img src="img1/event1.jpeg" alt="" class="h-12 w-12 rounded-full">
+                                    </div>
+                                    <div class="flex flex-col items-center justify-center">
+                                        <span class="text-lg font-thin text-center"> Google Developer Community</span>
+                                        <h6>1.25 Member</h6>
 
-                            <div class="flex flex-row gap-4 items-center mt-4">
-                                <div class="">
-                                    <img src="img1/event1.jpeg" alt="" class="rounded-full h-12 w-12">
+                                </div>
                                 </div>
                                 <div class="flex flex-col">
                                     <span class="text-lg font-thin">Google Developer Community</span>
@@ -312,6 +366,7 @@
                                         1.2K Members
                                     </span>
                                 </div>
+                                </div>
 
 
                             </div>
@@ -320,43 +375,7 @@
                                 <div class="">
                                     <img src="img1/event1.jpeg" alt="" class="rounded-full h-12 w-12">
                                 </div>
-                                <div class="flex flex-col">
-                                    <span class="text-lg font-thin">Google Developer Community</span>
-                                    <span class="text-sm text-neutral opacity-80">
-                                        1.2K Members
-                                    </span>
-                                </div>
-
-
-                            </div>
-
-
-                            <div class="flex flex-row gap-4 items-center mt-4">
-                                <div class="">
-                                    <img src="img1/event1.jpeg" alt="" class="rounded-full h-12 w-12">
-                                </div>
-                                <div class="flex flex-col">
-                                    <span class="text-lg font-thin">Google Developer Community</span>
-                                    <span class="text-sm text-neutral opacity-80">
-                                        1.2K Members
-                                    </span>
-                                </div>
-
-
-                            </div>
-
-
-
-                            <div class="flex flex-row gap-4 items-center mt-4">
-                                <div class="">
-                                    <img src="img1/event1.jpeg" alt="" class="rounded-full h-12 w-12">
-                                </div>
-                                <div class="flex flex-col">
-                                    <span class="text-lg font-thin">Google Developer Community</span>
-                                    <span class="text-sm text-neutral opacity-80">
-                                        1.2K Members
-                                    </span>
-                                </div>
+                                    </div>
 
 
                             </div>
@@ -372,15 +391,99 @@
                                     </span>
                                 </div>
 
+                                <div class="flex gap-2 flex-col items-center justify-center border border-stone p-2 rounded-lg">
+                                    <div>
+                                        <img src="img1/event1.jpeg" alt="" class="h-12 w-12 rounded-full">
+                                    </div>
+                                    <div class="flex flex-col items-center justify-center">
+                                        <span class="text-lg font-thin text-center"> Google Developer Community</span>
+                                        <h6>1.25 Member</h6>
 
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex  gap-2 mb-3">
+                                <div class="flex gap-2 flex-col items-center justify-center border border-stone p-2 rounded-lg">
+                                    <div>
+                                        <img src="img1/event1.jpeg" alt="" class="h-12 w-12 rounded-full">
+                                    </div>
+                                    <div class="flex flex-col items-center justify-center">
+                                        <span class="text-lg font-thin text-center"> Google Developer Community</span>
+                                        <h6>1.25 Member</h6>
+
+                                </div>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-lg font-thin">Google Developer Community</span>
+                                    <span class="text-sm text-neutral opacity-80">
+                                        1.2K Members
+                                    </span>
+                                    </div>
+                                <div class="flex flex-col">
+                                    <span class="text-lg font-thin">Google Developer Community</span>
+                                    <span class="text-sm text-neutral opacity-80">
+                                        1.2K Members
+                                    </span>
+                                </div>
+
+                                <div class="flex gap-2 flex-col items-center justify-center border border-stone p-2 rounded-lg">
+                                    <div>
+                                        <img src="img1/event1.jpeg" alt="" class="h-12 w-12 rounded-full">
+                                    </div>
+                                    <div class="flex flex-col items-center justify-center">
+                                        <span class="text-lg font-thin text-center"> Google Developer Community</span>
+                                        <h6>1.25 Member</h6>
+
+                            </div>
                             </div>
 
 
 
+                            <div class="flex flex-row gap-4 items-center mt-4">
+                                <div class="">
+                                    <img src="img1/event1.jpeg" alt="" class="rounded-full h-12 w-12">
+                                </div>
 
 
 
-                            
+                            <div class="flex flex-row gap-4 items-center mt-4">
+                                <div class="">
+                                    <img src="img1/event1.jpeg" alt="" class="rounded-full h-12 w-12">
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-lg font-thin">Google Developer Community</span>
+                                    <span class="text-sm text-neutral opacity-80">
+                                        1.2K Members
+                                    </span>
+                                </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="flex flex-row gap-4 items-center mt-4">
+                                <div class="">
+                                    <img src="img1/event1.jpeg" alt="" class="rounded-full h-12 w-12">
+                                </div>
+                                    </div>
+
+
+                            </div>
+
+                            <div class="flex flex-row gap-4 items-center mt-4">
+                                <div class="">
+                                    <img src="img1/event1.jpeg" alt="" class="rounded-full h-12 w-12">
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-lg font-thin">Google Developer Community</span>
+                                    <span class="text-sm text-neutral opacity-80">
+                                        1.2K Members
+                                    </span>
+                                </div>
+                            </div>
+
+
 
 
                         </div>
@@ -419,27 +522,20 @@
 
 
     //like
-    document.addEventListener('DOMContentLoaded', function () {
-        // Your code here
-        const like = document.getElementsByClassName('like');
-        like.addEventListener('click', reaction);
+   // Get all thumbs-up icons
+var thumbsUpIcons = document.querySelectorAll(".like");
 
-        function reaction() {
-            if (like.classList.contains('fa-regular')) {
-                like.classList.add('fa-solid');
-                like.classList.remove('fa-regular');
+// Add event listener for each thumbs-up icon
+thumbsUpIcons.forEach(function(thumbsUpIcon) {
 
-            }
-
-            else if (like.classList.contains('fa-solid')) {
-                like.classList.add('fa-regular');
-                like.classList.remove('fa-solid');
-            }
-        }
-
+    thumbsUpIcon.addEventListener("click", function() {
+        // Toggle between red and blue colors
+        this.classList.toggle("text-red");
+        this.classList.toggle("text-black");
+        this.classList.toggle("fa-regular");
+        this.classList.toggle("fa-solid");
     });
-
-
+});
     
 
         //LogOut
@@ -448,13 +544,12 @@
         
        LogOut.addEventListener('click',function(){
            confirm('Are you sure to LogOut?');
-           window.location.href = '/logout';
+           
        })
 
 
 
 
 </script>
-<script src="js/count-time.js"></script>
 
 </html>
