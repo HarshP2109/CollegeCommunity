@@ -66,17 +66,15 @@ function generateOTP() {
   function sorter(one,two){
       let result;
       for (let i = 0; i < Math.min(one.length, two.length); i++) {
-              let charA = one[i];
-              let charB = two[i];
-              let indexA = customOrder.indexOf(charA);
-              let indexB = customOrder.indexOf(charB);
+              const charA = one[i];
+              const charB = two[i];
+              const indexA = customOrder.indexOf(charA);
+              const indexB = customOrder.indexOf(charB);
               if (indexA !== indexB) {
-                result = Math.min(indexA,indexB);
-                result = indexA < indexB ? one+":"+two : two+":"+one ;
-                break;
+                return result = indexA < indexB ? one+":"+two : two+":"+one ;
           }
       }
-  return result;
+    return one.length < two.length ? one + ":" + two : two + ":" + one;;
   }
 
   module.exports = {
@@ -84,5 +82,6 @@ function generateOTP() {
     generateUniqueId,
     extractFields,
     formatDateAndTime,
-    sorter
+    sorter,
+    extractDomain
   }

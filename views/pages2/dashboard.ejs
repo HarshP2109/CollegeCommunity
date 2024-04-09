@@ -80,8 +80,8 @@
                                 <a href="/profile" class="flex flex-row"><img src="img1/profle-picture.png"
                                         alt="" class="h-12 w-12 rounded-full">
                                     <div class="ml-1 flex flex-col">
-                                        <h3 class="text-lg">Prajwal</h3>
-                                        <span class="text-xs opacity-[0.8]">Admin</span>
+                                        <h3 class="text-lg"><%= Name %></h3>
+                                        <span class="text-xs opacity-[0.8]"><%= Role %></span>
                                     </div>
                                 </a>
 
@@ -166,8 +166,8 @@
                         <!-- <i class="fa-solid fa-xl fa-bell mr-12"></i> -->
                         <!-- Profile Info -->
                         <div class="flex flex-col mr-6 ">
-                            <h3 class="text-xl">Prajwal</h3>
-                            <h6 class="text-sm text-end">Admin</h6>
+                            <h3 class="text-xl"><%= Name %></h3>
+                            <h6 class="text-sm text-end"><%= Role %></h6>
                         </div>
                         <!-- Proifle Picture -->
                         <a href="/profile"><img src="img1/profle-picture.png" alt="Profile Picture"
@@ -187,8 +187,8 @@
                             <a href="/events">
                                 <h6 class="opacity-65">Ongoing Events</h6>
                                 <p class="flex items-end justify-start mt-4">
-                                    <span class="text-2xl font-semibold">2</span>
-                                    <span class="opacity-65 mb-1 ml-1">/50*</span>
+                                    <span class="text-2xl font-semibold"><%= Events.ongoingEvents %></span>
+                                    <span class="opacity-65 mb-1 ml-1">/ <%= Events.totalEvents %></span>
                                 </p>
                             </a>
 
@@ -196,10 +196,10 @@
                         <!-- Card-2 -->
                         <div
                             class="  rounded-xl  p-4 h-36 border border-stone  hover:border-black transform duration-75 cursor-pointer">
-                            <h6 class="opacity-65">Questions Answered</h6>
+                            <h6 class="opacity-65">Active Users</h6>
                             <p class="flex items-end justify-start mt-4">
-                                <span class="text-2xl font-semibold">3,298</span>
-                                <!-- <span class="opacity-65 mb-1 ml-1">/50*</span> -->
+                                <span class="text-2xl font-semibold" id="ActiveUse">0*</span>
+                                <span class="opacity-65 mb-1 ml-1">/ <%= Total %></span>
                             </p>
                         </div>
                         <!-- Card-3 -->
@@ -207,7 +207,7 @@
                             class=" rounded-xl  p-4 h-36 border border-stone  hover:border-black transform duration-75 cursor-pointer">
                             <h6 class="opacity-65">Today's Usage </h6>
                             <p class="flex items-end justify-start mt-4">
-                                <span class="text-2xl font-semibold">2m34s</span>
+                                <span class="text-2xl font-semibold" id="timeSpent">0m0s</span>
                                 <!-- <span class="opacity-65 mb-1 ml-1">/50*</span> -->
                             </p>
                         </div>
@@ -271,14 +271,27 @@
                                 </div>
 
                             </div>
-                            <div class=" cursor-pointer p-2 border border-stone rounded-xl overflow-y-scroll ">
-                                TLDR NEWS FEEDS
+                            <div class=" cursor-pointer p-2 border border-stone rounded-xl overflow-y-scroll flex flex-col gap-4">
+                                <div>
+                                    <span class="text-lg  font-semibold">
+                                        Top Events
+                                    </span>
 
-                            </div>
-
+                                </div>
+                                <% let arr = EventList %>
+                                <% for( let index = 0; index < arr.length; index++ ) { %>
+                                    <div class="flex items-center px-2 py-1 border border-stone rounded-md ">
+                                        <img src="img2/charmender.png" alt="" class="h-10 w-10 rounded-full">
+                                        <div>
+                                            <span class="text-lg ml-3">
+                                                <%= arr[index] %>
+                                            </span>
+                                        </div>
+                                    </div>
+                                <% } %>
                         </div>
-
                     </div>
+                </div>
 
                     <!-- Right side -->
                     <div class=" order-1 lg:order-2  border border-stone rounded-xl py-1  rightLoad">
@@ -418,10 +431,21 @@
         </main>
 
     </div>
-
+    <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
+        let iD = `<%- ID %>`
+        const socket = io();
+        socket.emit("loggedIn", iD);
+
+        function decodeHTMLEntities(str) {
+        return str.replace(/&#(\d+);/g, function(match, dec) {
+            return String.fromCharCode(dec);
+        });
+        }
 
 
+        let labelArray = [`<%= Activity.date1 %>`, `<%= Activity.date2 %>`, `<%= Activity.date3 %>`,  `<%= Activity.date4 %>`,  `<%= Activity.date5 %>`,  `<%= Activity.date6 %>` ,  `<%= Activity.date7 %>`];
+        let dataArray = [ Number(`<%= Activity.Active1 %>`), Number(`<%= Activity.Active2 %>`),  Number(`<%= Activity.Active3 %>`),  Number(`<%= Activity.Active4 %>`),  Number(`<%= Activity.Active5 %>`), Number(`<%= Activity.Active6 %>`) , Number(`<%= Activity.Active7 %>`)];
         //Graph
         var bar_ctx = document.getElementById('bar-chart').getContext('2d');
 
@@ -432,13 +456,13 @@
         var bar_chart = new Chart(bar_ctx, {
             type: 'bar',
             data: {
-                labels: ["21/2", "22/2", "23/3", "24/3", "May", "June", 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                labels: labelArray,
                 datasets: [{
                     label: 'Annual Activity',
-                    data: [12, 19, 3, 8, 14, 5, 6, 7, 8, 9, 11, 12],
+                    data: dataArray,
                     backgroundColor: purple_orange_gradient,
-                    borderRadius: 50,
-                    barThickness: 10,
+                    borderRadius: 20,
+                    barThickness: 20,
                     circular: true,
                     barPercentage: 0.5,
                 }]
@@ -515,8 +539,14 @@
             });
         });
 
+        socket.on("ActiveUser",(data)=>{
+            let change = document.getElementById("ActiveUse");
+            change.innerHTML = data;
+        })
+
 
     </script>
+    <script src="js/count-time.js"></script>
 
 </body>
 

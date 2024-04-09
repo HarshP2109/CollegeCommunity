@@ -1,11 +1,13 @@
 
 //Import Functions
 const sendMail = require ('../middleware/nodemailing');
-const { findacc , accInsert } = require ('../utils/databaseFunctions')
-const { generateUniqueId , generateOTP} = require ('../utils/basicFunctions')
+const { findacc , accInsert, updateDomain } = require ('../utils/databaseFunctions')
+const { generateUniqueId , generateOTP, extractDomain} = require ('../utils/basicFunctions');
+const { AddActivityTable } = require('../utils/dashboardFunctions');
 
 
-const landingPage = (req,res) => {
+const landingPage = async(req,res) => {
+
     res.render('pages/index');
 }
 
@@ -126,7 +128,7 @@ const accountCreationForm = (req,res) => {
   }
 }
 
-const accountCreationPost = (req,res)=>{
+const accountCreationPost = async(req,res)=>{
   let fname = req.body.fname;
   let lname = req.body.lname;
   let username = req.body.username;
@@ -136,9 +138,12 @@ const accountCreationPost = (req,res)=>{
  let gen = req.body.gender;
   let id = req.session.spID;
   req.session.User = id;
+  AddActivityTable(id,username);
   console.log(fname,lname,username,dob,pass,gen,id);
   // Accounts.push(newAccount);
-  accInsert(fname,lname,username,dob,gen,mail,pass,id);
+  let dom = extractDomain(id);
+  accInsert(fname,lname,username,dom,dob,gen,mail,pass,id);
+  await updateGroup(dom,id);
   res.redirect('/dash');
 }
 

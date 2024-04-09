@@ -1,0 +1,12 @@
+<% for( let i = 0; i < Groups.length; i++ ) { %>
+    <% let capitalizedStr = Groups[i].GroupName.charAt(0).toUpperCase() + Groups[i].GroupName.slice(1); %>
+    <div class="p-1 actChat cursor-pointer group">
+        <div class="px-1 flex flex-row items-center">
+            <img src="img1/group.jpg" alt="" class="h-12 w-12 rounded-full">
+            <div class="px-2">
+                <span class="text-xl">Community Group - <%= capitalizedStr %></span>
+            </div>
+        </div>
+    </div>
+
+<% } %>                  

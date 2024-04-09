@@ -75,8 +75,8 @@
                             <div class="flex flex-row">
                                 <a href="/profile" class="flex flex-row"><img src="img1/profle-picture.png" alt="" class="h-12 w-12 rounded-full">
                                     <div class="ml-1 flex flex-col">
-                                        <h3 class="text-lg">Prajwal</h3>
-                                        <span class="text-xs opacity-[0.8]">Admin</span>
+                                        <h3 class="text-lg"><%= Name %></h3>
+                                        <span class="text-xs opacity-[0.8]"><%= Role %></span>
                                     </div></a>
                            
                                 
@@ -155,8 +155,8 @@
                     <!-- <i class="fa-solid fa-xl fa-bell mr-12"></i> -->
                     <!-- Profile Info -->
                     <div class="flex flex-col mr-6 ">
-                        <h3 class="text-xl">Prajwal</h3>
-                        <h6 class="text-sm text-end">Admin</h6>
+                        <h3 class="text-xl"><%= Name %></h3>
+                        <h6 class="text-sm text-end"><%= Role %></h6>
                     </div>
                     <!-- Proifle Picture -->
                     <a href="/profile"><img src="img1/profle-picture.png" alt="Profile Picture"
@@ -268,6 +268,7 @@
             </section>
         </main>
     </div>
+    <script src="/socket.io/socket.io.js"></script>
     <script>
         const MenuShowBtn = document.querySelector('#MenuShowBtn');
         const MobileMenu = document.querySelector('#MobileMenu');

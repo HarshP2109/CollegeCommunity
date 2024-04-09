@@ -42,10 +42,11 @@
                     <!-- Profle Picture -->
                     <div class="flex flex-row items-center justify-between">
                         <div>
+                            <input name="profle-picture" type="file" id="fileInput" accept="image/*" class="hidden" />
                             <img src="img1/profle-picture.png " class="h-20 w-20 rounded-full" alt="">
                         </div>
                         <div>
-                            <button class="bg-stone px-2 py-1 rounded-full prflBtn">Upload Picture</button>
+                            <button class="bg-stone px-2 py-1 rounded-full prflBtn" onclick="openFileInput()">Upload Picture</button>
                         </div>
                     </div>
 
@@ -58,17 +59,17 @@
                         <div class="  transform transition-all duration-150 " id="myDiv">
                             <div class="flex flex-col">
                                 <span class="text-xs opacity-[0.8]">Your Name</span>
-                                <span class="text-lg mt-1"><%= Name %></span>
+                                <span class="text-lg mt-1" id="nameSpan"><%= Name %></span>
 
                             </div>
                             <div class="flex flex-col mt-4">
                                 <span class="text-xs opacity-[0.8]">Email</span>
-                                <span class="text-lg mt-1"><%=  Email %></span>
+                                <span class="text-lg mt-1" id="emailSpan"><%=  Email %></span>
 
                             </div>
                             <div class="flex flex-col mt-4">
                                 <span class="text-xs opacity-[0.8]">Phone Number</span>
-                                <span class="text-lg mt-1">+91 49652845732</span>
+                                <span class="text-lg mt-1" id="phoneSpan">+91 49652845732</span>
 
                             </div>
                         </div>
@@ -82,28 +83,28 @@
                                     <label for="pname" class="text-sm opacity-[0.8] ml-1">Your Name</label>
                                     <input type="text" name="pname" id="pname"
                                         class="bg-stone h-8 rounded-md pl-2 focus:outline-none"
-                                        placeholder="make unique username">
+                                        placeholder="Make your UserName">
                                 </div>
 
                                 <div class="flex flex-col gap-y-2 px-2 mt-4">
                                     <label for="mail" class="text-sm opacity-[0.8] ml-1">Your Email</label>
                                     <input type="email" name="mail" id="mail"
                                         class="bg-stone h-8 rounded-md pl-2 focus:outline-none"
-                                        placeholder="enter your email here">
+                                        placeholder="Enter your Email :">
                                 </div>
 
 
                                 <div class="flex flex-col gap-y-2 px-2 mt-4">
                                     <label for="number" class="text-sm opacity-[0.8] ml-1">Your Phone Number</label>
-                                    <input type="email" name="Number" id="number"
+                                    <input type="number" name="Number" id="number"
                                         class="bg-stone h-8 rounded-md pl-2 focus:outline-none"
-                                        placeholder="enter your phone number here">
+                                        placeholder="XXXXX XXXXX">
                                 </div>
                             </form>
                         </div>
 
-                        <div class="text-center mt-6" ">
-                            <button class="bg-stone py-1 px-2  rounded-full prflBtn" onclick="toggleDiv(),toggleTxt(this)">Edit Profile Details</button>
+                        <div class="text-center mt-6" >
+                            <button class="bg-stone py-1 px-2  rounded-full prflBtn" id="ChangeNameMailNum">Edit Profile Details</button>
                         </div>
 
                     </div>
@@ -241,9 +242,10 @@
 
 
 
-
+    <script src="/socket.io/socket.io.js"></script>
     <script>
         //logOut
+        const socket = io();
 
         const LogOut = document.getElementById('LogOut') 
        
@@ -252,6 +254,8 @@
             confirm('Are you sure to LogOut?');
             window.location.href = '/logout';
         })
+
+        
         
     
         //edit profile
@@ -289,6 +293,82 @@
             
         }
 
+        function updateValues(newData, idToChange) {
+            document.getElementById(idToChange).innerHTML = newData
+        }
+
+        let Id = `<%= ID %>`
+
+        document.addEventListener("DOMContentLoaded", function() {
+            let nameValue = document.querySelector("#myDiv-1 #pname");
+            let mailValue = document.querySelector("#myDiv-1 #mail");
+            let numValue = document.querySelector("#myDiv-1 #number");
+
+            let ChangeNameMailNum = document.querySelector("#ChangeNameMailNum");
+
+            ChangeNameMailNum.addEventListener("click", function () {
+                var myDiv = document.getElementById("myDiv");
+                var myDiv_1 = document.getElementById("myDiv-1");
+
+                // Toggle the 'hidden' class using classList.toggle
+
+                if (ChangeNameMailNum.innerText === "Edit Profile Details") {
+                    myDiv_1.classList.toggle("hidden");
+                    myDiv.classList.toggle("hidden");                
+                    ChangeNameMailNum.innerText = "Save";
+                } else {
+                    setTimeout(()=>{
+                        myDiv_1.classList.toggle("hidden");
+                        myDiv.classList.toggle("hidden");
+
+                        let name = nameValue.value;
+                        let mail = mailValue.value;
+                        let num = numValue.value;
+
+                        if (name !== "") {
+                            updateValues(name, "nameSpan");
+                        }
+                        if (mail !== "") {
+                            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+                                updateValues(mail, "emailSpan");
+                            } else {
+                                mail = "";
+                                console.log("Invalid email format");
+                            }
+                        }
+                        if (num !== "") {
+                            if (/^\d{10}$/.test(num)) {
+                                let propNum = '+91 '+num;
+                                updateValues(propNum, "phoneSpan");
+                            } else {
+                                num = "";
+                                console.log("Phone number should be 10 digits");
+                            }
+                        }
+
+                        let data = {
+                            Name: name, 
+                            Mail: mail,
+                            Number: num,
+                            ID: Id
+                        }
+
+                        nameValue.value = "";
+                        mailValue.value = "";
+                        numValue.value = "";
+
+                        console.log(data);
+
+                        socket.emit("ChangeMyData", data);
+                        ChangeNameMailNum.innerText = "Edit Profile Details";
+                    },2500)
+                    
+                }
+            });
+
+        // Now you can use nameValue, mailValue, and numValue to access the input values
+        });
+
         function toggleTxt(button) {
             // Toggle the text of the button
             if (button.innerText === "Edit Profile Details") {
@@ -297,6 +377,11 @@
                 button.innerText = "Edit Profile Details";
             }
             
+        }
+
+        function openFileInput() {
+            const fileInput = document.getElementById('fileInput');
+            fileInput.click();
         }
 
 

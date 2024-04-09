@@ -76,8 +76,8 @@
                                 <a href="/profile" class="flex flex-row"><img src="img1/profle-picture.png"
                                         alt="" class="h-12 w-12 rounded-full">
                                     <div class="ml-1 flex flex-col">
-                                        <h3 class="text-lg">Prajwal</h3>
-                                        <span class="text-xs opacity-[0.8]">Admin</span>
+                                        <h3 class="text-lg"><%= Name %></h3>
+                                        <span class="text-xs opacity-[0.8]"><%= Role %></span>
                                     </div>
                                 </a>
 
@@ -141,8 +141,8 @@
                     <!-- <i class="fa-solid fa-xl fa-bell mr-12"></i> -->
                     <!-- Profile Info -->
                     <div class="flex flex-col mr-6 ">
-                        <h3 class="text-xl">Prajwal</h3>
-                        <h6 class="text-sm text-end">Admin</h6>
+                        <h3 class="text-xl"><%= Name %></h3>
+                        <h6 class="text-sm text-end"><%= Role %></h6>
                     </div>
                     <!-- Proifle Picture -->
                     <a href="/profile"><img src="img1/profle-picture.png" alt="Profile Picture"
@@ -161,7 +161,7 @@
                         </span>
 
                     </div>
-                    <div class="bg-stone p-1  ">
+                    <!-- <div class="bg-stone p-1  ">
                         <div class="bg-white flex items-center justify-between  ">
                             <input type="text " class="w-3/4 p-1 focus:outline-none" placeholder="Search user">
                             <div class="px-4">
@@ -169,7 +169,7 @@
                             </div>
 
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="mt-4 flex flex-col gap-y-2 ">
                         <!-- chat 1 -->
@@ -177,26 +177,19 @@
                             <div class="px-1  flex flex-row items-center">
                                 <img src="img1/bot.jpg" alt="" class="h-12 w-12 rounded-full">
                                 <div class="px-2">
-                                    <span class="text-xl">Chat with the bot</span>
+                                    <span class="text-xl">Chat Bot</span>
                                 </div>
                             </div>
                         </div>
-                        <!-- chat 2 -->
-                        <div class="p-1 actChat cursor-pointer" id="group">
-                            <div class="px-1 flex flex-row items-center">
-                                <img src="img1/group.jpg" alt="" class="h-12 w-12 rounded-full">
-                                <div class="px-2">
-                                    <span class="text-xl">Community Group</span>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- chat = Community -->
+                        <%- include('../components/messages/GroupCard') %>
                         <hr class="mt-1 text-stone">
 
                         <!-- user chats -->
                         <div class="overflow-y-scroll h-44">
 
                             <!-- chat 3 -->
-                            <div class="mt-1 p-1 actChat cursor-pointer">
+                            <!-- <div class="mt-1 p-1 actChat cursor-pointer human">
                                 <div class="px-1 flex flex-row items-center">
                                     <img src="img1/profle-picture.png" alt="" class="h-12 w-12 rounded-full">
                                     <div class="px-2 flex items-start flex-col justify-center">
@@ -204,57 +197,9 @@
                                         <h3>Backend Developer</h3>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
-                            <!-- chat 4 -->
-                            <div class="mt-1 p-1 actChat cursor-pointer">
-                                <div class="px-1 flex flex-row items-center">
-                                    <img src="img1/profle-picture.png" alt="" class="h-12 w-12 rounded-full">
-                                    <div class="px-2 flex items-start flex-col justify-center">
-                                        <span class="text-xl">Harsh Yadav</span>
-                                        <h3>Backend Developer</h3>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mt-1 p-1 actChat cursor-pointer">
-                                <div class="px-1 flex flex-row items-center">
-                                    <img src="img1/profle-picture.png" alt="" class="h-12 w-12 rounded-full">
-                                    <div class="px-2 flex items-start flex-col justify-center">
-                                        <span class="text-xl">Harsh Yadav</span>
-                                        <h3>Backend Developer</h3>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mt-1 p-1 actChat cursor-pointer">
-                                <div class="px-1 flex flex-row items-center">
-                                    <img src="img1/profle-picture.png" alt="" class="h-12 w-12 rounded-full">
-                                    <div class="px-2 flex items-start flex-col justify-center">
-                                        <span class="text-xl">Harsh Yadav</span>
-                                        <h3>Backend Developer</h3>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mt-1 p-1 actChat cursor-pointer">
-                                <div class="px-1 flex flex-row items-center">
-                                    <img src="img1/profle-picture.png" alt="" class="h-12 w-12 rounded-full">
-                                    <div class="px-2 flex items-start flex-col justify-center">
-                                        <span class="text-xl">Harsh Yadav</span>
-                                        <h3>Backend Developer</h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-1 p-1 actChat cursor-pointer">
-                                <div class="px-1 flex flex-row items-center">
-                                    <img src="img1/profle-picture.png" alt="" class="h-12 w-12 rounded-full">
-                                    <div class="px-2 flex items-start flex-col justify-center">
-                                        <span class="text-xl">Harsh Yadav</span>
-                                        <h3>Backend Developer</h3>
-                                    </div>
-                                </div>
-                            </div>
+                            <%- include('../components/messages/ChatCard') %>
 
 
 
@@ -266,16 +211,16 @@
                 </section>
 
                 <!-- message field with the chat bot -->
-                <section class="col-span-3 bg-stone h-screen gap-2 hidden" id="botChats">
+                <section class="col-span-3 bg-stone h-screen gap-2" id="Chats">
                     <div class="bg-blue text-white p-2 flex flex-row justify-between">
-                        <div class="flex items-center gap-2">
+                        <div class="flex items-center gap-2" id="chatField">
                             <img src="img1/bot.jpg" alt="" class="h-16 w-16 rounded-full">
                             <div>
                                 <span class="text-2xl">Let me help you with your tasks!</span>
                             </div>
                         </div>
                         <!-- chats toggle to normal and assign tasks -->
-                        <div class="flex justify-center items-center">
+                        <div class="flex justify-center items-center" id="botToggle">
                             <label class="inline-flex items-center cursor-pointer">
 
                                 <input type="checkbox" value="" class="sr-only peer">
@@ -289,81 +234,15 @@
                     </div>
 
                     <!-- chats -->
-                    <div class="overflow-y-scroll cursor-pointer" style="height: 500px;">
-                        <div class="p-1 flex items-center justify-center font-semibold">
-
-                            Today
-
-                        </div>
-                        <!-- bot msg -->
-                        <div class="mt-4 px-2">
-
-                            <div class="">
-                                <span class="bg-white p-2 rounded-md text-xl">Hello! I'm here to help. What tasks do you
-                                    need to assign?</span>
-                                <h5 class="mt-2 text-sm">11.30</h5>
-                            </div>
-
-                        </div>
-
-                        <!-- user reply -->
-                        <div class="mt-4 px-2 flex justify-end items-end ">
-
-                            <div class="w-3/4">
-                                <span class="bg-white p-2 rounded-md text-xl flex">We have a project deadline coming up,
-                                    and
-                                    I need to assign tasks to team members. Can you help me organize that?</span>
-                                <h5 class="mt-2 text-sm text-end">11.30</h5>
-                            </div>
-
-                        </div>
-
-
-                        <!-- bot msg -->
-                        <div class="mt-4 px-2">
-
-                            <div class="w-3/4">
-                                <span class="bg-white p-2 rounded-md text-xl flex"> Absolutely! Let's start by listing
-                                    out
-                                    the tasks that need to be completed for the project.</span>
-                                <h5 class="mt-2 text-sm">11.30</h5>
-                            </div>
-
-                        </div>
-
-                        <!-- user reply -->
-                        <div class="mt-4 px-2 flex justify-end items-end ">
-
-                            <div class="w-3/4">
-                                <span class="bg-white p-2 rounded-md text-xl flex"> Sure. We need to design the UI,
-                                    develop
-                                    backend functionality, write documentation, and conduct testing.</span>
-                                <h5 class="mt-2 text-sm text-end">11.30</h5>
-                            </div>
-
-                        </div>
-
-
-
-                        <!-- bot reply -->
-                        <div class="mt-4 px-2">
-
-                            <div class="w-3/4">
-                                <span class="bg-white p-2 rounded-md text-xl flex"> Great. Now, who are the team members
-                                    involved in this project?</span>
-                                <h5 class="mt-2 text-sm">11.30</h5>
-                            </div>
-
-                        </div>
-                    </div>
+                    <%- include('../components/messages/connectMessageCard') %>
 
                     <!-- send -->
                     <div class="bg-l-sky-blue px-2   flex justify-center items-center" style="height: 80px;">
 
                         <div class="w-full flex items-center justify-center px-4">
-                            <input type="text" class=" w-3/4 p-2 rounded-lg focus:outline-none text-lg font-thin">
+                            <input type="text" class=" w-3/4 p-2 rounded-lg focus:outline-none text-lg font-thin" id="chatInput">
                             <div class="">
-                                <button class="ml-4 bg-blue text-white py-2 px-4 rounded-lg"><span
+                                <button class="ml-4 bg-blue text-white py-2 px-4 rounded-lg" onclick="sendMessage('chatInput','#chatField')"><span
                                         class="font-thin text-lg">Send</span>
                                     <i class="fa-solid fa-paper-plane"></i>
                                 </button>
@@ -379,9 +258,9 @@
                 </section>
 
                  <!-- community group chat field -->
-                 <section class="col-span-3 bg-stone h-screen gap-2 " id="grpChats">
+                 <section class="col-span-3 bg-stone h-screen gap-2 hidden" id="grpChats">
                     <div class="bg-blue text-white p-2 flex flex-row justify-between">
-                        <div class="flex items-center gap-2">
+                        <div class="flex items-center gap-2" id="groupField">
                             <img src="img1/group.jpg" alt="" class="h-16 w-16 rounded-full">
                             <div>
                                 <span class="text-2xl">Community Group</span>
@@ -402,105 +281,15 @@
                     </div>
 
                     <!-- chats -->
-                    <div class="overflow-y-scroll cursor-pointer" style="height: 500px;">
-                        <div class="p-1 flex items-center justify-center font-semibold">
-
-                            Today
-
-                        </div>
-                        <!-- user 1 msg -->
-                        <div class="mt-4 px-2 w-3/4">
-                            <div>
-                                <span class="text-black font-semibold">Alice</span>
-                            </div>
-
-                            <div class="">
-                                <span class="bg-white p-2 rounded-md text-xl flex ">Good morning, team! Just a reminder that our project deadline is approaching. How's everyone doing with their tasks?</span>
-                                <h5 class="mt-2 text-sm">11.30</h5>
-                            </div>
-
-                        </div>
-
-                         <!-- user 2 msg -->
-                         <div class="mt-4 px-2 w-3/4">
-                            <div>
-                                <span class="text-black font-semibold">Bob</span>
-                            </div>
-
-                            <div class="">
-                                <span class="bg-white p-2 rounded-md text-xl flex ">Morning, Alice! I've finished my part on the market analysis. I'll send it over for review shortly.</span>
-                                <h5 class="mt-2 text-sm">11.30</h5>
-                            </div>
-
-                        </div>
-
-                        <!-- user reply -->
-                        <div class="mt-4 px-2 flex justify-end items-end ">
-
-                            <div class="w-3/4">
-                                <span class="bg-white p-2 rounded-md text-xl flex">Hey, everyone! I've been working on the presentation slides. I'm almost done with the first draft.</span>
-                                <h5 class="mt-2 text-sm text-end">11.30</h5>
-                            </div>
-
-                        </div>
-
-
-                        <!-- user 1  msg -->
-                        <div class="mt-4 px-2">
-                            <div>
-                                <span class="text-black font-semibold">Alice</span>
-                            </div>
-                            <div class="w-3/4">
-                                <span class="bg-white p-2 rounded-md text-xl flex"> Great progress, Bob and Charlie! Thanks for the updates. David, how's the financial projections going?</span>
-                                <h5 class="mt-2 text-sm">11.30</h5>
-                            </div>
-
-                        </div>
-
-                         <!-- user 3  msg -->
-                         <div class="mt-4 px-2">
-                            <div>
-                                <span class="text-black font-semibold">David</span>
-                            </div>
-                            <div class="w-3/4">
-                                <span class="bg-white p-2 rounded-md text-xl flex"> Hey, sorry for the delay. I've been caught up with some personal stuff, but I'll dedicate more time to it today. Should have it ready by the end of the day.</span>
-                                <h5 class="mt-2 text-sm">11.30</h5>
-                            </div>
-
-                        </div>
-
-                        <!-- user reply -->
-                        <div class="mt-4 px-2 flex justify-end items-end ">
-
-                            <div class="w-3/4">
-                                <span class="bg-white p-2 rounded-md text-xl flex"> In the meantime, I can help with any formatting or data organization for the financial projections if needed.</span>
-                                <h5 class="mt-2 text-sm text-end">11.30</h5>
-                            </div>
-
-                        </div>
-
-
-
-                        <!-- user 3  msg -->
-                        <div class="mt-4 px-2">
-                            <div>
-                                <span class="text-black font-semibold">David</span>
-                            </div>
-                            <div class="w-3/4">
-                                <span class="bg-white p-2 rounded-md text-xl flex"> Thanks, guys. I really appreciate it. I'll make sure to reach out if I need any help.</span>
-                                <h5 class="mt-2 text-sm">11.30</h5>
-                            </div>
-
-                        </div>
-                    </div>
+                    <%- include('../components/messages/groupMessageCard') %>
 
                     <!-- send -->
                     <div class="bg-l-sky-blue px-2   flex justify-center items-center" style="height: 80px;">
 
                         <div class="w-full flex items-center justify-center px-4">
-                            <input type="text" class=" w-3/4 p-2 rounded-lg focus:outline-none text-lg font-thin">
+                            <input type="text" class=" w-3/4 p-2 rounded-lg focus:outline-none text-lg font-thin" id="groupInput">
                             <div class="">
-                                <button class="ml-4 bg-blue text-white py-2 px-4 rounded-lg"><span
+                                <button class="ml-4 bg-blue text-white py-2 px-4 rounded-lg" onclick="sendMessage('groupInput','#groupField')"><span
                                         class="font-thin text-lg">Send</span>
                                     <i class="fa-solid fa-paper-plane"></i>
                                 </button>
@@ -526,8 +315,16 @@
 
 </body>
 
-
+<script src="/socket.io/socket.io.js"></script>
 <script>
+    const socket = io();
+
+    const Name = `<%= Name %>`;
+    const ID = `<%= ID %>`;
+    socket.emit("loggedIn", ID);
+    console.log(Name);
+    console.log(ID);
+
     //mobile
     const MenuShowBtn = document.querySelector('#MenuShowBtn');
     const MobileMenu = document.querySelector('#MobileMenu');
@@ -574,38 +371,403 @@
 
         })
     })
-    console.log(chatList)
+    // console.log(chatList)
 
 
     const bot = document.getElementById('bot');
-    const group = document.getElementById('group');
+    // const group = document.getElementsByClassName('group');
+    // const human = document.getElementsByClassName('human');
+    const toggle = document.getElementById('botToggle');    
     const grpChats = document.getElementById('grpChats');    
-    const botChats = document.getElementById('botChats');    
+    const botChats = document.getElementById('Chats');    
+
+    // Find the span element within the "Chats" section
+    // const spanElement = querySelectorAll('span.text-2xl');
 
 
-    console.log(bot,group);
+    // console.log(human);
 
     bot.addEventListener('click',()=>{
         if(botChats.classList.contains('hidden')){
             botChats.classList.remove('hidden');
             grpChats.classList.add('hidden');
-        }else{
-            botChats.classList.add('hidden');
-            grpChats.classList.remove('hidden');
         }
+        if(toggle.classList.contains('hidden')){
+                toggle.classList.remove('hidden');
+        }
+
+                    // Update the image URL and span text
+        let botFieldImg = document.querySelector('#chatField img');
+        let botFieldSpan = document.querySelector('#chatField span');
+
+        // Update the image URL
+        botFieldImg.src = "img1/bot.jpg";
+
+        // Update the span text
+        botFieldSpan.textContent = "Let me help you with your tasks!";
+        // else{
+        //     botChats.classList.add('hidden');
+        //     grpChats.classList.remove('hidden');
+        // }
     })
 
-    group.addEventListener('click',()=>{
-        if(grpChats.classList.contains('hidden')){
-            grpChats.classList.remove('hidden');
-            botChats.classList.add('hidden');
-        }else{
-            grpChats.classList.add('hidden');
-            botChats.classList.remove('hidden');
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Add event listener to all elements with the 'group' class
+    const groups = document.querySelectorAll('.group');
+    groups.forEach(function(group) {
+        group.addEventListener('click', function() {
+            // Get the capitalized string from the clicked group
+            const groupName = this.querySelector('.text-xl').textContent;
+            
+            // Update the image URL and span text
+            const groupFieldImg = document.querySelector('#groupField img');
+            const groupFieldSpan = document.querySelector('#groupField span');
+
+            // Update the image URL
+            groupFieldImg.src = this.querySelector('img').src;
+
+            // Update the span text
+            groupFieldSpan.textContent = groupName;
+
+            //Send Socket
+            console.log(groupName);
+            socket.emit("joinGroup", groupName);
+
+
+
+            // Toggle visibility of chat sections
+            if(grpChats.classList.contains('hidden')) {
+                grpChats.classList.remove('hidden');
+                botChats.classList.add('hidden');
+            }
+            if(!toggle.classList.contains('hidden')) {
+                toggle.classList.add('hidden');
+            }
+            console.log('Group clicked!');
+        });
+    });
+
+    // Add event listener to all elements with the 'human' class
+    const humans = document.querySelectorAll('.human');
+    humans.forEach(function(human) {
+        human.addEventListener('click', function() {
+            // Get the capitalized string from the clicked group
+            const chatName = this.querySelector('.text-xl').textContent;
+            
+            // Update the image URL and span text
+            const chatFieldImg = document.querySelector('#chatField img');
+            const chatFieldSpan = document.querySelector('#chatField span');
+
+            // Update the image URL
+            chatFieldImg.src = this.querySelector('img').src;
+
+            // Update the span text
+            chatFieldSpan.textContent = chatName;
+
+            socket.emit("joinChat", {chatName: chatName.trim(), MyId: ID});
+
+            // Toggle visibility of chat sections
+            if(botChats.classList.contains('hidden')) {
+                botChats.classList.remove('hidden');
+                grpChats.classList.add('hidden');
+            }
+            if(!toggle.classList.contains('hidden')) {
+                toggle.classList.add('hidden');
+            }
+            console.log("Human clicked!");
+        });
+    });
+
+});
+
+
+
+function sendMessage(idTagInput,idTagField) {
+    console.log(idTagField,idTagInput);
+    const messageInput = document.getElementById(idTagInput);
+    const message = messageInput.value.trim(); // Extract message from input
+    let date = new Date();
+    // console.log(date);
+    const currentTime = getTime(date); // Get current time in "hh:mm" format
+    sendingMessage(message, currentTime, idTagField); // Call your existing function with message and time
+    let To = document.querySelector(idTagField+' span').textContent.trim();
+    console.log(To);
+    if(To.includes("Community")){       //Send Message to Group
+        let slicedPart = To.split('- ')[1];
+        slicedPart = slicedPart.toLowerCase()
+        console.log(slicedPart); 
+        let groupData = `<%= Groups %>`
+        groupData.forEach((group) => {
+            if(group.GroupName === slicedPart){
+                let ide = `<%= ID %>`
+                let data = {
+                    GroupId: group.GroupID,
+                    from: ide,
+                    message: message,
+                    time: currentTime
+                }
+                // socket.emit("Group sendMessage",data)
+            }
+        });
+    }
+    else {
+        let friendData = ([`<%= Friend %>`]);
+        if(To === 'Let me help you with your tasks!'){
+            console.log("Bot");
         }
-    })
+        else{
+            // friendData.forEach((user) => {
+            //     if (To === user.Name) {
+            //         console.log(user);
+            //     }
+            // })()
+            socket.emit("personalMessage", {FromUser:Name,FromId:ID,ToUser:To,Message:message,Time:currentTime});
+        }
+    }
+    messageInput.value = ''; // Clear input field after sending message
+}
+
+function sendLoadMessage(idTagInput,idTagField) {
+    console.log(idTagField,idTagInput);
+    const messageInput = document.getElementById(idTagInput);
+    let message = ""
+    if (messageInput) {
+        message = messageInput.value.trim();
+        // Proceed with further processing
+    } else {
+        console.error('Message input element not found');
+    }
+    let date = new Date();
+    // console.log(date);
+    const currentTime = getTime(date); // Get current time in "hh:mm" format
+    sendingMessage(message, currentTime, idTagField); // Call your existing function with message and time
+    let To = document.querySelector(idTagField+' span').textContent;
+    console.log(To);
+    if(To.includes("Community")){       //Send Message to Group
+        let slicedPart = To.split('- ')[1];
+        slicedPart = slicedPart.toLowerCase()
+        console.log(slicedPart); 
+        let groupData = `<%= Groups %>`
+        groupData.forEach((group) => {
+            if(group.GroupName === slicedPart){
+                let ide = `<%= ID %>`
+                let data = {
+                    GroupId: group.GroupID,
+                    from: ide,
+                    message: message,
+                    time: currentTime
+                }
+                // socket.emit("Group sendMessage",data)
+            }
+        });
+    }
+    else {
+        let friendData = ([`<%= Friend %>`]);
+        if(To === 'Let me help you with your tasks!'){
+            console.log("Bot");
+        }
+        else{
+            friendData.forEach((user) => {
+                if (To === user.Name) {
+                    console.log(user);
+                }
+            })
+        }
+    }
+    messageInput.value = ''; // Clear input field after sending message
+}
 
 
+
+function getTime(date) {
+    const now = date;
+    const hours = String(now.getHours()).padStart(2, '0'); // Get hours with leading zero
+    const minutes = String(now.getMinutes()).padStart(2, '0'); // Get minutes with leading zero
+    return `${hours}:${minutes}`;
+}
+
+
+//Send and Receive Message
+
+const parent1Element = document.getElementById('personalPlay');
+const parent2Element = document.getElementById('groupPlay');
+
+function sendingMessage(spanText, h5Text, idTagField) {
+    const div = document.createElement('div');
+    div.classList.add('mt-4', 'px-2', 'flex', 'justify-end', 'items-end');
+
+    const innerDiv = document.createElement('div');
+    innerDiv.classList.add('w-3/4');
+
+    // let currentFieldImg = document.querySelector('#chatField img');
+    let currentFieldSpan = document.querySelector(idTagField+' span');
+
+    // // Update the image URL
+    // let url = currentFieldImg.src;
+
+    // Update the span text
+    let currentChat = currentFieldSpan.textContent;
+    let type = idTagField === '#chatField' ? 'Normal' : 'Group'
+
+    let  newChat = {
+        dataType: type,
+        To: currentChat,
+        fromName: Name,
+        fromId: ID,
+        Message: spanText,
+        Time: h5Text 
+    }
+    // socket.emit("SendMessage", newChat);
+
+    const span = document.createElement('span');
+    span.classList.add('bg-white', 'p-2', 'rounded-md', 'text-xl', 'flex');
+    span.textContent = spanText;
+
+    const h5 = document.createElement('h5');
+    h5.classList.add('mt-2', 'text-sm', 'text-end');
+    h5.textContent = h5Text;
+    // console.log(currentChat);
+
+    innerDiv.appendChild(span);
+    innerDiv.appendChild(h5);
+    div.appendChild(innerDiv);
+    if(idTagField == '#chatField'){
+        parent1Element.append(div);
+    }
+    else{
+        parent2Element.append(div);
+    }
+
+    return div;
+}
+
+function receiverPersonalMessage(spanText, h5Text) {
+    const div = document.createElement('div');
+    div.classList.add('mt-4', 'px-2');
+
+    const innerDiv = document.createElement('div');
+
+    const span = document.createElement('span');
+    span.classList.add('bg-white', 'p-2', 'rounded-md', 'text-xl');
+    span.textContent = spanText;
+
+    const h5 = document.createElement('h5');
+    h5.classList.add('mt-2', 'text-sm');
+    h5.textContent = h5Text;
+
+    innerDiv.appendChild(span);
+    innerDiv.appendChild(h5);
+    div.appendChild(innerDiv);
+    parent1Element.append(div)
+    return div;
+}
+
+function receiverGroupMessage(fromName,spanText, h5Text) {
+    const div = document.createElement('div');
+    div.classList.add('mt-4', 'px-2','w-3/4');
+
+    const fromDiv = document.createElement('div');
+    fromDiv.classList.add('text-black', 'font-semibold');
+    fromDiv.textContent = fromName;
+
+    const innerDiv = document.createElement('div');
+
+    const span = document.createElement('span');
+    span.classList.add('bg-white', 'p-2', 'rounded-md', 'text-xl');
+    span.textContent = spanText;
+
+    const h5 = document.createElement('h5');
+    h5.classList.add('mt-2', 'text-sm');
+    h5.textContent = h5Text;
+
+    innerDiv.appendChild(span);
+    innerDiv.appendChild(h5);
+    div.appendChild(innerDiv);
+    div.appendChild(fromDiv);
+    parent2Element.append(div);
+    return div;
+}
+
+function groupORchat(){
+    if (grpChats.classList.contains('hidden')) {
+
+        let Field = document.querySelector('#chatField span');
+
+        // Update the span text
+        let To = Field.textContent;
+        let data = {
+            dataType: 'Normal',
+            To: To,
+            idFieldTag: 'chatField',
+            parent: parent1Element
+        }
+        return data;
+        // return 'Bot';
+    } else if (botChats.classList.contains('hidden')) {
+
+        let Field = document.querySelector('#groupField span');
+
+        // Update the span text
+        let To = Field.textContent;
+        let data = {
+            dataType: 'Group',
+            To: To,
+            idFieldTag: 'groupField',
+            parent:  parent2Element
+        }
+        return data;
+        // return 'Group';
+    }
+}
+
+
+function emptyDivs(parent) {
+    // const parent = document.getElementById(parentId); // Get the parent element by ID
+    if (!parent) {
+        console.error('Parent element not found');
+        return;
+    }
+
+    // Loop through each child node of the parent
+    while (parent.firstChild) {
+        // Remove the first child node (div element) of the parent
+        parent.removeChild(parent.firstChild);
+    }
+}
+
+    // socket.on('receiveMessage', (message,fromId) => {
+
+    // })
+
+    //   Receiving a Message from
+
+    socket.on("loadChats", (chats)=>{
+        console.log(chats);
+        let focus = groupORchat();
+        if(focus.dataType === "Group"){
+            emptyDivs(parent2Element)
+            chats.forEach(data => {
+                if(data.FromUser === Name){
+                    sendingMessage(data.Message, data.Time, '#groupField' );
+                }
+                else{
+                    receiverGroupMessage(data.FromUser, data.Message, data.Time);
+                }
+            });
+        }
+        else{
+            emptyDivs(parent1Element);
+            chats.forEach(data => {
+                if(data.FromUser === Name){
+                    sendingMessage(data.Message, data.Time, '#chatField' );
+                }
+                else{
+                    receiverPersonalMessage(data.Message, data.Time);
+                }
+            });
+        }
+    });
 
 
 </script>

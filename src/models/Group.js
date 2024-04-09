@@ -1,15 +1,17 @@
 const mongoose = require('mongoose');
-const { chat } = require ('../config/mongoose.js')
+const { mainData } = require ('../config/mongoose.js')
 
 const groupSchema = new mongoose.Schema({
     GroupName: String,
     GroupID: String, 
     Domain: String, 
     Admin: String, 
-    Members: String
+    Members: [{ type: String }]
 });
 
-const groupData = chat.model('Group', groupSchema);
+// groupSchema.index({ GroupName: 1 }, { unique: true });
+
+const groupData = mainData.model('Group', groupSchema);
 
 module.exports = {
   groupData

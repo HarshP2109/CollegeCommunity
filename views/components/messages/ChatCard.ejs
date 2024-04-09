@@ -1,0 +1,16 @@
+    <!-- chat 4 -->
+
+    <% for( let j = 0; j < Friend.length; j++ ) { %>
+    
+        <div class="mt-1 p-1 actChat cursor-pointer human">
+            <div class="px-1 flex flex-row items-center">
+                <img src="img1/profle-picture.png" alt="" class="h-12 w-12 rounded-full">
+                <div class="px-2 flex items-start flex-col justify-center">
+                    <span class="text-xl"> <%=Friend[j].Name%> </span>
+                    <h3><%= Friend[j].ID %> - <%= Friend[j].Domain %></h3>
+                    <% console.log(Friend); %>
+                </div>
+            </div>
+        </div>
+
+    <% } %>

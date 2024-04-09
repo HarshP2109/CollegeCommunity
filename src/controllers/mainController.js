@@ -1,8 +1,9 @@
 // Import Functions
 const sendMail = require('../middleware/nodemailing');
 const { sendImage } = require('../middleware/uploadImage');
+const { AddActivityTable,updateActivityTable, TotalCount, countEvents } = require('../utils/dashboardFunctions');
 const { formatDateAndTime, generateUniqueId } = require ('../utils/basicFunctions')
-const { find_data, find_task, extract_EVE, find_Event, Event_Inserter, Participation_Inserter } = require ('../utils/databaseFunctions')
+const { find_data, find_task, extract_EVE, find_Event, Event_Inserter, Participation_Inserter, findConnection } = require ('../utils/databaseFunctions')
 
 
 const dashboardPage = async(req,res)=>{
@@ -13,15 +14,17 @@ const dashboardPage = async(req,res)=>{
       //   res.redirect('/login');
       // }
       // else
+      let Total = await TotalCount();
+      let Events = await countEvents();
       let ide = req.session.User;
       let data = await find_data(ide);
       let task = await find_task(ide);
+      let activity = await updateActivityTable(ide);
       req.session.MAIN_DATA = data;
       let name = data.Username;
       let role = data.Role;
-      console.log(task);
-  
-      res.render('pages2/dashboard', { "Name": name, "Role": role, "Tasks": task });
+      // console.log(activity);
+      res.render('pages2/dashboard', { "Name": name, "ID": ide, "Role": role, "Tasks": task, "Activity": activity, "Total":Total, "Events":Events.Data, "EventList":Events.EventName });
   }, 2000);
   }
   
@@ -30,47 +33,47 @@ const dashboardPage = async(req,res)=>{
     let data = req.session.MAIN_DATA;
     let name = data.Username;
     let role = data.Role;
-    // let name = "harsh";
+    let id = data.UniqueId;
     // let role = "Admin";
     let EventData = await extract_EVE();
-    console.log(EventData);
-    res.render('pages2/events',{"Name":name,"Role":role,"Events":EventData});
+    // console.log(EventData);
+    res.render('pages2/events',{"Name":name,"Role":role,"Events":EventData, "ID": id});
   }
   
   const communityPage = (req,res)=>{
     // res.sendFile(__dirname+'/html/communities.html');
     let data = req.session.MAIN_DATA;
     let name = data.Username;
+    let id = data.UniqueId;
     let role = data.Role;
-    res.render('pages2/communities',{"Name":name,"Role":role});
+    res.render('pages2/communities',{"Name":name,"Role":role, "ID":id});
   }
   
   const messagesPage = (req,res)=>{
     // res.sendFile(__dirname+'/html/messages.html');
     let data = req.session.MAIN_DATA;
+    let id = data.UniqueId;
+    let domain = data.Domain;
     let name = data.Username;
     let role = data.Role;
-    res.render('pages2/messages',{"Name":name,"Role":role});
+    findConnection(id,domain).then(data => {
+        // console.log(data.Connection);
+        res.render('pages2/messages',{"Name":name,"Role":role, "ID": id,"Friend":data.Connection,"Groups":data.Group});
+    })
+    
   }
-  
-//   app.get('/mycollege',requireAuth,(req,res)=>{
-//     // res.sendFile(__dirname+'/html/settings.html');
-//     let data = req.session.MAIN_DATA;
-//     let name = data.Username;
-//     let role = data.Role;
-//     res.render('pages2/mycollege',{"Name":name,"Role":role});
-//   })
-  
-  //sub 
   
   const profilePage = (req,res)=>{
     // res.sendFile(__dirname+'/html/settings.html');
     let data = req.session.MAIN_DATA;
-    let name = data.Firstname + " " + data.Lastname;
+    let name = data.Username;
     let firstname = data.Firstname;
-    let email = data.Email;
+
+    let email = data.SecondaryMail || data.Email;
+    // let num = data
+    let id = data.UniqueId;
     // let name = data.firstname + " " + data.lastname;
-    res.render('pages2/profile',{'Name':name,'Email':email, 'Firstname':firstname });
+    res.render('pages2/profile',{'Name':name,'Email':email, 'Firstname':firstname, "ID":id });
   }
   
   const createEvent = (req,res)=>{

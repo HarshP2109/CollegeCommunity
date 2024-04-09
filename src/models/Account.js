@@ -12,7 +12,11 @@ const accountSchema = new mongoose.Schema({
     Password: String,
     Gender: String,
     UniqueId: String,
-    Role: String
+    Role: String,
+    Number: String,
+    About: String,
+    SecondaryMail: String,
+    imgUrl : String
 });
 
 const userData = mainData.model('Account', accountSchema);

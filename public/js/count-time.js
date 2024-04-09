@@ -20,10 +20,12 @@ function updateTimeSpent() {
         min  = Math.floor(min);
         let sec = timeSpent % 60;
         // document.getElementById('timeSpent').innerText = timeSpent + 's';
+        if(document.getElementById('timeSpent')){
         if(min == 0)
         document.getElementById('timeSpent').innerText = sec + 's';
         else
         document.getElementById('timeSpent').innerText = min + 'm' + sec + 's';
+        }
     }, 1000);
 }
 

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { chat } = require ('../config/mongoose.js')
+const { mainData } = require ('../config/mongoose.js')
 
 const connectSchema = new mongoose.Schema({
     FromUser: String ,
@@ -9,7 +9,7 @@ const connectSchema = new mongoose.Schema({
     Connection: String 
 });
 
-const connection = chat.model('Connections', connectSchema);
+const connection = mainData.model('Connections', connectSchema);
 
 module.exports = {
   connection

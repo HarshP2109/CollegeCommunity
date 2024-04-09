@@ -18,7 +18,7 @@ app.use(session({
   }));
 
 
-// const registerEventFunctions = require('./controllers/websocket');
+const registerEventFunctions = require('./controllers/websocket');
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
@@ -31,9 +31,10 @@ const route = require("./routes/route");
 //route use
 app.use("/", route);
 
-// const io = new Server(server);
+const io = new Server(server);
+
 // // console.log(io);
-// registerEventFunctions(io);
+registerEventFunctions(io);
 
 
 // export default app;
