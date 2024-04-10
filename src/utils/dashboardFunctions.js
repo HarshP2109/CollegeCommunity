@@ -42,10 +42,11 @@ async function AddActivityTable(Id, Name) {
 
 
 
-async function updateActivityTable(Id) {
+async function updateActivityTable(email) {
     try {
         // Find the document with the given UniqueId
-        let date = await dailyData.findOne({ UniqueId: Id });
+        let user = await userData.findOne({ Email: email });
+        let date = await dailyData.findOne({ UniqueId: user.UniqueId });
 
         if (!date) {
             console.log(Id + " is not in database");
@@ -63,31 +64,42 @@ async function updateActivityTable(Id) {
 
         await data.save();
 
-        let sendingData = {
-            'date1': formatDate(data["Date1"]),
-            'Active1': data['DateActive1'],
-            'date2': formatDate(data["Date2"]),
-            'Active2': data['DateActive2'],
-            'date3': formatDate(data["Date3"]),
-            'Active3': data['DateActive3'],
-            'date4': formatDate(data["Date4"]),
-            'Active4': data['DateActive4'],
-            'date5': formatDate(data["Date5"]),
-            'Active5': data['DateActive5'],
-            'date6': formatDate(data["Date6"]),
-            'Active6': data['DateActive6'],
-            'date7': "Today",
-            'Active7': data['DateActive7'],
-        }
 
         // console.log(formatDate(data["Date7"]));
         // console.log(data);
         console.log('Data updated successfully');
-        return sendingData;
+        // return sendingData;
     } catch (error) {
         console.error('Error updating data:', error);
     }
 }
+
+
+async function extractActivityData(id){
+
+    let date = await dailyData.findOne({ UniqueId: Id });
+
+    let sendingData = {
+        'date1': formatDate(data["Date1"]),
+        'Active1': data['DateActive1'],
+        'date2': formatDate(data["Date2"]),
+        'Active2': data['DateActive2'],
+        'date3': formatDate(data["Date3"]),
+        'Active3': data['DateActive3'],
+        'date4': formatDate(data["Date4"]),
+        'Active4': data['DateActive4'],
+        'date5': formatDate(data["Date5"]),
+        'Active5': data['DateActive5'],
+        'date6': formatDate(data["Date6"]),
+        'Active6': data['DateActive6'],
+        'date7': "Today",
+        'Active7': data['DateActive7'],
+    }
+
+    return sendingData;
+
+}
+
 
 function createUpdatedData(previousData) {
     const Newdata = previousData;
@@ -188,5 +200,6 @@ module.exports  = {
     AddActivityTable,
     updateActivityTable,
     TotalCount,
-    countEvents
+    countEvents,
+    extractActivityData
 }

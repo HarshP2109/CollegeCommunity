@@ -1,7 +1,7 @@
 // Import Functions
 const sendMail = require('../middleware/nodemailing');
 const { sendImage } = require('../middleware/uploadImage');
-const { AddActivityTable,updateActivityTable, TotalCount, countEvents } = require('../utils/dashboardFunctions');
+const { TotalCount, countEvents, extractActivityData } = require('../utils/dashboardFunctions');
 const { formatDateAndTime, generateUniqueId } = require ('../utils/basicFunctions')
 const { find_data, find_task, extract_EVE, find_Event, Event_Inserter, Participation_Inserter, findConnection } = require ('../utils/databaseFunctions')
 
@@ -19,7 +19,7 @@ const dashboardPage = async(req,res)=>{
       let ide = req.session.User;
       let data = await find_data(ide);
       let task = await find_task(ide);
-      let activity = await updateActivityTable(ide);
+      let activity = await extractActivityData(ide);
       req.session.MAIN_DATA = data;
       let name = data.Username;
       let role = data.Role;

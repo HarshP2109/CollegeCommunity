@@ -3,7 +3,7 @@
 const sendMail = require ('../middleware/nodemailing');
 const { findacc , accInsert, updateDomain } = require ('../utils/databaseFunctions')
 const { generateUniqueId , generateOTP, extractDomain} = require ('../utils/basicFunctions');
-const { AddActivityTable } = require('../utils/dashboardFunctions');
+const { AddActivityTable, updateActivityTable } = require('../utils/dashboardFunctions');
 
 
 const landingPage = async(req,res) => {
@@ -44,6 +44,7 @@ const validateUser = async(req,res) => {
       else{
         console.log("User Logged in");
         req.session.User = valid;
+        await updateActivityTable(l_email);
         res.redirect('/dash');
       }
     }
@@ -89,7 +90,7 @@ else{
 }
 }
 
-const otpVerify = (req,res) => {
+const otpVerify = async(req,res) => {
   console.log(req.session.otp);
   let otp = req.session.otp;
   // let enteredotp = req.body.otp;
@@ -99,6 +100,7 @@ const otpVerify = (req,res) => {
   let d = req.body.char.trim();
   let e = req.body.paanch.trim();
   let email = req.session.Email;
+  let id = req.session
   let valid = Accounts.find((acc)=> acc.Email == email)  
   let enteredotp = a+b+c+d+e;
   console.log("Entered RandomOTP : "+randomOTP);
@@ -108,6 +110,7 @@ const otpVerify = (req,res) => {
     res.redirect('/otp');
   }
   else if(valid){
+    await updateActivityTable(email);
     res.redirect('/dash');
   }
   else{
