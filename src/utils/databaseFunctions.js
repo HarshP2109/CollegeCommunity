@@ -306,8 +306,14 @@ async function checkGroup(domain, id){
 
 //Send Message 
 
-function sendMessage(fromId,toId,fromName,toName,message,time){
-  let tmp = sorter(fromId,toId);
+function sendMessage(dataType,fromId,toId,fromName,toName,message,time){
+  let tmp = ''
+  if(dataType === "Group"){
+    tmp = sorter(toId,toName);
+  }else{
+    tmp = sorter(fromId,toId);
+  }
+  console.log(tmp);
   let ChatModel = chat.model(tmp, messageSchema);
   let NewChat = new ChatModel({ FromUser:fromName, FromID:fromId, ToUser:toName, ToID:toId, Connection:tmp, Message: message, Time:time });
   NewChat.save().then(() => console.log(' Messageee Sentt!!!'));
@@ -315,6 +321,7 @@ function sendMessage(fromId,toId,fromName,toName,message,time){
 
 async function getAllChatData(one,two) {
   let tmp = sorter(one, two);
+  console.log(tmp);
   let ChatModel = chat.model(tmp, messageSchema);
   let data = await ChatModel.find({});
   console.log("We are at getAllCHatData");

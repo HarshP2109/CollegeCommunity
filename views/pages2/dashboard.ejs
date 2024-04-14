@@ -266,9 +266,10 @@
                         <!-- Area below graph -->
                         <div class="grid grid-cols-2 mt-4 gap-8 h-[245px]">
                             <div
-                                class=" cursor-pointer p-2  rounded-xl text-xltracking-wide bg-blue text-white justify-center items-center flex overflow-y-scroll">
+                                class=" cursor-pointer p-2 shadow-[0_8px_14px_rgb(0,0,0,0.4)] rounded-xl text-xltracking-wide bg-blue text-white justify-center items-center flex overflow-y-scroll">
                                 <div>
-                                    Random Quotes
+                                    There is Currently <span class="bg-purple rounded-full p-1">1</span> Event Occuring in
+                                    <span class="bg-purple  rounded-full p-1 ">Sjcem</span> College
                                 </div>
 
                             </div>
@@ -306,121 +307,7 @@
                         <section class="flex flex-col gap-8 px-4  h-[350px] overflow-y-scroll font-thin">
 
                             <!-- card-1 -->
-                            <section class="flex flex-col gap-2 bg-stone px-2 py-3 rounded-md cursor-pointer">
-
-                                <div class="flex justify-between items-center">
-                                    <div class="bg-neutral p-1 text-xs text-white rounded-full">
-                                        Research
-                                    </div>
-                                    <div
-                                        class=" py-1 px-2 text-xs rounded-full font-semibold dptoggle text-green bg-l-green cursor-pointer">
-                                        Done
-                                    </div>
-
-                                </div>
-
-                                <div>
-                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium consequatur
-                                        cum et quam architecto id tempora expedita quidem, perspiciatis facere?</p>
-                                </div>
-
-                                <div class="flex flex-row justify-between">
-                                    <div class="flex flex-row gap-4">
-                                        <div>
-                                            <i class="fa-regular fa-calendar" style="color: #c1c1c1"></i>
-                                            <span class="opacity-80">March</span>
-                                        </div>
-                                        <div>
-                                            <i class="fa-solid fa-paperclip" style="color: #c1c1c1;"></i>
-                                            <span class="opacity-80">4</span>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <img src="img1/bot.jpg" alt="" class="h-8 w-8 rounded-full">
-                                    </div>
-
-
-                                </div>
-
-                            </section>
-
-
-                            <!-- card-2 -->
-                            <section class="flex flex-col gap-2  bg-stone px-2 py-3 rounded-md cursor-pointer">
-                                <div class="flex justify-between items-center">
-                                    <div class="bg-neutral p-1 text-xs text-white rounded-full">
-                                        Research
-                                    </div>
-                                    <div
-                                        class=" py-1 px-2 text-xs rounded-full font-semibold dptoggle text-green bg-l-green cursor-pointer">
-                                        Done
-                                    </div>
-
-                                </div>
-
-                                <div>
-                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium consequatur
-                                        cum et quam architecto id tempora expedita quidem, perspiciatis facere?</p>
-                                </div>
-
-                                <div class="flex flex-row justify-between">
-                                    <div class="flex flex-row gap-4">
-                                        <div>
-                                            <i class="fa-regular fa-calendar" style="color: #c1c1c1"></i>
-                                            <span class="opacity-80">March</span>
-                                        </div>
-                                        <div>
-                                            <i class="fa-solid fa-paperclip" style="color: #c1c1c1;"></i>
-                                            <span class="opacity-80">4</span>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <img src="img1/bot.jpg" alt="" class="h-8 w-8 rounded-full">
-                                    </div>
-                                </div>
-
-                            </section>
-
-                            <!-- card-3 -->
-                            <section class="flex flex-col gap-2  bg-stone px-2 py-3 rounded-md cursor-pointer">
-                                <div class="flex justify-between items-center">
-                                    <div class="bg-neutral p-1 text-xs text-white rounded-full">
-                                        Research
-                                    </div>
-                                    <div
-                                        class=" py-1 px-2 text-xs rounded-full font-semibold dptoggle text-green bg-l-green cursor-pointer">
-                                        Done
-                                    </div>
-
-                                </div>
-
-                                <div>
-                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium consequatur
-                                        cum et quam architecto id tempora expedita quidem, perspiciatis facere?</p>
-                                </div>
-
-                                <div class="flex flex-row justify-between">
-                                    <div class="flex flex-row gap-4">
-                                        <div>
-                                            <i class="fa-regular fa-calendar" style="color: #c1c1c1"></i>
-                                            <span class="opacity-80">March</span>
-                                        </div>
-                                        <div>
-                                            <i class="fa-solid fa-paperclip" style="color: #c1c1c1;"></i>
-                                            <span class="opacity-80">4</span>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <img src="img1/bot.jpg" alt="" class="h-8 w-8 rounded-full">
-                                    </div>
-
-
-                                </div>
-
-                            </section>
+                            <%- include('../components/task_card') %>
 
                         </section>
 
@@ -437,12 +324,6 @@
         let iD = `<%- ID %>`
         const socket = io();
         socket.emit("loggedIn", iD);
-
-        function decodeHTMLEntities(str) {
-        return str.replace(/&#(\d+);/g, function(match, dec) {
-            return String.fromCharCode(dec);
-        });
-        }
 
 
         let labelArray = [`<%= Activity.date1 %>`, `<%= Activity.date2 %>`, `<%= Activity.date3 %>`,  `<%= Activity.date4 %>`,  `<%= Activity.date5 %>`,  `<%= Activity.date6 %>` ,  `<%= Activity.date7 %>`];
@@ -521,6 +402,7 @@
                     return;
                 }
                 
+                const taskDescription = document.querySelector('.descript').innerText;
 
                 if (ele.classList.contains('bg-l-green')) {
                     ele.classList.remove('bg-l-green');
@@ -532,11 +414,12 @@
                     ele.innerText = 'Done';
                 }
                 console.log('Function is executed');
+                socket.emit("TaskComplete", {myId: iD, taskDescription: taskDescription})
 
                 clickable = false;
                 setTimeout(() => {
                     clickable = true;
-                }, 2000);
+                }, 5000);
             });
         });
 

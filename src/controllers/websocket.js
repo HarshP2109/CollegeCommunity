@@ -2,7 +2,9 @@
 
 const { userData } = require("../models/Account");
 const { groupData } = require("../models/Group");
+const { task } = require("../models/Task");
 const { generateUniqueId } = require("../utils/basicFunctions");
+const { chatwithbot, getResponse } = require("../utils/botChatbot");
 const { checkGroup, getAllChatData, sendMessage } = require("../utils/databaseFunctions");
 const { changeNameMailNum } = require("../utils/profileFunctions");
 
@@ -115,25 +117,22 @@ function registerEvents(io){
         socket.on('joinChat', async (data) => {
             try {
                 console.log('Data received for joining chat:', data);
-        
-                // Check if data object contains required fields
-                if (!data || !data.chatName || !data.MyId) {
-                    throw new Error('Invalid data received for joining chat');
+
+                if(data === "BotGang"){
+                    io.to(socket.id).emit("loadChats", data)
                 }
+                else{
         
-                // Query the database to find the user based on the provided chatName
-                const user = await userData.findOne({ Username: data.chatName });
-                // console.log('User found:', user);
-        
-                // Check if user exists
-                if (!user) {
-                    throw new Error('User not found');
+                    // Check if data object contains required fields
+                    if (!data || !data.toId || !data.myId) {
+                        throw new Error('Invalid data received for joining chat');
+                    }
+                    // Send chat data to the client
+                    let chats = await getAllChatData(data.myId, data.toId);
+                    console.log('Chat data:', chats);
+                    io.to(socket.id).emit("loadChats", chats);
+
                 }
-        
-                // Send chat data to the client
-                let chats = await getAllChatData(data.MyId, user.UniqueId);
-                console.log('Chat data:', chats);
-                io.to(socket.id).emit("loadChats", chats);
             } catch (error) {
                 // Handle errors gracefully
                 console.error('Error joining chat:', error.message);
@@ -144,9 +143,9 @@ function registerEvents(io){
         
 
         socket.on("personalMessage", async(data) => {
-            console.log(data);
+            // console.log(data);
             let friend = await userData.findOne( {Username : data.ToUser} ); 
-            console.log(friend);
+            // console.log(friend);
             let toId = friend.UniqueId;
 
             sendMessage(data.FromId, toId, data.FromUser, data.ToUser, data.Message, data.Time);
@@ -156,20 +155,73 @@ function registerEvents(io){
 
 
         socket.on("SendMessage", async(newChat) => {
-            let To = newChat.To;
-            let Toid =''
+            let To = newChat.ToUser;
+            let Toid ='';
             if(newChat.dataType === 'Group'){
-                Toid = await groupData.findOne({GroupName: To},'GroupID');
+                let group = await groupData.findOne({GroupID: newChat.ToId});
+                // console.log(group,newChat);
+                let users = group.Members;
+                users.forEach(user => {
+                    // Check if the user ID exists in any of the Active user objects
+                    Active.forEach(activeUser => {
+                        if (activeUser.ID === user && newChat.FromId !== activeUser.ID) {
+                            // Log the socket of the active user
+                            io.to(activeUser.Socket).emit("OnlineMessage",newChat);
+                        }
+                    });
+                });
+
             }
             else{
-                Toid = await userData.findOne({Username: To},'UniqueId');
+                // friend = await userData.findOne({Username: To},'UniqueId');
+                // console.log(To, friend);
+                Toid = newChat.ToId;
                 if (Active.some(user => user.ID === Toid)) {
                     const userSocket = Active.find(user => user.ID === Toid).Socket;
                     io.to(userSocket).emit("OnlineMessage", newChat);
                 }
             }
-            sendMessage(newChat.fromId, Toid, newChat.fromName, To, newChat.Message, newChat.Time );
+
+            console.log(Toid);
+            sendMessage(newChat.dataType,newChat.FromId, newChat.ToId, newChat.FromUser, To, newChat.Message, newChat.Time);
+
         });
+
+
+        socket.on("BotMessage", async(data) => {
+            console.log("sockett");
+            if(data.Task === 'Chat'){
+                let reply = await chatwithbot(data.Message);
+                console.log(reply);
+                io.to(socket.id).emit("OnlineMessage",{dataType:"BotGang", Message:reply});
+            }
+            else {
+                let AdminPower = await groupData.find({Admin: data.myId});
+                // console.log("Admin");
+                let reply = await getResponse(data.Message, AdminPower, data.myId)
+                io.to(socket.id).emit("OnlineMessage",{dataType:"BotGang", Message:reply});             
+            }
+        })
+
+        socket.on("TaskComplete", async(data) => {
+
+            // console.log(data);
+            let Task = await task.findOne({ToID: data.myId, TaskDescript: data.taskDescription});
+            if(Task.Status === "Pending"){
+                Task.Status = "Done";
+            }
+            else{
+                Task.Status = "Pending";
+            }
+
+            await Task.save();
+        })
+
+
+
+
+
+
 
 
         socket.on('disconnect', () => {

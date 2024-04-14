@@ -3,7 +3,8 @@ const sendMail = require('../middleware/nodemailing');
 const { sendImage } = require('../middleware/uploadImage');
 const { TotalCount, countEvents, extractActivityData } = require('../utils/dashboardFunctions');
 const { formatDateAndTime, generateUniqueId } = require ('../utils/basicFunctions')
-const { find_data, find_task, extract_EVE, find_Event, Event_Inserter, Participation_Inserter, findConnection } = require ('../utils/databaseFunctions')
+const { find_data, find_task, extract_EVE, find_Event, Event_Inserter, Participation_Inserter, findConnection } = require ('../utils/databaseFunctions');
+const { getNews } = require('../middleware/technewsapi');
 
 
 const dashboardPage = async(req,res)=>{
@@ -23,6 +24,8 @@ const dashboardPage = async(req,res)=>{
       req.session.MAIN_DATA = data;
       let name = data.Username;
       let role = data.Role;
+      // let News = await getNews();
+      // console.log(News);
       // console.log(activity);
       res.render('pages2/dashboard', { "Name": name, "ID": ide, "Role": role, "Tasks": task, "Activity": activity, "Total":Total, "Events":Events.Data, "EventList":Events.EventName });
   }, 2000);

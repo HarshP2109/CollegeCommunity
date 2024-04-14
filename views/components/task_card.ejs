@@ -1,4 +1,4 @@
-<div class="px-4 ">
+<!-- <div class="px-4 "> -->
     <!-- Card-1 -->
     <!-- <div
         class="p-2  bg-stone rounded-md hover:scale-[1.02] cursor-pointer transition transform duration-100">
@@ -44,53 +44,93 @@
 
     </div> -->
 
+
+
+<section class="flex flex-col gap-8 px-4  h-[350px] overflow-y-scroll font-thin">
+
     <% let n = Tasks.length; %>
     <% for(let i=0;i<n;i++){ %>
-            <div
-            class="p-2  bg-stone rounded-md hover:scale-[1.02] cursor-pointer transition transform duration-100">
-            <!-- Title -->
-            <div class="grid grid-cols-2">
 
-                <!-- Research -->
-                <div class="opacity-45">
-                    <span
-                        class="text-white bg-l-grey text-[15px] rounded-full p-2  font-thin"><%= Tasks[i].FromName %></span>
+        <section class="flex flex-col gap-2 bg-stone px-2 py-3 rounded-md cursor-pointer">
+
+            <div class="flex justify-between items-center">
+                <div class="bg-neutral p-1 text-xs text-white rounded-full">
+                    <%= Tasks[i].Committee %>
                 </div>
-
-                <!-- Done -->
-                <div class="justify-end flex">
-                    <span
-                        class="text-green bg-l-green p-1 text-[10px] font-semibold rounded-full"><%= Tasks[i].Status %></span>
+                <div class=" py-1 px-2 text-xs rounded-full font-semibold dptoggle cursor-pointer <%= Tasks[i].Status === "Pending" ? "bg-1-red text-red " : "bg-l-green text-green" %> cursor-pointer">
+                    <%= Tasks[i].Status %>
                 </div>
 
             </div>
-            <!-- Discription -->
-            <div class="mt-2">
-                <span class="font-thin text[12px]  text-neutral"><%= Tasks[i].Message %></span>
+
+            <div>
+                <p class="descript"><%= Tasks[i].TaskDescript %></p>
             </div>
 
-            <!-- Bottom Task Div -->
-            <div class="grid grid-cols-2 mt-2">
+            <div class="flex flex-row justify-between">
                 <div class="flex flex-row gap-4">
                     <div>
-                        <i class="fa-regular fa-calendar fa-sm" style="color: #828282;"></i>
-                        <span class="text-sm font-thin text-grey"><%= Tasks[i].Deadline %></span>
+                        <i class="fa-regular fa-calendar" style="color: #c1c1c1"></i>
+                        <% let month = Tasks[i].Deadline %>
+                        <% let value = month.split(" ") %>
+                        <span class="opacity-80"><%= value[0] %></span>
                     </div>
-                    <!-- <div>
-                        <i class="fa-solid fa-sm fa-paperclip" style="color: #828282;"></i>
-                        <span class="text-sm  font-thin text-grey">4</span>
-
-                    </div> -->
-
-
+                    <div>
+                        <i class="fa-solid fa-paperclip" style="color: #c1c1c1;"></i>
+                        <span class="opacity-80"><%- value[1] %></span>
+                    </div>
                 </div>
 
-                <div class="flex justify-end">
-                    <img src="img1/profle-picture.png" alt="" class="h-8 w-8 rounded-full">
+                <div>
+                    <img src="img1/bot.jpg" alt="" class="h-8 w-8 rounded-full">
                 </div>
+
+
+            </div>
+
+        </section>
+
+    <% } %>
+
+
+
+    <!-- <section class="flex flex-col gap-2 bg-stone px-2 py-3 rounded-md cursor-pointer">
+
+        <div class="flex justify-between items-center">
+            <div class="bg-neutral p-1 text-xs text-white rounded-full">
+                Research
+            </div>
+            <div
+                class=" py-1 px-2 text-xs rounded-full font-semibold dptoggle text-green bg-l-green cursor-pointer">
+                Done
             </div>
 
         </div>
-    <% } %>
 
-</div>
+        <div>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium consequatur
+                cum et quam architecto id tempora expedita quidem, perspiciatis facere?</p>
+        </div>
+
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-4">
+                <div>
+                    <i class="fa-regular fa-calendar" style="color: #c1c1c1"></i>
+                    <span class="opacity-80">March</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-paperclip" style="color: #c1c1c1;"></i>
+                    <span class="opacity-80">4</span>
+                </div>
+            </div>
+
+            <div>
+                <img src="img1/bot.jpg" alt="" class="h-8 w-8 rounded-full">
+            </div>
+
+
+        </div>
+
+    </section> -->
+
+</section>

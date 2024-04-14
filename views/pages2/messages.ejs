@@ -220,10 +220,10 @@
                             </div>
                         </div>
                         <!-- chats toggle to normal and assign tasks -->
-                        <div class="flex justify-center items-center" id="botToggle">
+                        <div class="flex justify-center items-center <%= Role === "Admin" ? "" : "hidden" %>" id="botToggle">
                             <label class="inline-flex items-center cursor-pointer">
 
-                                <input type="checkbox" value="" class="sr-only peer">
+                                <input type="checkbox" value="10" id="TaskChecker" class="sr-only peer">
                                 <span class="ms-3 text-md font-normal text-white dark:text-gray-300 mr-2">Chat</span>
                                 <div
                                     class="relative w-11 h-6 bg-violet rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
@@ -317,6 +317,51 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
+    const Name = `<%= Name %>`;
+    const ID = `<%= ID %>`;
+    const Role = `<%= Role %>`;
+    const FriendData = [];
+   ` <% Friend.forEach(element => { %>`
+        FriendData.push({ Name: '<%= element.Name %>', ID: '<%= element.ID %>', Domain: '<%= element.Domain %>' });
+       ` <% }); %>`
+
+
+    const GroupData = [];
+   ` <% Groups.forEach(element => { %>`
+        let capitalizedStr = `<%= element.GroupName.charAt(0).toUpperCase() + element.GroupName.slice(1); %>`
+            GroupData.push({ Name: capitalizedStr, ID: '<%= element.GroupID %>', Admin: '<%= element.Admin %>' });
+       ` <% }); %>`
+
+    console.log(FriendData);
+    console.log(GroupData);
+
+    // Function to log GroupData when it's ready
+    function getFriendId(name){
+        let toFind = ''
+        FriendData.forEach(element => {
+            if(element.Name === name){
+                toFind = element.ID;
+            }
+        });
+        console.log(FriendData);
+        console.log(name,toFind);
+        return toFind;
+    }
+
+    function getGroupId(name){
+        let toFind = ''
+        GroupData.forEach(element => {
+            if(element.Name === name){
+                toFind = element.ID
+            }
+        });
+
+        return toFind;
+    }
+
+</script>
+<script src="js/messages.js" ></script>
+<!-- <script>
     const socket = io();
 
     const Name = `<%= Name %>`;
@@ -770,6 +815,6 @@ function emptyDivs(parent) {
     });
 
 
-</script>
+</script> -->
 
 </html>
