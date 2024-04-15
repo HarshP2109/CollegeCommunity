@@ -18,26 +18,26 @@
             <form action="/eventcreate" method="post" enctype="multipart/form-data">
                 <div class="flex flex-col justify-start items-start mt-10">
                     <label for="title" class="text-md ml-2">Event Title</label >
-                    <input type="text" name="title" id="title" placeholder="Enter Event Title" class="w-full h-12 text-md bg-white focus:outline-none p-2 mt-2 rounded-md" >
+                    <input type="text" name="title" id="title" placeholder="Enter Event Title" class="w-full h-12 text-md bg-white focus:outline-none p-2 mt-2 rounded-md" required>
                 </div>
     
                 <div class="flex flex-col justify-start items-start mt-6">
                     <label for="Venue" class="text-md ml-2">Event Venue</label >
-                    <input type="text" name="Venue" id="title" placeholder="Enter Event Venue" class="w-full h-12 text-md bg-white focus:outline-none p-2 mt-2 rounded-md">
+                    <input type="text" name="Venue" id="title" placeholder="Enter Event Venue" class="w-full h-12 text-md bg-white focus:outline-none p-2 mt-2 rounded-md" required>
                 </div>
     
                 <div class=" grid md:gap-4   grid-cols-1 md:grid-cols-2">
                     <div>
                         <div class="flex flex-col justify-start items-start mt-6">
                             <label for="Start_d" class="text-md ml-2">Start Date</label >
-                            <input type="date" name="Start_d" id="title" placeholder="Enter Start Time" class="w-full h-12 text-md bg-white focus:outline-none p-2 mt-2 rounded-md">
+                            <input type="date" name="Start_d" id="title" placeholder="Enter Start Time" class="w-full h-12 text-md bg-white focus:outline-none p-2 mt-2 rounded-md" required>
                         </div>
     
                     </div>
                     <div>
                         <div class="flex flex-col justify-start items-start mt-6">
                             <label for="End_d" class="text-md ml-2"> End Date</label >
-                            <input type="date" name="End_d" id="title" placeholder="Enter End Time" class="w-full h-12 text-md bg-white focus:outline-none p-2 mt-2 rounded-md">
+                            <input type="date" name="End_d" id="title" placeholder="Enter End Time" class="w-full h-12 text-md bg-white focus:outline-none p-2 mt-2 rounded-md" required>
                         </div>
                     </div>
     
@@ -48,14 +48,14 @@
                     <div>
                         <div class="flex flex-col justify-start items-start mt-6">
                             <label for="Start_t" class="text-md ml-2">Start Time</label >
-                            <input type="text" name="Start_t" id="title" placeholder="XX:XX" class="w-full h-12 text-md bg-white focus:outline-none p-2 mt-2 rounded-md">
+                            <input type="text" name="Start_t" id="title" placeholder="XX:XX" class="w-full h-12 text-md bg-white focus:outline-none p-2 mt-2 rounded-md" required>
                         </div>
     
                     </div>
                     <div>
                         <div class="flex flex-col justify-start items-start mt-6">
                             <label for="End_t" class="text-md ml-2"> End Time</label >
-                            <input type="text" name="End_t" id="title" placeholder="XX:XX" class="w-full h-12 text-md bg-white focus:outline-none p-2 mt-2 rounded-md">
+                            <input type="text" name="End_t" id="title" placeholder="XX:XX" class="w-full h-12 text-md bg-white focus:outline-none p-2 mt-2 rounded-md" required>
                         </div>
                     </div>
     
@@ -106,6 +106,7 @@
                           id="file-input" 
                           accept="image/*" 
                           class="hidden" 
+                          required
                       />
                       <!-- Image upload input -->
                       <div class="preview-container hidden items-center justify-center flex-col">
@@ -119,7 +120,7 @@
                 <div class="flex flex-col  mt-8 justify-start items-start">
                     
                     <label for="message" class="text-md ml-2">Event Description</label>
-                    <textarea id="message" rows="4" name="descrip" class="block p-2.5 w-full text-sm   rounded-lg  focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  mt-2 focus:outline-none" placeholder="Event discription goes here..."></textarea>
+                    <textarea id="message" rows="4" name="descrip" class="block p-2.5 w-full text-sm   rounded-lg  focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  mt-2 focus:outline-none" placeholder="Event discription goes here..." required></textarea>
 
                 </div>
                 <div class="flex flex-col justify-start items-start mt-10">
@@ -128,7 +129,7 @@
                 </div>
                 <div class="flex flex-col justify-start items-start mt-10">
                     <label for="Organiz" class="text-md ml-2">Organizers</label >
-                    <input type="text" name="Organiz" id="title" placeholder="Organizer's Details" class="w-full h-12 text-md bg-white focus:outline-none p-2 mt-2 rounded-md">
+                    <input type="text" name="Organiz" id="title" placeholder="Organizer's Details" class="w-full h-12 text-md bg-white focus:outline-none p-2 mt-2 rounded-md" required>
                 </div>
                 
 

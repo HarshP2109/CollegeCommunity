@@ -10,16 +10,18 @@ cloudinary.config({
 const storage = multer.memoryStorage(); // Store file data in memory
 const upload = multer({ storage: storage });
 
-async function sendImage(){
-    let data = '';
-    cloudinary.uploader.upload_stream({ resource_type: 'auto' }, async(error, result) => {
-        if (error) {
-          console.error('Error uploading image:', error);
-          return res.status(500).json({ error: 'Error uploading image' });
-        }
-        data = result.url;
-        return data;
-    }).end(req.file.buffer);
+async function sendImage(buffer) {
+    return new Promise((resolve, reject) => {
+        cloudinary.uploader.upload_stream({ resource_type: 'auto' }, (error, result) => {
+            if (error) {
+                console.error('Error uploading image:', error);
+                reject(error);
+            } else {
+                // Image uploaded successfully, resolve with Cloudinary URL
+                resolve(result.url);
+            }
+        }).end(buffer);
+    });
 }
 
 module.exports = {

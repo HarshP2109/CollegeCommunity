@@ -151,10 +151,14 @@ const dashboardPage = async(req,res)=>{
     //   res.redirect('/events');
     // }).end(req.file.buffer);
 
-    sendImage().then((imageUrl)=>{
-        Event_Inserter(title,venue,st_d,en_d,st_t,en_t,partic,link,imageUrl,descip,tag,organz,UniqueEV_Id,comp);
-        res.redirect('/events');
-    });
+    try {
+      let imageUrl = await sendImage(req.file.buffer);
+      Event_Inserter(title, venue, st_d, en_d, st_t, en_t, partic, link, imageUrl, descip, tag, organz, UniqueEV_Id, comp);
+      res.redirect('/events');
+    } catch (error) {
+        console.error('Error creating event:', error);
+        res.status(500).json({ error: 'Error creating event' });
+    }
   
   
   }
