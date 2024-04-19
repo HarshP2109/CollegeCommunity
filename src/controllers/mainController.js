@@ -110,7 +110,7 @@ const dashboardPage = async(req,res)=>{
     Participation_Inserter(EventData.title, EventData.Venue, new Date(), EventData.descp, EventData.tag, EventData.Organsiation, ID, me.UniqueId, me.Username, EventData.By )
 
     let subject = 'Congratulations on Applying!';
-    let text = 'Hi '+me.Username+',\n Congratulations on applying for our events! - '+ EventData.title +'🎉 \n We appreciate your interest and can`t wait to review your application. Stay tuned for updates! \n\n Best, \nCCH'
+    let text = 'Hi '+me.Username+',\n Congratulations on applying for our events! - '+ EventData.Title +'🎉 \n We appreciate your interest and can`t wait to review your application. Stay tuned for updates! \n\n Best, \nCCH'
     sendMail(me.Email, subject, text);
   
     res.redirect('/events');

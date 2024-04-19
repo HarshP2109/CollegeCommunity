@@ -4,6 +4,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm i body-parser cloudinary @google/generative-ai dotenv ejs express express-session mongoose multer nodemailer socket.io",
     "start": "node src/app.js",
     "dev": "nodemon src/app.js"
   },

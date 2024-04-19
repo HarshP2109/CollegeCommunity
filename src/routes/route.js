@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const authentication = require('../controllers/authentication');
 const mainControl = require('../controllers/mainController');
-const { requireAuth, goo } = require('../middleware/Authenticator');
+const { requireAuth, goo, requireEmail } = require('../middleware/Authenticator');
 
 const multer = require('multer');
 const storage = multer.memoryStorage(); // Store file data in memory
@@ -18,11 +18,11 @@ router.get('/',goo,authentication.landingPage)
 router.get('/login',goo,authentication.loginPage)
 router.post('/validate',authentication.validateUser)
 
-router.get('/otp',requireAuth,authentication.sendOtp)
+router.get('/otp',requireEmail,authentication.sendOtp)
 router.post('/otpverify',authentication.otpVerify)
 
-router.get('/register',requireAuth,authentication.accountCreationForm)
-router.post('/otpverify',authentication.accountCreationPost)
+router.get('/register',requireEmail,authentication.accountCreationForm)
+router.post('/getdata',authentication.accountCreationPost)
 
 //After Login
 //Main Pages
@@ -40,7 +40,7 @@ router.post('/eventcreate',upload.single('eventpic'),mainControl.eventCreatePost
 router.get('/postcreate',requireAuth,mainControl.createPost)
 
 router.get('/eventhomie/:EveID',requireAuth,mainControl.particularEvent)
-router.get('/eventhomie/:EveID/DONE',requireAuth,mainControl.eventParticipatedDone)
+router.get('/events/:EveID/DONE',requireAuth,mainControl.eventParticipatedDone)
 
 
 // Define other chat routes...

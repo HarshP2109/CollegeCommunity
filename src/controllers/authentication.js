@@ -1,9 +1,10 @@
 
 //Import Functions
 const sendMail = require ('../middleware/nodemailing');
-const { findacc , accInsert, updateDomain } = require ('../utils/databaseFunctions')
+const { findacc , accInsert, updateDomain, updateGroup } = require ('../utils/databaseFunctions')
 const { generateUniqueId , generateOTP, extractDomain} = require ('../utils/basicFunctions');
 const { AddActivityTable, updateActivityTable } = require('../utils/dashboardFunctions');
+const { userData } = require('../models/Account');
 
 
 const landingPage = async(req,res) => {
@@ -62,7 +63,7 @@ const validateUser = async(req,res) => {
     // email = r_email;
     req.session.Email = r_email;
     req.session.Password = r_pass;
-    // console.log(RegisterUser);
+    console.log(RegisterUser);
 
     res.redirect('/otp');
   }
@@ -100,17 +101,18 @@ const otpVerify = async(req,res) => {
   let d = req.body.char.trim();
   let e = req.body.paanch.trim();
   let email = req.session.Email;
-  let id = req.session
-  let valid = Accounts.find((acc)=> acc.Email == email)  
+  // let id = req.session
+  let valid = await userData.findOne({Email: email});
   let enteredotp = a+b+c+d+e;
-  console.log("Entered RandomOTP : "+randomOTP);
-  console.log("Entered OTP : "+otp);
+  console.log("Entered RandomOTP : "+ otp);
+  console.log("Entered OTP : "+enteredotp);
   console.log(enteredotp+"      "+otp);
   if (enteredotp!=otp) {
     res.redirect('/otp');
   }
   else if(valid){
     await updateActivityTable(email);
+    req.session.User = valid.UniqueId;
     res.redirect('/dash');
   }
   else{
