@@ -57,8 +57,9 @@
                                 <% }else { %>
                                 <% link = EventData.Devfolio || '#' %>
                                 <% } %>
-                                <a href="<%- link %>"><button class="text-white buttonHover bg-violet py-3 w-full rounded-md ">
-                                        Book Now
+                                <% Status == "Owner" ? link = "/events/"+EventData.EventID+"/exportData" : null %>
+                                <a href="<%- Status !== 'Registered' ? link : '#' %>"><button class="text-white buttonHover bg-violet py-3 w-full rounded-md ">
+                                        <%- Status == "New" ? "Book Now" : Status == "Owner" ? "Download" : "Already Registered" %>
                                 </button></a>
                                 <!-- <a href="#"><button
                                         class="text-white buttonHover bg-neutral py-3 w-full rounded-md mt-4 ">
@@ -85,7 +86,7 @@
                     </span>
                     <div class="mt-2">
                         <p>
-                            <%=  EventData.Description %>
+                            <%=  EventData.descp %>
                         </p>
                     </div>
                 </div>

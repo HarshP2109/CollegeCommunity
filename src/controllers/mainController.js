@@ -3,7 +3,7 @@ const sendMail = require('../middleware/nodemailing');
 const { sendImage } = require('../middleware/uploadImage');
 const { TotalCount, countEvents, extractActivityData } = require('../utils/dashboardFunctions');
 const { formatDateAndTime, generateUniqueId } = require ('../utils/basicFunctions')
-const { find_data, find_task, extract_EVE, find_Event, Event_Inserter, Participation_Inserter, findConnection } = require ('../utils/databaseFunctions');
+const { find_data, find_task, extract_EVE, find_Event, Event_Inserter, Participation_Inserter, findConnection, getParticipantList, findEventUser } = require ('../utils/databaseFunctions');
 const { getNews } = require('../middleware/technewsapi');
 
 
@@ -95,19 +95,50 @@ const dashboardPage = async(req,res)=>{
     // res.sendFile(__dirname+'/html/settings.html');
     let ID = req.params.EveID;
     let EventData = await find_Event(ID);
+    // getParticipantList(ID);
     EventData.St_d = formatDateAndTime(EventData.St_d,EventData.St_t);
     let Tag = EventData.tag.split(',');
+    let me = req.session.MAIN_DATA;
+    let status;
+    if(me.UniqueId == EventData.By){
+      status = "Owner";
+    }
+    else{
+      let isRegistered = await findEventUser(me.UniqueId);
+      console.log(isRegistered);
+      if(isRegistered == null){
+        status = "New";
+      }
+      else{
+        status = "Registered"
+      }
+    }
     // console.log("Event Data: ",EventData)
     // let name = data.firstname + " " + data.lastname;
-    res.render('pages2/eventHome',{EventData:EventData,Tag:Tag});
+    res.render('pages2/eventHome',{EventData:EventData,Tag:Tag, Status:status});
+  }
+
+
+  const exportParticipantData = async(req,res) => {
+    let ID = req.params.EveID;
+    let excel = await getParticipantList(ID);
+
+  //   res.status(200).json({
+  //     message: 'Data received successfully',
+  //     receivedData: ID
+  // });
+    res.setHeader('Content-Disposition', 'attachment; filename="data.xlsx"');
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+
+    res.send(excel);
   }
   
   const eventParticipatedDone = async(req,res)=>{
     // res.sendFile(__dirname+'/html/settings.html');
     let ID = req.params.EveID;
     let EventData = await find_Event(ID);
-    let me = req.session.MAIN_DATA
-    Participation_Inserter(EventData.title, EventData.Venue, new Date(), EventData.descp, EventData.tag, EventData.Organsiation, ID, me.UniqueId, me.Username, EventData.By )
+    let me = req.session.MAIN_DATA;
+    Participation_Inserter(EventData.Title, EventData.Venue, new Date(), EventData.Organsiation, ID, me.UniqueId, me.Username, me.Email, me.Number, EventData.By )
 
     let subject = 'Congratulations on Applying!';
     let text = 'Hi '+me.Username+',\n Congratulations on applying for our events! - '+ EventData.Title +'🎉 \n We appreciate your interest and can`t wait to review your application. Stay tuned for updates! \n\n Best, \nCCH'
@@ -185,6 +216,7 @@ const dashboardPage = async(req,res)=>{
     createPost,
     particularEvent,
     eventCreatePost,
+    exportParticipantData,
     eventParticipatedDone,
     logout
   }

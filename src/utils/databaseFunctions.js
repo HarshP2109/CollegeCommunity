@@ -9,10 +9,11 @@ const { groupData } = require ('../models/Group')
 const { chat } = require ('../config/mongoose')
 
 //Functions Import 
-const { extractDomain , sorter, extractFields, generateUniqueId } = require ('./basicFunctions')
+const { extractDomain , sorter, extractFields, generateUniqueId, formatDate } = require ('./basicFunctions')
 const { Connection } = require('mongoose')
 const { messageSchema } = require('../models/Message')
 const { updateActivityTable, AddActivityTable } = require('./dashboardFunctions')
+const { convertExcell } = require('../middleware/extractExcel')
 
 
 //Account Related
@@ -86,17 +87,17 @@ data.save().then(() => console.log("Permanents Event created!!!"));
 }
 
 
-function Participation_Inserter(title,ven,std,descrip,tagi,organi,Ev_id,Us_id,Us_name,comp){
+function Participation_Inserter(title,ven,std,organi,Ev_id,Us_id,Us_name,email,contact,comp){
     let data = new participant({
       EventTitle : title,
       Venue : ven,
       RegistrationTime : std,
-      descp: descrip,
-      tag: tagi,
-      Organsiation: organi,
+      Organisation: organi,
       EventID: Ev_id,
       UserID: Us_id,
       UserName: Us_name,
+      Email: email,
+      ContactNo: contact,
       By:comp
     })
     data.save().then(() => console.log("Participation created!!!"));
@@ -352,6 +353,46 @@ async function updateDomain(){
 
 
 
+//Get Event Participation list
+
+async function getParticipantList(eve_id){
+  // let 
+  let data = await participant.find({ EventID : eve_id});
+
+  let res = [];
+
+  data.forEach((person) => {
+    let filteredPerson = {
+      UserId: person.UserID,
+      Name: person.UserName, 
+      Email: person.Email,   
+      ContactNo: person.ContactNo,
+      CollegeDomain: extractDomain(person.Email),
+      RegistrationTime: formatDate(person.RegistrationTime)
+    };
+
+    res.push(filteredPerson);
+
+});
+
+  console.log(res);
+
+  let excel = await convertExcell(res);
+  // Name
+  // Mobile no,
+  // Email Id
+  // cOLLEGE
+  // tIME OF REGISTRATION
+  //
+  return excel;
+}
+
+async function findEventUser(id){
+  let data = await participant.findOne({UserID : id});
+
+  return data;
+}
+
   
   module.exports = {
     accInsert,
@@ -370,6 +411,8 @@ async function updateDomain(){
     checkGroup,
     getAllChatData,
     sendMessage,
+    getParticipantList,
+    findEventUser,
 
 
     updateDomain

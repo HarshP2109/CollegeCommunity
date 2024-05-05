@@ -77,11 +77,36 @@ function generateOTP() {
     return one.length < two.length ? one + ":" + two : two + ":" + one;;
   }
 
+  function formatDate(date) {
+    // Utility function to add leading zeros to single-digit numbers
+    function pad(num) {
+        return num.toString().padStart(2, '0');
+    }
+
+    // Extract components from the date
+    const day = pad(date.getDate()); // 'dd'
+    const month = pad(date.getMonth() + 1); // 'mm'
+    const year = date.getFullYear(); // 'yyyy'
+
+    const hours = pad(date.getHours()); // 'hh'
+    const minutes = pad(date.getMinutes()); // 'mm'
+
+    // Construct the formatted date and time
+    const formattedDate = `${day}/${month}/${year}`; // 'dd/mm/yyyy'
+    const formattedTime = `${hours}:${minutes}`; // 'ss/mm/hh'
+
+    // Combine into the desired format
+    const formattedOutput = `${formattedDate} - ${formattedTime}`;
+
+    return formattedOutput;
+}
+
   module.exports = {
     generateOTP,
     generateUniqueId,
     extractFields,
     formatDateAndTime,
     sorter,
-    extractDomain
+    extractDomain,
+    formatDate
   }
