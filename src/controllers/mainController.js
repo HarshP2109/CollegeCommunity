@@ -138,7 +138,15 @@ const dashboardPage = async(req,res)=>{
     let ID = req.params.EveID;
     let EventData = await find_Event(ID);
     let me = req.session.MAIN_DATA;
-    Participation_Inserter(EventData.Title, EventData.Venue, new Date(), EventData.Organsiation, ID, me.UniqueId, me.Username, me.Email, me.Number, EventData.By )
+    const now = new Date();
+
+// Format it to Indian Standard Time (IST)
+    const formatter = new Intl.DateTimeFormat('en-IN', {
+      timeZone: 'Asia/Kolkata', // IST is represented by 'Asia/Kolkata'
+      dateStyle: 'full', // You can change this to 'short', 'medium', etc.
+      timeStyle: 'full'  // Control how the time is displayed
+    });
+    Participation_Inserter(EventData.Title, EventData.Venue, formatter.format(now), EventData.Organsiation, ID, me.UniqueId, me.Username, me.Email, me.Number, EventData.By )
 
     let subject = 'Congratulations on Applying!';
     let text = 'Hi '+me.Username+',\n Congratulations on applying for our events! - '+ EventData.Title +'🎉 \n We appreciate your interest and can`t wait to review your application. Stay tuned for updates! \n\n Best, \nCCH'
