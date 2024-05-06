@@ -100,6 +100,7 @@ const dashboardPage = async(req,res)=>{
     let Tag = EventData.tag.split(',');
     let me = req.session.MAIN_DATA;
     let status;
+    if(me){
     if(me.UniqueId == EventData.By){
       status = "Owner";
     }
@@ -110,9 +111,14 @@ const dashboardPage = async(req,res)=>{
         status = "New";
       }
       else{
-        status = "Registered"
+        status = "Registered";
       }
     }
+    }
+    else{
+      status="Public";
+    }
+    // console.log(EventData);
     // console.log("Event Data: ",EventData)
     // let name = data.firstname + " " + data.lastname;
     res.render('pages2/eventHome',{EventData:EventData,Tag:Tag, Status:status});

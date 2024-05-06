@@ -39,7 +39,7 @@ router.post('/eventcreate',upload.single('eventpic'),mainControl.eventCreatePost
 
 router.get('/postcreate',requireAuth,mainControl.createPost)
 
-router.get('/eventhomie/:EveID',requireAuth,mainControl.particularEvent)
+router.get('/eventhomie/:EveID',mainControl.particularEvent)
 router.get('/events/:EveID/exportData',requireAuth,mainControl.exportParticipantData)
 router.get('/events/:EveID/DONE',requireAuth,mainControl.eventParticipatedDone)
 
