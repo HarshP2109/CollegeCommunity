@@ -146,7 +146,7 @@ const accountCreationPost = async(req,res)=>{
   AddActivityTable(id,username);
   console.log(fname,lname,username,dob,pass,gen,id);
   // Accounts.push(newAccount);
-  let dom = extractDomain(id);
+  let dom = extractDomain(mail);
   accInsert(fname,lname,username,dom,dob,gen,mail,pass,id);
   await updateGroup(dom,id);
   res.redirect('/dash');
