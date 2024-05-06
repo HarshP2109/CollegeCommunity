@@ -56,6 +56,48 @@ function generateOTP() {
     return formattedDateTime;
   }
   
+  function formatEventDate(date, time) {
+    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  
+    // Get day of the week, month, day, and time
+    const dayOfWeek = daysOfWeek[date.getDay()];
+    const month = months[date.getMonth()];
+    const day = date.getDate();
+    
+    // Set hours and minutes based on the time input
+    let hours = 0;
+    let minutes = 0;
+    let ampm = 'AM';
+  
+    if (time) {
+      const timeParts = time.split(":");
+      hours = parseInt(timeParts[0]);
+      if (timeParts.length > 1) {
+        minutes = parseInt(timeParts[1]);
+      }
+    }
+  
+    // Adjust hours for PM
+    if (hours >= 12) {
+      ampm = 'PM';
+      hours = hours % 12;
+    }
+  
+    // Handle midnight edge case
+    if (hours === 0) {
+      hours = 12;
+    }
+  
+    // Append '0' to minutes if less than 10
+    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+  
+    // Construct the formatted date string
+    const formattedDate = `${dayOfWeek}, ${month} ${day}, ${hours}.${formattedMinutes}${ampm}`;
+  
+    return formattedDate;
+  }
+
   function extractDomain(email) {
     const match = email.match(/@([^.]*)\./);
     return match ? match[1] : null;
@@ -106,6 +148,7 @@ function generateOTP() {
     generateUniqueId,
     extractFields,
     formatDateAndTime,
+    formatEventDate,
     sorter,
     extractDomain,
     formatDate

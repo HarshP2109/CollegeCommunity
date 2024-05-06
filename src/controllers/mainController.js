@@ -2,7 +2,7 @@
 const sendMail = require('../middleware/nodemailing');
 const { sendImage } = require('../middleware/uploadImage');
 const { TotalCount, countEvents, extractActivityData } = require('../utils/dashboardFunctions');
-const { formatDateAndTime, generateUniqueId } = require ('../utils/basicFunctions')
+const { formatDateAndTime, generateUniqueId, formatEventDate } = require ('../utils/basicFunctions')
 const { find_data, find_task, extract_EVE, find_Event, Event_Inserter, Participation_Inserter, findConnection, getParticipantList, findEventUser } = require ('../utils/databaseFunctions');
 const { getNews } = require('../middleware/technewsapi');
 
@@ -39,6 +39,9 @@ const dashboardPage = async(req,res)=>{
     let id = data.UniqueId;
     // let role = "Admin";
     let EventData = await extract_EVE();
+    EventData.forEach(element => {
+      element.St_d = formatEventDate(element.St_d, element.St_t)
+    });
     // console.log(EventData);
     res.render('pages2/events',{"Name":name,"Role":role,"Events":EventData, "ID": id});
   }
@@ -96,7 +99,7 @@ const dashboardPage = async(req,res)=>{
     let ID = req.params.EveID;
     let EventData = await find_Event(ID);
     // getParticipantList(ID);
-    EventData.St_d = formatDateAndTime(EventData.St_d,EventData.St_t);
+    EventData.St_d = formatEventDate(EventData.St_d,EventData.St_t);
     let Tag = EventData.tag.split(',');
     let me = req.session.MAIN_DATA;
     let status;

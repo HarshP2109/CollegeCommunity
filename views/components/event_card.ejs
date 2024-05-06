@@ -21,9 +21,7 @@
                     </span>
                 </div>
                 <div class="mt-8">
-                    <% let date = new Date(Events[i].St_d) %>
-                    <% let dates = date.getDate() + ' , ' + Events[i].St_t %>
-                    <span class="text-md font-thin text-violet"><%- dates %></span><br/>
+                    <span class="text-md font-thin text-violet"><%- Events[i].St_d %></span><br/>
                 </div>
                 <div>
                     <span class="text-sm text-neutral font-semibold opacity-80"><%= Events[i].Venue %></span>
@@ -52,9 +50,7 @@
                     </span>
                 </div>
                 <div class="mt-8">
-                    <% let date = new Date(Events[i].St_d) %>
-                    <% let dates = date.getDate() + ' , ' + Events[i].St_t %>
-                    <span class="text-md font-thin text-violet"><%- dates %></span><br/>
+                    <span class="text-md font-thin text-violet"><%- Events[i].St_d %></span><br/>
                 </div>
                 <div>
                     <span class="text-sm text-neutral font-semibold opacity-80"><%= Events[i].Venue %></span>
