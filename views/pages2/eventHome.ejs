@@ -60,7 +60,7 @@
                                 <% Status == "Owner" ? link = "/events/"+EventData.EventID+"/exportData" : null %>
                                 <% Status == "Public" ? link = "/login" : null %>
                                 <a href="<%- Status !== 'Registered' ? link : '#' %>"><button class="text-white buttonHover bg-violet py-3 w-full rounded-md ">
-                                        <%- Status == "New" || "Public" ? "Book Now" : Status == "Owner" ? "Download" : "Already Registered" %>
+                                        <%- Status == "New" ? "Book Now" : Status == "Owner" ? "Download" : Status == "Public" ? "Book Now" :  "Already Registered" %>
                                 </button></a>
                                 <!-- <a href="#"><button
                                         class="text-white buttonHover bg-neutral py-3 w-full rounded-md mt-4 ">
